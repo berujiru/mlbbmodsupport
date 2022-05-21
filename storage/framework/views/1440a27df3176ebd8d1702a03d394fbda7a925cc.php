@@ -50,7 +50,7 @@
                     </li>
                 </ul>
                 <div class="flex-shrink-0">
-                    <a href="pages-profile-settings" class="btn btn-success"><i
+                    <a href="<?php echo e(route('profile.edit',0)); ?>" class="btn btn-success"><i
                             class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
                 </div>
             </div>
@@ -219,9 +219,8 @@
 <!--end row-->
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-    <script src="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.js')); ?>"></script>
-
-    <script src="<?php echo e(URL::asset('assets/js/pages/profile.init.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('/assets/libs/swiper/swiper.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('/assets/js/pages/profile.init.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 

@@ -50,15 +50,13 @@
                     <div class="flex-grow-1">
                         <h5 class="card-title mb-0">Complete Your Profile</h5>
                     </div>
-                    <div class="flex-shrink-0">
-                        <a href="javascript:void(0);" class="badge bg-light text-primary fs-12"><i
-                                class="ri-edit-box-line align-bottom me-1"></i> Edit</a>
-                    </div>
                 </div>
-                <div class="progress animated-progress custom-progress progress-label">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 30%"
-                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-                        <div class="label">30%</div>
+                <div
+                    class="progress animated-progress custom-progress progress-label">
+                    <div class="progress-bar bg-danger" role="progressbar"
+                        style="width: <?php if($dbsc): ?><?php echo e(100); ?><?php else: ?><?php echo e(10); ?><?php endif; ?>%" aria-valuenow="<?php if($dbsc): ?><?php echo e(100); ?><?php else: ?><?php echo e(10); ?><?php endif; ?>" aria-valuemin="0"
+                        aria-valuemax="100">
+                        <div class="label"><?php if($dbsc): ?><?php echo e("100%"); ?><?php else: ?><?php echo e("10%"); ?><?php endif; ?></div>
                     </div>
                 </div>
             </div>
@@ -160,14 +158,18 @@
                                 <!--end col-->
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label for="phonenumberInput" class="form-label">Phone
-                                            Number</label>
-                                        <input type="text" class="form-control"
-                                            id="phonenumberInput"
-                                            placeholder="Enter your phone number"
-                                            value="+(1) 987 6543">
+                                        <label for="cleave-phone" class="form-label">Phone</label>
+                                        <input type="text" class="form-control" id="cleave-phone"
+                                            placeholder="(xxx)xxx-xxxx">
                                     </div>
                                 </div>
+                                <div class="col-xl-6">
+                                    <div class="mb-3 mb-xl-0">
+                                        <label for="cleave-phone" class="form-label">Phone</label>
+                                        <input type="text" class="form-control" id="cleave-phone"
+                                            placeholder="(xxx)xxx-xxxx">
+                                    </div>
+                                </div><!-- end col -->
                                 <!--end col-->
                                 <div class="col-lg-6">
                                     <div class="mb-3">
@@ -354,6 +356,10 @@
 <!--end row-->
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
+
+
+    <script src="<?php echo e(URL::asset('assets/libs/cleave.js/cleave.js.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/js/pages/form-masks.init.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/js/pages/profile-setting.init.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>

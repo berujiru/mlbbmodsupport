@@ -37,11 +37,10 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        $dbsc = Dbsc::find(auth()->user()->name);
+        $dbsc = Dbsc::find(auth()->user()->id);
         
-    
         return view('pages-profile-settings',compact('dbsc'));
     }
 

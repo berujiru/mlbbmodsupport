@@ -124,10 +124,6 @@ var third_party_assets = {
             "./node_modules/jsvectormap/dist/css/jsvectormap.min.css",
             "./node_modules/jsvectormap/dist/js/jsvectormap.min.js",
             "./node_modules/jsvectormap/dist/maps/world-merc.js",
-            "./node_modules/jsvectormap/dist/maps/us-merc-en.js",
-            "./node_modules/jsvectormap/dist/maps/canada.js",
-            "./node_modules/jsvectormap/dist/maps/russia.js",
-            "./node_modules/jsvectormap/dist/maps/spain.js",
         ] },
         { "name": "leaflet", "assets": [
             "./node_modules/leaflet/dist/leaflet.js",

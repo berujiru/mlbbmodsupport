@@ -46,10 +46,10 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="users" class="nav-link" >Users</a>
+                                <a href="<?php echo e(route('users.index')); ?>" class="nav-link" >Users</a>
                             </li>
                             <li class="nav-item">
-                                <a href="roles" class="nav-link" >Roles</a>
+                                <a href="<?php echo e(route('roles.index')); ?>" class="nav-link" >Roles</a>
                             </li>
                         </ul>
                     </div>

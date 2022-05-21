@@ -245,7 +245,7 @@
     "/assets/css/app.min.css": "/assets/css/app.min.css",
     "/assets/css/custom.min.css": "/assets/css/custom.min.css",
     "/assets/js/plugins.min.js": "/assets/js/plugins.min.js",
-    "/assets/js/layout.min.js": "/assets/js/layout.min.js",
+    "/assets/js/layout.js": "/assets/js/layout.js",
     "/assets/js/bootstrap.min.js": "/assets/js/bootstrap.min.js",
     "/assets/js/app.min.js": "/assets/js/app.min.js",
     "/assets/js/pages/calendar.init.js": "/assets/js/pages/calendar.init.js",

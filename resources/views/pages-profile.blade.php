@@ -51,7 +51,7 @@
                     </li>
                 </ul>
                 <div class="flex-shrink-0">
-                    <a href="pages-profile-settings" class="btn btn-success"><i
+                    <a href="{{ route('profile.edit',0) }}" class="btn btn-success"><i
                             class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
                 </div>
             </div>
@@ -220,8 +220,7 @@
 <!--end row-->
 @endsection
 @section('script')
-    <script src="{{ URL::asset('assets/libs/swiper/swiper.min.js') }}"></script>
-
-    <script src="{{ URL::asset('assets/js/pages/profile.init.js') }}"></script>
+    <script src="{{ URL::asset('/assets/libs/swiper/swiper.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/js/pages/profile.init.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection
