@@ -15,4 +15,25 @@ class Dbsc extends Model
      * @var string
      */
     protected $table = 'dbsc';
+
+    protected $fillable = [
+        'id',
+        'modid',
+        'firstname',
+        'middlename',
+        'lastname',
+        'contactno',
+        'email',
+        'fblink',
+        'team',
+        'designation',
+        'birthday',
+        'age',
+        'sex',
+        'location',
+        'igname',
+        'ignid',
+        'igserver',
+        'description',
+];
 }
