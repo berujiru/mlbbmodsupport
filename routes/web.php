@@ -21,12 +21,24 @@ Auth::routes();
 
 //rbac
 Route::group(['middleware' => ['auth']], function() {
+
+    //admin only 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+
+    //user profile edit dbsc
     Route::get('profile', [ProfileController::class,'index'])->name('profile');
     Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('editProfile');
     Route::post('/update-profile', [ProfileController::class, 'update'])->name('updateProfile');
+
+    //user edit login credential
+    Route::get('changeprofile', ['as' => 'profileedit', 'uses' => 'App\Http\Controllers\ProfileController@loginedit']);
+    Route::put('settingprofile', ['as' => 'profileupdate', 'uses' => 'App\Http\Controllers\ProfileController@loginupdate']);
+    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
+
+
+
 
 //Language Translation
 Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);

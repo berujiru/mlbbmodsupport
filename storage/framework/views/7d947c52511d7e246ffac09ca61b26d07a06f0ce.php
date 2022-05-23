@@ -6,19 +6,19 @@
                 <div class="navbar-brand-box horizontal-logo">
                     <a href="index" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" height="22">
+                            <img src="<?php echo e(URL::asset('assets/images/logo-sm.png')); ?>" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ URL::asset('assets/images/logo-dark.png') }}" alt="" height="17">
+                            <img src="<?php echo e(URL::asset('assets/images/logo-dark.png')); ?>" alt="" height="17">
                         </span>
                     </a>
 
                     <a href="index" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" height="22">
+                            <img src="<?php echo e(URL::asset('assets/images/logo-sm.png')); ?>" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="17">
+                            <img src="<?php echo e(URL::asset('assets/images/logo-light.png')); ?>" alt="" height="17">
                         </span>
                     </a>
                 </div>
@@ -84,7 +84,7 @@
                             <div class="notification-list">
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" class="me-3 rounded-circle avatar-xs"
+                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-2.jpg')); ?>" class="me-3 rounded-circle avatar-xs"
                                         alt="user-pic">
                                     <div class="flex-1">
                                         <h6 class="m-0">Angela Bernier</h6>
@@ -93,7 +93,7 @@
                                 </a>
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" class="me-3 rounded-circle avatar-xs"
+                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-3.jpg')); ?>" class="me-3 rounded-circle avatar-xs"
                                         alt="user-pic">
                                     <div class="flex-1">
                                         <h6 class="m-0">David Grasso</h6>
@@ -102,7 +102,7 @@
                                 </a>
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-5.jpg') }}" class="me-3 rounded-circle avatar-xs"
+                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-5.jpg')); ?>" class="me-3 rounded-circle avatar-xs"
                                         alt="user-pic">
                                     <div class="flex-1">
                                         <h6 class="m-0">Mike Bunch</h6>
@@ -234,7 +234,7 @@
 
                                     <div class="text-reset notification-item d-block dropdown-item position-relative">
                                         <div class="d-flex">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}"
+                                            <img src="<?php echo e(URL::asset('assets/images/users/avatar-2.jpg')); ?>"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <a href="#!" class="stretched-link"><h6 class="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6></a>
@@ -276,7 +276,7 @@
 
                                     <div class="text-reset notification-item d-block dropdown-item position-relative">
                                         <div class="d-flex">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-8.jpg') }}" class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                            <img src="<?php echo e(URL::asset('assets/images/users/avatar-8.jpg')); ?>" class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <a href="#!" class="stretched-link"><h6 class="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6></a>
                                                 <div class="fs-13 text-muted">
@@ -297,7 +297,7 @@
                                             All Notifications <i class="ri-arrow-right-line align-middle"></i></button>
                                     </div> -->
                                     <div class="w-25 w-sm-50 pt-3 mx-auto">
-                                        <img src="{{ URL::asset('assets/images/svg/bell.svg') }}" class="img-fluid" alt="user-pic">
+                                        <img src="<?php echo e(URL::asset('assets/images/svg/bell.svg')); ?>" class="img-fluid" alt="user-pic">
                                     </div>
                                     <div class="text-center pb-5 mt-2">
                                         <h6 class="fs-18 fw-semibold lh-base">Hey! You have no any notifications </h6>
@@ -311,7 +311,7 @@
                                 <div data-simplebar style="max-height: 300px;" class="pe-2">
                                     <!-- <div class="text-reset notification-item d-block dropdown-item">
                                         <div class="d-flex">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}"
+                                            <img src="<?php echo e(URL::asset('assets/images/users/avatar-3.jpg')); ?>"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <a href="#!" class="stretched-link"><h6 class="mt-0 mb-1 fs-13 fw-semibold">James Lemire</h6></a>
@@ -330,7 +330,7 @@
 
                                     <div class="text-reset notification-item d-block dropdown-item">
                                         <div class="d-flex">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}"
+                                            <img src="<?php echo e(URL::asset('assets/images/users/avatar-2.jpg')); ?>"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <a href="#!" class="stretched-link"><h6 class="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6></a>
@@ -350,7 +350,7 @@
 
                                     <div class="text-reset notification-item d-block dropdown-item">
                                         <div class="d-flex">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-6.jpg') }}"
+                                            <img src="<?php echo e(URL::asset('assets/images/users/avatar-6.jpg')); ?>"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <a href="#!" class="stretched-link"><h6 class="mt-0 mb-1 fs-13 fw-semibold">Kenneth Brown</h6></a>
@@ -369,7 +369,7 @@
 
                                     <div class="text-reset notification-item d-block dropdown-item">
                                         <div class="d-flex">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-8.jpg') }}"
+                                            <img src="<?php echo e(URL::asset('assets/images/users/avatar-8.jpg')); ?>"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <a href="#!" class="stretched-link"><h6 class="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6></a>
@@ -391,7 +391,7 @@
                                             All Messages <i class="ri-arrow-right-line align-middle"></i></button>
                                     </div> -->
                                     <div class="w-25 w-sm-50 pt-3 mx-auto">
-                                        <img src="{{ URL::asset('assets/images/svg/bell.svg') }}" class="img-fluid" alt="user-pic">
+                                        <img src="<?php echo e(URL::asset('assets/images/svg/bell.svg')); ?>" class="img-fluid" alt="user-pic">
                                     </div>
                                     <div class="text-center pb-5 mt-2">
                                         <h6 class="fs-18 fw-semibold lh-base">Hey! You have no any notifications </h6>
@@ -400,7 +400,7 @@
                             </div>
                             <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel" aria-labelledby="alerts-tab">
                                 <div class="w-25 w-sm-50 pt-3 mx-auto">
-                                    <img src="{{ URL::asset('assets/images/svg/bell.svg') }}" class="img-fluid" alt="user-pic">
+                                    <img src="<?php echo e(URL::asset('assets/images/svg/bell.svg')); ?>" class="img-fluid" alt="user-pic">
                                 </div>
                                 <div class="text-center pb-5 mt-2">
                                     <h6 class="fs-18 fw-semibold lh-base">Hey! You have no any notifications </h6>
@@ -414,10 +414,10 @@
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="@if (Auth::user()->avatar != ''){{ URL::asset('images/' . Auth::user()->avatar) }}@else{{ URL::asset('assets/images/users/avatar-1.jpg') }}@endif"
+                            <img class="rounded-circle header-profile-user" src="<?php if(Auth::user()->avatar != ''): ?><?php echo e(URL::asset('images/' . Auth::user()->avatar)); ?><?php else: ?><?php echo e(URL::asset('assets/images/users/avatar-1.jpg')); ?><?php endif; ?>"
                                 alt="Header Avatar">
                             <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"><?php echo e(Auth::user()->name); ?></span>
                                 <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">User</span>
                             </span>
                         </span>
@@ -425,7 +425,7 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
                         <h6 class="dropdown-header">Welcome!</h6>
-                        <a class="dropdown-item" href="{{ route('profile') }}"><i
+                        <a class="dropdown-item" href="<?php echo e(route('profile')); ?>"><i
                                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Profile</span></a>
                         <!-- <a class="dropdown-item" href="apps-chat"><i
@@ -441,7 +441,7 @@
                         <a class="dropdown-item" href="pages-profile"><i
                                 class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Balance : <b>$5971.67</b></span></a>-->
-                        <a class="dropdown-item" href="{{route('profileedit')}}"><span
+                        <a class="dropdown-item" href="<?php echo e(route('profileedit')); ?>"><span
                                 class="badge bg-soft-success text-success mt-1 float-end">New</span><i
                                 class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Settings</span></a> 
@@ -450,9 +450,9 @@
                         <a class="dropdown-item " href="javascript:void();"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
                                 class="bx bx-power-off font-size-16 align-middle me-1"></i> <span
-                                key="t-logout">@lang('translation.logout')</span></a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                                key="t-logout"><?php echo app('translator')->get('translation.logout'); ?></span></a>
+                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                            <?php echo csrf_field(); ?>
                         </form>
                     </div>
                 </div>
@@ -460,3 +460,4 @@
         </div>
     </div>
 </header>
+<?php /**PATH C:\xampp8\htdocs\mlbbmodsupport\resources\views/layouts/topbar.blade.php ENDPATH**/ ?>
