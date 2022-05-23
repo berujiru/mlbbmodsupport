@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Password;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => [
+            'resetpassword','sendresetpassword'
+        ]]);
     }
 
     /**
@@ -50,6 +53,21 @@ class HomeController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function resetpassword(){
+        return view('auth-pass-reset-basic');
+    }
+
+    public function sendresetpassword(Request $request){
+        $request->validate(['email' => 'required|email'],['required'=>'Email is required']);
+ 
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+        return $status === Password::RESET_LINK_SENT
+                    ? back()->with(['status' => __($status)])
+                    : back()->withErrors(['email' => __($status)]);
     }
 
     public function updateProfile(Request $request, $id)
