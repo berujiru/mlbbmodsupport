@@ -60,7 +60,9 @@ class HomeController extends Controller
     }
 
     public function sendresetpassword(Request $request){
-        $request->validate(['email' => 'required|email'],['required'=>'Email is required']);
+        $request->validate(['email' => 'required|email'],[
+            'required'=>'Email is required',
+            'user'=>'Email is not a valid moderator']);
  
         $status = Password::sendResetLink(
             $request->only('email')
