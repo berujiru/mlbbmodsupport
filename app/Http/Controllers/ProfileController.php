@@ -13,13 +13,13 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
-    {
-         $this->middleware('permission:profile-list', ['only' => ['index']]);
-        //  $this->middleware('permission:role-create', ['only' => ['create','store']]);
-         $this->middleware('permission:profile-edit', ['only' => ['edit','update']]);
-        //  $this->middleware('permission:role-delete', ['only' => ['destroy']]);
-    }
+    // function __construct()
+    // {
+    //      $this->middleware('permission:profile-list', ['only' => ['index']]);
+    //     $this->middleware('permission:role-create', ['only' => ['create','store']]);
+    //      $this->middleware('permission:profile-edit', ['only' => ['edit','update']]);
+    //     $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+    // }
 
     /**
      * Display a listing of the resource.
