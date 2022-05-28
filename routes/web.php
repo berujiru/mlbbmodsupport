@@ -37,17 +37,21 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
+//public reset pass
+Route::get('/reset', [App\Http\Controllers\HomeController::class, 'resetpassword'])->name('resetpass');
+
+Route::post('/forgot-password', [App\Http\Controllers\HomeController::class, 'sendresetpassword'])->name('password.email');
 
 
 
 //Language Translation
-Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
+// Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
 
 //Update User Details
 // Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
-Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
+//Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
 
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+// Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
