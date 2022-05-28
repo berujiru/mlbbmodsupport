@@ -50,7 +50,7 @@
                     </li>
                 </ul>
                 <div class="flex-shrink-0">
-                    <a href="<?php echo e(route('profile.edit',0)); ?>" class="btn btn-success"><i
+                    <a href="<?php echo e(route('editProfile')); ?>" class="btn btn-soft-success waves-effect waves-light"><i
                             class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
                 </div>
             </div>
@@ -113,7 +113,14 @@
                                 <div class="card-body">
                                     <h5 class="card-title mb-3">About</h5>
                                     <div class="row">
-                                    <div class="col-6 col-md-4">
+                                        <div class="col-12 col-md-12">
+                                            <div class="d-flex mt-3">
+                                                <div class="flex-grow-1 ">
+                                                    <p class="mb-1"><?php if($dbsc): ?><?php echo e($dbsc->description); ?><?php else: ?><?php echo e("None"); ?><?php endif; ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4">
                                             <div class="d-flex mt-4">
                                                 <div
                                                     class="flex-shrink-0 avatar-xs align-self-center me-3">
