@@ -12,3 +12,4 @@
         </div>
     </div>
 </footer>
+<?php /**PATH C:\xampp8\htdocs\mlbbmodsupport\resources\views/layouts/footer.blade.php ENDPATH**/ ?>
