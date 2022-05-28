@@ -1,8 +1,8 @@
-@extends('layouts.master-without-nav')
-@section('title')
-    @lang('translation.password-reset')
-@endsection
-@section('content')
+
+<?php $__env->startSection('title'); ?>
+    <?php echo app('translator')->get('translation.password-reset'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="auth-page-wrapper pt-5">
         <!-- auth page bg -->
         <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
@@ -24,7 +24,7 @@
                         <div class="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
                                 <a href="index" class="d-inline-block auth-logo">
-                                    <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="20">
+                                    <img src="<?php echo e(URL::asset('assets/images/logo-light.png')); ?>" alt="" height="20">
                                 </a>
                             </div>
                             <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
@@ -52,15 +52,22 @@
                                     Enter your email and instructions will be sent to you!
                                 </div>
                                 <div class="p-2">
-                                    <form action="{{route('password.email')}}" method="POST">
-                                        @csrf
+                                    <form action="<?php echo e(route('password.email')); ?>" method="POST">
+                                        <?php echo csrf_field(); ?>
                                         <div class="mb-4">
                                             <label class="form-label">Email</label>
                                             <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email">
                                         </div>
-                                        @error('email')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="alert alert-danger"><?php echo e($message); ?></div>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 
                                         <div class="text-center mt-4">
                                             <button class="btn btn-success w-100" type="submit">Send Reset Link</button>
@@ -103,8 +110,10 @@
         <!-- end Footer -->
     </div>
     <!-- end auth-page-wrapper -->
-@endsection
-@section('script')
-    <script src="{{ URL::asset('assets/libs/particles.js/particles.js.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/pages/particles.app.js') }}"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(URL::asset('assets/libs/particles.js/particles.js.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/js/pages/particles.app.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master-without-nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\mlbbmodsupport\resources\views/auth-pass-reset-basic.blade.php ENDPATH**/ ?>
