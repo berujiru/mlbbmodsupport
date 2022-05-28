@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Password;
+use App\Models\Dbsc;
 
 class HomeController extends Controller
 {
@@ -37,9 +38,28 @@ class HomeController extends Controller
         return abort(404);
     }
 
-    public function root()
+    public function root(Request $request)
     {
-        return view('index');
+        if(date("H") >= 12 && date("H:i") < date("H:i",strtotime("00:17:59"))) {
+            $greeting = "Good Afternoon";
+        } elseif(date("H") >= 18) {
+            $greeting = "Good Evening";
+        } else {
+            $greeting = "Good Morning";
+        }
+        $dbsc = Dbsc::find(auth()->user()->id);
+
+        if(!empty($dbsc)) {
+            $greeting_name = $dbsc->firstname;
+        }
+
+        //echo auth()->user()->id;
+        // echo "<pre>";
+        // print_r($dbsc);
+        // echo "</pre>";
+        // exit;
+        return view('index',compact('dbsc','greeting'));
+        //return view('index');
     }
 
     /*Language Translation*/

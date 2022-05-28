@@ -26,6 +26,7 @@ class Dbsc extends Model
         'email',
         'fblink',
         'team',
+        'team_id',
         'designation',
         'birthday',
         'age',
@@ -35,5 +36,5 @@ class Dbsc extends Model
         'ignid',
         'igserver',
         'description',
-];
+    ];
 }
