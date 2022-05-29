@@ -54,7 +54,10 @@ class HomeController extends Controller
             $greeting_name = $dbsc->firstname;
         }
 
-        $list_teams = DB::select('CALL spTeamDetails()');
+        $list_teams = Dbsc::select('team',DB::raw('COUNT(*) AS number_people'))
+                        ->groupby('team')
+                        ->orderby('team')
+                        ->get();
 
         //active mapped accounts
         $active_accounts = DB::table('users')
@@ -70,13 +73,13 @@ class HomeController extends Controller
         $total_male = DB::table('dbsc')
             ->join('users', 'users.id', '=', 'dbsc.id')
             ->where('users.status',1)
-            ->where('dbsc.sex',1)
+            ->where('dbsc.sex','male')
             ->count();
         //only mapped active accounts
         $total_female = DB::table('dbsc')
             ->join('users', 'users.id', '=', 'dbsc.id')
             ->where('users.status',1)
-            ->where('dbsc.sex',2)
+            ->where('dbsc.sex','female')
             ->count();
 
         //echo auth()->user()->id;
