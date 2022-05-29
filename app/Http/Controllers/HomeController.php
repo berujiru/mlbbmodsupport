@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Password;
 use App\Models\Dbsc;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -40,7 +41,7 @@ class HomeController extends Controller
 
     public function root(Request $request)
     {
-        if(date("H") >= 12 && date("H:i") < date("H:i",strtotime("00:17:59"))) {
+        if(date("H") >= 12 && date("H:i") < date("H:i",strtotime("17:59"))) {
             $greeting = "Good Afternoon";
         } elseif(date("H") >= 18) {
             $greeting = "Good Evening";
@@ -53,12 +54,37 @@ class HomeController extends Controller
             $greeting_name = $dbsc->firstname;
         }
 
+        $list_teams = DB::select('CALL spTeamDetails()');
+
+        //active mapped accounts
+        $active_accounts = DB::table('users')
+            ->join('dbsc', 'users.id', '=', 'dbsc.id')
+            ->where('users.status',1)
+            ->count();
+
+        $today_birthdays = Dbsc::select('modid','firstname','lastname','birthday')
+            ->where(DB::raw("DATE_FORMAT(birthday,'%m-%d')"),date("m-d"))
+            ->orderByRaw('lastname, firstname')
+            ->get();
+        //only mapped active accounts
+        $total_male = DB::table('dbsc')
+            ->join('users', 'users.id', '=', 'dbsc.id')
+            ->where('users.status',1)
+            ->where('dbsc.sex',1)
+            ->count();
+        //only mapped active accounts
+        $total_female = DB::table('dbsc')
+            ->join('users', 'users.id', '=', 'dbsc.id')
+            ->where('users.status',1)
+            ->where('dbsc.sex',2)
+            ->count();
+
         //echo auth()->user()->id;
         // echo "<pre>";
-        // print_r($dbsc);
+        // print_r($list_teams);
         // echo "</pre>";
         // exit;
-        return view('index',compact('dbsc','greeting'));
+        return view('index',compact('dbsc','greeting','active_accounts','today_birthdays','total_male','total_female','list_teams'));
         //return view('index');
     }
 

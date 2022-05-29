@@ -37,4 +37,9 @@ class Dbsc extends Model
         'igserver',
         'description',
     ];
+
+    public function team()
+    {
+        return $this->hasOne(Team::class, 'team_id', 'team_id');
+    }
 }
