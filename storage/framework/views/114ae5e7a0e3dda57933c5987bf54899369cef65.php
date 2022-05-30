@@ -405,8 +405,6 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="hstack gap-2 justify-content-end">
                                         <button type="submit"
                                             class="btn btn-primary">Update</button>
-                                        <button type="button"
-                                            class="btn btn-soft-success">Cancel</button>
                                     </div>
                                 </div>
                                 <!--end col-->
