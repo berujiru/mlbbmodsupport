@@ -47,7 +47,7 @@
                                 <form action="<?php echo e(route('login')); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
                                     <div class="mb-3">
-                                        <label for="username" class="form-label">Username</label>
+                                        <label for="username" class="form-label">Email</label>
                                         <input type="text" class="form-control <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
