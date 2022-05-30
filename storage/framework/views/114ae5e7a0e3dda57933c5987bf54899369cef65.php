@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
 <div class="position-relative mx-n4 mt-n4">
     <div class="profile-wid-bg profile-setting-img">
-        <img src="<?php echo e(URL::asset('assets/images/profile-bg.jpg')); ?>" class="profile-wid-img" alt="">
+        <img src="<?php echo e(URL::asset('assets/images/moderator.png')); ?>" alt="" class="profile-wid-img" />
         <div class="overlay-content">
             <div class="text-end p-3">
                 <div class="p-0 ms-auto rounded-circle profile-photo-edit">
