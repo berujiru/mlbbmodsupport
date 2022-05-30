@@ -24,10 +24,12 @@
                         <div class="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
                                 <a href="index" class="d-inline-block auth-logo">
-                                    <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="20">
+                                <span class="logo-sm">
+                                    <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="">
+                                </span>
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
+                            <p class="mt-3 fs-15 fw-medium"><span class="text-success">Official </span> Mod Support Team</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +75,7 @@
                         <!-- end card -->
 
                         <div class="mt-4 text-center">
-                            <p class="mb-0">Wait, I remember my password... <a href="auth-signin-basic"
+                            <p class="mb-0">Wait, I remember my password... <a href="/login"
                                     class="fw-semibold text-primary text-decoration-underline"> Click here </a> </p>
                         </div>
 
