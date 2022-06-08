@@ -21,13 +21,15 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
-                        <div>
-                            <a href="index" class="d-inline-block auth-logo">
-                            <h1 class="display-6 fw-semibold mb-3 text-warning">MLBB <span
-                                        class="text-success">LOGO </span></h1>
-                            </a>
+                         <div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        
                         </div>
-                        <p class="mt-3 fs-15 fw-medium">Official Mod Support Team</p>
+                        <!--<p class="mt-3 fs-15 fw-medium"><span class="text-success">Official </span> Mod Support Team</p> -->
                     </div>
                 </div>
             </div>
@@ -46,7 +48,7 @@
                                 <form action="<?php echo e(route('login')); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
                                     <div class="mb-3">
-                                        <label for="username" class="form-label">Username</label>
+                                        <label for="username" class="form-label">Email</label>
                                         <input type="text" class="form-control <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -54,7 +56,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="username" name="email" placeholder="Enter username">
+unset($__errorArgs, $__bag); ?>" id="username" name="email" placeholder="Enter registered email">
                                         <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

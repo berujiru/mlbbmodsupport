@@ -31,6 +31,8 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    protected $maxAttempts = 3;
+    protected $decayMinutes = 5;
 
     /**
      * Create a new controller instance.
@@ -57,9 +59,34 @@ class LoginController extends Controller
             // Success
             return redirect()->intended('/index');
         } else {
-            // Go back on error (or do what you want)
-            $errors = new MessageBag(['email' => ['Email and/or password invalid.']]);
-            return Redirect::back()->withErrors($errors)->withInput($request->except('password'));
+
+            if ($this->hasTooManyLoginAttempts($request)) {
+    
+                    $key = $this->throttleKey($request);
+                    $rateLimiter = $this->limiter();
+    
+    
+                    $limit = [3 => 10, 5 => 30];
+                    $attempts = $rateLimiter->attempts($key);  // return how attapts already yet
+    
+                    if($attempts >= 5)
+                    {
+                        $rateLimiter->clear($key);;
+                    }
+    
+                    if(array_key_exists($attempts, $limit)){
+                        $this->decayMinutes = $limit[$attempts];
+                    }
+                    
+                    $this->incrementLoginAttempts($request);
+    
+                    $this->fireLockoutEvent($request);
+                return $this->sendLockoutResponse($request);
+    
+                }
+    
+                $this->incrementLoginAttempts($request);
+            return $this->sendFailedLoginResponse($request);
         }
 
     }
