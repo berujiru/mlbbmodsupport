@@ -1,6 +1,6 @@
-@extends('layouts.master')
-@section('title') @lang('translation.mailbox') @endsection
-@section('content')
+
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.mailbox'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 <div class="email-wrapper d-lg-flex gap-1 mx-n4 mt-n4 p-1">
     <div class="email-content">
@@ -437,7 +437,7 @@
                                 aria-controls="email-collapseOne">
                                 <div class="d-flex align-items-center text-muted">
                                     <div class="flex-shrink-0 avatar-xs me-3">
-                                        <img src="{{ URL::asset('assets/images//users/avatar-3.jpg') }}" alt=""
+                                        <img src="<?php echo e(URL::asset('assets/images//users/avatar-3.jpg')); ?>" alt=""
                                             class="img-fluid rounded-circle">
                                     </div>
                                     <div class="flex-grow-1 overflow-hidden">
@@ -465,14 +465,14 @@
 
                                     <div class="d-flex gap-3">
                                         <div class="border rounded avatar-xl h-auto">
-                                            <img src="{{ URL::asset('assets/images/small/img-2.jpg') }}" alt=""
+                                            <img src="<?php echo e(URL::asset('assets/images/small/img-2.jpg')); ?>" alt=""
                                                 class="img-fluid rouned-top">
                                             <div class="py-2 text-center">
                                                 <a href="" class="d-block fw-semibold">Download</a>
                                             </div>
                                         </div>
                                         <div class="border rounded avatar-xl h-auto">
-                                            <img src="{{ URL::asset('assets/images/small/img-6.jpg') }}" alt=""
+                                            <img src="<?php echo e(URL::asset('assets/images/small/img-6.jpg')); ?>" alt=""
                                                 class="img-fluid rouned-top">
                                             <div class="py-2 text-center">
                                                 <a href="" class="d-block fw-semibold">Download</a>
@@ -539,9 +539,11 @@
 </div>
 <!-- end email wrapper -->
 
-@endsection
-@section('script')
-<script src="{{ URL::asset('assets/libs/@ckeditor/@ckeditor.min.js') }}"></script>
-<script src="{{ URL::asset('assets/js/pages/mailbox.init.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(URL::asset('assets/libs/@ckeditor/@ckeditor.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/pages/mailbox.init.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp8\htdocs\mlbbmodsupport\resources\views/apps-mailbox.blade.php ENDPATH**/ ?>

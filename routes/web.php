@@ -53,5 +53,5 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('roo
 // Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
 //Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
 
-// Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
