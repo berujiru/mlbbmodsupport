@@ -96,8 +96,8 @@
     position: absolute;
     top: 4px;
     bottom: 4px;
-    left: 68%;
-    width: 32%;
+    left: 41%;
+    width: 59%;
     background-color: $card-bg;
     transform: translateX(200%);
     transition: all 0.2s;
@@ -112,7 +112,7 @@
     }
 
     .email-content {
-        margin-right: 32%;
+        margin-right:60%;
 
         @media (max-width: 1349.98px) {
             margin-right: 0;
@@ -121,7 +121,7 @@
 }
 
 .email-detail-content-scroll {
-    height: calc(100vh - 390px);
+    height: calc(100vh - 266px);
 
     @media (max-width: 1349.98px) {
         height: calc(100vh - 252px);
