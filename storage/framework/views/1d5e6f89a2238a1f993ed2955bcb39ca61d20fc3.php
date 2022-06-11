@@ -2,8 +2,8 @@
 <?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.starter'); ?>  <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Pages <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Starter  <?php $__env->endSlot(); ?>
+<?php $__env->slot('li_1'); ?> Roles <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Create  <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 <div class="row">
     <div class="col-lg-12 margin-tb">

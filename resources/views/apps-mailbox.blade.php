@@ -51,7 +51,7 @@
                             <a href="javascript: void(0);" class="title">MLBB MIL-QA</a>
                         </div>
                         <div class="col-mail col-mail-2">
-                            <a href="javascript: void(0);" class="subject"><span class="bg-success badge me-2">Perfect</span>Hello - <span class="teaser">Here's your QA Score for the week</span>
+                            <a href="javascript: void(0);" class="subject"><span class="bg-success badge me-2">Perfect</span>Hello - <span class="teaser">This is a sample of Perfect QA Score</span>
                             </a>
                             <div class="date">June 6</div>
                         </div>
@@ -69,15 +69,15 @@
                             <a href="javascript: void(0);" class="title">MLBB MIL-QA</a>
                         </div>
                         <div class="col-mail col-mail-2">
-                            <a href="javascript: void(0);" class="subject"><span class="bg-warning badge me-2">Infractions</span>Hello - <span class="teaser">Here's your QA Score for the week</span>
+                            <a href="javascript: void(0);" class="subject"><span class="bg-warning badge me-2">Infractions</span>Hello - <span class="teaser">This is a sample of QA Score with some infractions</span>
                             </a>
                             <div class="date">June 6</div>
                         </div>
                     </li>
 
-                    <li class="bg-transparent text-center">
+                    <!-- <li class="bg-transparent text-center">
                         <button type="button" class="btn btn-soft-info btn-rounded btn-sm px-2"><i class="mdi mdi-spin mdi-loading me-2"></i>Load More</button>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>
@@ -101,7 +101,7 @@
 
             <div class="mx-n4 px-4 email-detail-content-scroll" data-simplebar>
                 <div class="mt-4 mb-3">
-                    <h5 class="fw-bold">Title</h5>
+                    <h5 class="fw-bold">MLBB QA Score</h5>
                 </div>
 
                 <div class="accordion accordion-flush">
@@ -110,7 +110,7 @@
                             <a role="button" class="btn w-100 text-start px-0 bg-transparent shadow-none" data-bs-toggle="collapse" href="#email-collapseOne" aria-expanded="true" aria-controls="email-collapseOne">
                                 <div class="d-flex align-items-center text-muted">
                                     <div class="flex-shrink-0 avatar-xs me-3">
-                                        <img src="{{ URL::asset('assets/images//users/avatar-3.jpg') }}" alt="" class="img-fluid rounded-circle">
+                                        <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" class="img-fluid rounded-circle">
                                     </div>
                                     <div class="flex-grow-1 overflow-hidden">
                                         <h5 class="fs-14 text-truncate mb-0">MLBBMODSUPPORT TEAM</h5>

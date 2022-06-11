@@ -6,7 +6,13 @@
 @section('content')
 <div class="profile-foreground position-relative mx-n4 mt-n4">
     <div class="profile-wid-bg">
-        <img src="{{ URL::asset('assets/images/moderator.png') }}" alt="" class="profile-wid-img" />
+        @if(Auth::user()->hasRole('Community Manager'))
+            <img src="{{ URL::asset('assets/images/manager.png') }}" alt="" class="profile-wid-img" />
+        @elseif(Auth::user()->hasRole('Deputy'))
+            <img src="{{ URL::asset('assets/images/deputy.png') }}" alt="" class="profile-wid-img" />
+        @else
+            <img src="{{ URL::asset('assets/images/moderator.png') }}" alt="" class="profile-wid-img" />
+        @endif
     </div>
 </div>
 <div class="pt-4 mb-4 mb-lg-3 pb-lg-4">

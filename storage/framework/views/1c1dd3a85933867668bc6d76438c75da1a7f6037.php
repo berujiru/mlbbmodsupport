@@ -6,7 +6,7 @@
 <div class="auth-page-wrapper pt-5">
     <!-- auth page bg -->
     <div class="auth-one-bg-position auth-one-bg"  id="auth-particles">
-        <div></div>
+        <div class="bg-overlay"></div>
 
         <div class="shape">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
@@ -21,14 +21,15 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
-                        <div>
-                            <a href="index" class="d-inline-block auth-logo">
-                            <span class="logo-sm">
-                                <img src="<?php echo e(URL::asset('assets/images/logo-sm.png')); ?>" alt="">
-                            </span>
-                            </a>
+                         <div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        
                         </div>
-                        <p class="mt-3 fs-15 fw-medium"><span class="text-success">Official </span> Mod Support Team</p>
+                        <!--<p class="mt-3 fs-15 fw-medium"><span class="text-success">Official </span> Mod Support Team</p> -->
                     </div>
                 </div>
             </div>
@@ -55,7 +56,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="username" name="email" placeholder="Enter username">
+unset($__errorArgs, $__bag); ?>" id="username" name="email" placeholder="Enter registered email">
                                         <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

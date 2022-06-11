@@ -3,7 +3,13 @@
 @section('content')
 <div class="position-relative mx-n4 mt-n4">
     <div class="profile-wid-bg profile-setting-img">
-        <img src="{{ URL::asset('assets/images/moderator.png') }}" alt="" class="profile-wid-img" />
+        @if(Auth::user()->hasRole('Community Manager'))
+            <img src="{{ URL::asset('assets/images/manager.png') }}" alt="" class="profile-wid-img" />
+        @elseif(Auth::user()->hasRole('Deputy'))
+            <img src="{{ URL::asset('assets/images/deputy.png') }}" alt="" class="profile-wid-img" />
+        @else
+            <img src="{{ URL::asset('assets/images/moderator.png') }}" alt="" class="profile-wid-img" />
+        @endif
         <div class="overlay-content">
             <div class="text-end p-3">
                 <div class="p-0 ms-auto rounded-circle profile-photo-edit">
