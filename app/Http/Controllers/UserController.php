@@ -35,7 +35,7 @@ class UserController extends Controller
     {
         $data = User::orderBy('id','DESC')->paginate(50);
         return view('users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 50);
     }
     
     /**
