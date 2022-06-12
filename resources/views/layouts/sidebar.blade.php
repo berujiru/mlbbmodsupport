@@ -33,7 +33,7 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span >@lang('translation.menu')</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="dashboard-projects">
+                    <a class="nav-link menu-link" href="{{ route('root') }}">
                         <i class="ri-honour-line"></i> <span data-key="t-landing">Dashboard</span>
                     </a>
                 </li>
@@ -55,6 +55,11 @@
                     </div>
                 </li> <!-- end Dashboard Menu -->
                 @endif
+                <li class="nav-item"> <!-- start Infractions -->
+                    <a class="nav-link" aria-expanded="false" href="{{ route('infraction.index') }}">
+                        <i class="bx bx-message-alt-error"></i> <span >Infraction</span>
+                    </a>
+                </li> <!-- end Infractions -->
                 <li class="nav-item">
                     <a href="apps-mailbox" class="nav-link" >
                     <i class="ri-mail-line"></i> <span data-key="t-landing">@lang('translation.mailbox')</a>
