@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InfractionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RoleController;
@@ -36,7 +37,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('settingprofile', ['as' => 'profileupdate', 'uses' => 'App\Http\Controllers\ProfileController@loginupdate']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 
-    
+    //infraction
+    Route::resource('infraction', InfractionController::class);
 });
 
 //public reset pass
