@@ -3,7 +3,7 @@
     <!-- LOGO -->
     <div class="navbar-brand-box">
         <!-- Dark Logo-->
-        <a href="index" class="logo logo-dark">
+        <a href="/" class="logo logo-dark">
             <span class="logo-sm">
                 <img src="<?php echo e(URL::asset('assets/images/logo-sm.png')); ?>" alt="" height="22">
             </span>
@@ -12,7 +12,7 @@
             </span>
         </a>
         <!-- Light Logo-->
-        <a href="index" class="logo logo-light">
+        <a href="/" class="logo logo-light">
             <span class="logo-sm">
                 <img src="<?php echo e(URL::asset('assets/images/logo-sm.png')); ?>" alt="" height="22">
             </span>
@@ -33,7 +33,7 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span ><?php echo app('translator')->get('translation.menu'); ?></span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="dashboard-projects">
+                    <a class="nav-link menu-link" href="/">
                         <i class="ri-honour-line"></i> <span data-key="t-landing">Dashboard</span>
                     </a>
                 </li>
