@@ -33,7 +33,7 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span ><?php echo app('translator')->get('translation.menu'); ?></span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="/">
+                    <a class="nav-link menu-link" href="<?php echo e(route('root')); ?>">
                         <i class="ri-honour-line"></i> <span data-key="t-landing">Dashboard</span>
                     </a>
                 </li>
@@ -55,8 +55,13 @@
                     </div>
                 </li> <!-- end Dashboard Menu -->
                 <?php endif; ?>
+                <li class="nav-item"> <!-- start Infractions -->
+                    <a class="nav-link" aria-expanded="false" href="<?php echo e(route('infraction.index')); ?>">
+                        <i class="bx bx-message-alt-error"></i> <span >Infraction</span>
+                    </a>
+                </li> <!-- end Infractions -->
                 <li class="nav-item">
-                    <a href="apps-mailbox" class="nav-link" >
+                    <a href="<?php echo e(route('mailbox')); ?>" class="nav-link" >
                     <i class="ri-mail-line"></i> <span data-key="t-landing"><?php echo app('translator')->get('translation.mailbox'); ?></a>
                 </li>
 

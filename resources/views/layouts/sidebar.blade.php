@@ -61,7 +61,7 @@
                     </a>
                 </li> <!-- end Infractions -->
                 <li class="nav-item">
-                    <a href="apps-mailbox" class="nav-link" >
+                    <a href="{{ route('mailbox') }}" class="nav-link" >
                     <i class="ri-mail-line"></i> <span data-key="t-landing">@lang('translation.mailbox')</a>
                 </li>
 

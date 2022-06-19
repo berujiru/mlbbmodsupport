@@ -1,7 +1,6 @@
 
 <?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.mailbox'); ?> <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-
 <div class="email-wrapper d-lg-flex gap-1 mx-n4 mt-n4 p-1">
     <div class="email-content">
         <div class="p-4 pb-0">
@@ -39,6 +38,8 @@
 
             <div class="message-list-content mx-n4 px-4 message-list-scroll" data-simplebar>
                 <ul class="message-list">
+
+                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $mail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li>
                         <div class="col-mail col-mail-1">
                             <div class="form-check checkbox-wrapper-mail fs-14">
@@ -48,36 +49,25 @@
                             <button type="button" class="btn avatar-xs p-0 favourite-btn fs-15 active">
                                 <i class="ri-star-fill"></i>
                             </button>
-                            <a href="javascript: void(0);" class="title">MLBB MIL-QA</a>
+                            <a href="<?php echo e(route('mailboxview',$mail->Merged)); ?>" class="title">MLBB MIL-QA</a>
                         </div>
                         <div class="col-mail col-mail-2">
-                            <a href="javascript: void(0);" class="subject"><span class="bg-success badge me-2">Perfect</span>Hello - <span class="teaser">This is a sample of Perfect QA Score</span>
+                            <a href="<?php echo e(route('mailboxview',$mail->Merged)); ?>" class="subject">
+                                <?php if($mail->OVERALLSCORE=="100.00%"): ?>
+                                    <span class="bg-success badge me-2">Perfect</span>
+                                    Hello - <span class="teaser">Keep up the good work!</span>
+                                <?php else: ?>
+                                    <span class="bg-warning badge me-2">Infractions</span>
+                                    Hello - <span class="teaser">Needs Improvement from the following:</span>
+                                <?php endif; ?>
+                            
+                               
                             </a>
-                            <div class="date">June 6</div>
+                            <div class="date"><?php echo e($mail->Date); ?></div>
                         </div>
                     </li>
-
-                    <li class="unread">
-                        <div class="col-mail col-mail-1">
-                            <div class="form-check checkbox-wrapper-mail fs-14">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheck17">
-                                <label class="form-check-label" for="flexCheck17"></label>
-                            </div>
-                            <button type="button" class="btn avatar-xs p-0 favourite-btn fs-15 active">
-                                <i class="ri-star-fill"></i>
-                            </button>
-                            <a href="javascript: void(0);" class="title">MLBB MIL-QA</a>
-                        </div>
-                        <div class="col-mail col-mail-2">
-                            <a href="javascript: void(0);" class="subject"><span class="bg-warning badge me-2">Infractions</span>Hello - <span class="teaser">This is a sample of QA Score with some infractions</span>
-                            </a>
-                            <div class="date">June 6</div>
-                        </div>
-                    </li>
-
-                    <!-- <li class="bg-transparent text-center">
-                        <button type="button" class="btn btn-soft-info btn-rounded btn-sm px-2"><i class="mdi mdi-spin mdi-loading me-2"></i>Load More</button>
-                    </li> -->
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    
 
                 </ul>
             </div>
@@ -413,7 +403,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(URL::asset('assets/libs/@ckeditor/@ckeditor.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('assets/js/pages/mailbox.init.js')); ?>"></script>
+<!-- <script src="<?php echo e(URL::asset('assets/js/pages/mailbox.init.js')); ?>"></script> -->
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\mlbbmodsupport\resources\views/apps-mailbox.blade.php ENDPATH**/ ?>

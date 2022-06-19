@@ -4,86 +4,16 @@
 <div class="email-wrapper d-lg-flex gap-1 mx-n4 mt-n4 p-1">
     <div class="email-content">
         <div class="p-4 pb-0">
-            <div class="border-bottom border-bottom-dashed">
-                <div class="row mt-n2 mb-3 mb-sm-0">
-                    <div class="col col-sm-auto order-1 d-block d-lg-none">
-                        <button type="button" class="btn btn-soft-success btn-icon btn-sm fs-16 email-menu-btn">
-                            <i class="ri-menu-2-fill align-bottom"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row align-items-center mt-3">
-                    <div class="col">
-                        <ul class="nav nav-tabs nav-tabs-custom nav-success gap-1 text-center border-bottom-0" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link fw-semibold active" href="#">
-                                    <i class="ri-inbox-fill align-bottom d-inline-block"></i>
-                                    <span class="ms-1 d-none d-sm-inline-block">QA Scores</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link fw-semibold" href="#">
-                                    <i class="ri-file-edit-line align-bottom d-inline-block"></i>
-                                    <span class="ms-1 d-none d-sm-inline-block">NTE <span class="bg-success badge me-2">soon</span></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-auto">
-                        <div class="text-muted">1-50 of 154</div>
-                    </div>
-                </div>
-            </div>
-
             <div class="message-list-content mx-n4 px-4 message-list-scroll" data-simplebar>
-                <ul class="message-list">
-
-                @foreach ($data as $key => $mail)
-                    <li>
-                        <div class="col-mail col-mail-1">
-                            <div class="form-check checkbox-wrapper-mail fs-14">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheck20">
-                                <label class="form-check-label" for="flexCheck20"></label>
-                            </div>
-                            <button type="button" class="btn avatar-xs p-0 favourite-btn fs-15 active">
-                                <i class="ri-star-fill"></i>
-                            </button>
-                            <a href="{{ route('mailboxview',$mail->Merged) }}" class="title">MLBB MIL-QA</a>
-                        </div>
-                        <div class="col-mail col-mail-2">
-                            <a href="{{ route('mailboxview',$mail->Merged) }}" class="subject">
-                                @if($mail->OVERALLSCORE=="100.00%")
-                                    <span class="bg-success badge me-2">Perfect</span>
-                                    Hello - <span class="teaser">Keep up the good work!</span>
-                                @else
-                                    <span class="bg-warning badge me-2">Infractions</span>
-                                    Hello - <span class="teaser">Needs Improvement from the following:</span>
-                                @endif
-                            
-                               
-                            </a>
-                            <div class="date">{{$mail->Date}}</div>
-                        </div>
-                    </li>
-                @endforeach
-                    
-
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- end email-content -->
-
-    <div class="email-detail-content">
-        <div class="p-4 d-flex flex-column h-100">
+                
+            <div class="p-4 d-flex flex-column h-100">
             <div class="pb-4 border-bottom border-bottom-dashed">
                 <div class="row">
                     <div class="col">
                         <div class="">
-                            <button type="button" class="btn btn-soft-danger btn-icon btn-sm fs-16 close-btn-email">
-                                <i class="ri-close-fill align-bottom"></i>
-                            </button>
+                            <a class="btn btn-soft-danger " href="{{ route('mailbox') }}">
+                            <i class="bx bx-arrow-back"> </i>Back
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -97,7 +27,7 @@
                 <div class="accordion accordion-flush">
                     <div class="accordion-item border-dashed">
                         <div class="accordion-header">
-                            <a role="button" class="btn w-100 text-start px-0 bg-transparent shadow-none" data-bs-toggle="collapse" href="#email-collapseOne" aria-expanded="true" aria-controls="email-collapseOne">
+                            <a role="button" class="btn w-100 text-start px-0 bg-transparent shadow-none" >
                                 <div class="d-flex align-items-center text-muted">
                                     <div class="flex-shrink-0 avatar-xs me-3">
                                         <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" class="img-fluid rounded-circle">
@@ -107,7 +37,7 @@
                                         <div class="text-truncate fs-12">to: me</div>
                                     </div>
                                     <div class="flex-shrink-0 align-self-start">
-                                        <div class="text-muted fs-12">09 Jan 2022, 11:12 AM</div>
+                                        <div class="text-muted fs-12">{{$mail['Date']}}</div>
                                     </div>
                                 </div>
                             </a>
@@ -200,12 +130,16 @@
                                                                             <table border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;border-collapse:collapse'>
                                                                                 <tbody>
                                                                                     <tr>
-                                                                                        <td valign='top' style='background:#e5f6eb;padding:30.0pt 15.0pt 30.0pt 15.0pt;border-radius:8px'>
+                                                                                        @if($mail["OVERALLSCORE"]=="100.00%")
+                                                                                            <td valign='top' style='background: #e5f6eb;padding:30.0pt 15.0pt 30.0pt 15.0pt;border-radius:8px'>
+                                                                                        @else
+                                                                                            <td valign='top' style='background: #f7d6d6;padding:30.0pt 15.0pt 30.0pt 15.0pt;border-radius:8px'>
+                                                                                        @endif
                                                                                             <table border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;border-collapse:collapse;border-radius:8px'>
                                                                                                 <tbody>
                                                                                                     <tr>
                                                                                                         <td valign='top' style='padding:0in 15.0pt 0in 15.0pt'>
-                                                                                                            <p class='MsoNormal' style='line-height:25.5pt'><b><span style='font-size:18.0pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#151515;letter-spacing:-.3pt'>Hi "+ modname +",<u></u><u></u></span></b></p>
+                                                                                                            <p class='MsoNormal' style='line-height:25.5pt'><b><span style='font-size:18.0pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#151515;letter-spacing:-.3pt'>Hi {{$dbsc->firstname}},<u></u><u></u></span></b></p>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     <tr style='height:7.5pt'>
@@ -215,10 +149,30 @@
                                                                                                     </tr>
                                                                                                     <tr>
                                                                                                         <td valign='top' style='padding:0in 15.0pt 0in 15.0pt'>
+                                                                                                        @if($mail["OVERALLSCORE"]=="100.00%")
                                                                                                             <p align='center' style='color:#167000;font-size:20pt;line-height:20pt;'>Your QA Score is</p>
                                                                                                             <p align='center' style='color:#167000;background-color:#00ff141c;font-size:70pt;margin:0px;'><b>100%</b></p>
                                                                                                             <br>
                                                                                                             <p align='center' style='color:#167000;font-size:12pt;line-height:5pt;margin:0px;'><i>Keep up the good work!</i></p>
+                                                                                                        @else
+                                                                                                            <p align='center' style='color:#700000;font-size:20pt;line-height:20pt;'>Your QA Score is</p>
+                                                                                                            <p align='center' style='color:#700000;background-color:#ff00001c;font-size:70pt;margin:0px;'><b>{{$mail["OVERALLSCORE"]}}</b></p>
+                                                                                                            <br>
+                                                                                                            <p align='center' style='color:#700000;font-size:12pt;line-height:10pt;margin:0px;'><i>Needs Improvement on the Following</i></p>
+                                                                                                            <br>
+                                                                                                            @if($mail["ScoreonTimeliness"]!="100.00%")
+                                                                                                            <p align='center' style='color:#700000;font-size:10pt;line-height:10pt;margin:0px;'><i>Timeliness</i></p>
+                                                                                                            <br>
+                                                                                                            @endif
+                                                                                                            @if($mail["ScoreonCommunication"]!="100.00%")
+                                                                                                            <p align='center' style='color:#700000;font-size:10pt;line-height:10pt;margin:0px;'><i>Communication</i></p>
+                                                                                                            <br>
+                                                                                                            @endif
+                                                                                                            @if($mail["ScoreonAccuracy"]!="100.00%")
+                                                                                                            <p align='center' style='color:#700000;font-size:10pt;line-height:10pt;margin:0px;'><i>Accuracy</i></p>
+                                                                                                            <br>
+                                                                                                            @endif
+                                                                                                        @endif
                                                                                                             <br>
                                                                                                             <i>If you have any questions and concerns, contact your assigned QA Specialist.</i><u></u><u></u></span></p>
                                                                                                             <p class='MsoNormal' align='center' style='text-align:center;line-height:21.0pt'>
@@ -395,6 +349,13 @@
                 </div>
             </div>
         </div>
+            </div>
+        </div>
+    </div>
+    <!-- end email-content -->
+
+    <div class="email-detail-content">
+        
     </div>
     <!-- end email-detail-content -->
 </div>
@@ -403,6 +364,5 @@
 @endsection
 @section('script')
 <script src="{{ URL::asset('assets/libs/@ckeditor/@ckeditor.min.js') }}"></script>
-<!-- <script src="{{ URL::asset('assets/js/pages/mailbox.init.js') }}"></script> -->
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection

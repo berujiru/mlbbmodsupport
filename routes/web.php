@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\MailboxController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,10 @@ Route::group(['middleware' => ['auth']], function() {
 
     //infraction
     Route::resource('infraction', InfractionController::class);
+
+    //sheetdb
+    Route::get('/mailbox',[MailboxController::class,'index'])->name('mailbox');
+    Route::get('/mailbox/{id}',[MailboxController::class,'show'])->name('mailboxview');
 });
 
 //public reset pass
