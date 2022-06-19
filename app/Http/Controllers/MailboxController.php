@@ -21,6 +21,8 @@ class MailboxController extends Controller
             // return $data; exit;
             return view('apps-mailbox',compact('data'));
         }
+
+        return response()->view('errors.404');
         
     }
 
@@ -34,6 +36,12 @@ class MailboxController extends Controller
     {
         $dbsc = Dbsc::find(auth()->user()->id);
         $mail =  Masterfile::where('MERGED',$id)->first();
-        return view('apps-mailview',compact('mail'),compact('dbsc'));
+        //check if the mod id matches
+        
+        if($mail['MOD_ID']==$dbsc->modid){
+            return view('apps-mailview',compact('mail'),compact('dbsc'));
+        }
+        return response()->view('errors.404');
+
     }
 }
