@@ -29,7 +29,7 @@
                             <tbody>
                                 <tr>
                                     <td>Code :</td>
-                                    <td class="text-end">102</td>
+                                    <td class="text-end"><?php echo e($infraction->code); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Detail : </td>

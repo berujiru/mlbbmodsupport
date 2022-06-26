@@ -8,6 +8,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\MailboxController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamDeputyController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +43,10 @@ Route::group(['middleware' => ['auth']], function() {
 
     //infraction
     Route::resource('infraction', InfractionController::class);
+
+    //team management
+    Route::resource('team-deputy', TeamDeputyController::class);
+    Route::resource('team', TeamController::class);
 
     //sheetdb
     Route::get('/mailbox',[MailboxController::class,'index'])->name('mailbox');

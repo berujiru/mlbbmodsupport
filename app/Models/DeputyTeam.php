@@ -15,6 +15,7 @@ class DeputyTeam extends Model
      * @var string
      */
     protected $table = 'deputy_team';
+    protected $primaryKey = 'deputy_team_id';
 
     protected $fillable = [
         'deputy_team_id',
@@ -34,5 +35,15 @@ class DeputyTeam extends Model
     public function profile()
     {
         return $this->hasOne(Dbsc::class, 'id', 'profile_id');
+    }
+
+    public function createdby()
+    {
+        return $this->hasOne(Dbsc::class, 'id', 'created_by');
+    }
+
+    public function updatedby()
+    {
+        return $this->hasOne(Dbsc::class, 'id', 'updated_by');
     }
 }
