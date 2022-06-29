@@ -24,9 +24,6 @@
                          <div>
                         <br>
                         <br>
-                        <br>
-                        <br>
-                        <br>
                         
                         </div>
                         <!--<p class="mt-3 fs-15 fw-medium"><span class="text-success">Official </span> Mod Support Team</p> -->
@@ -40,6 +37,19 @@
                     <div class="card mt-4">
 
                         <div class="card-body p-4">
+                        <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mt-sm-5 mb-4 text-white-50">
+                            <div>
+                                <a href="index" class="d-inline-block auth-logo">
+                                <span class="logo-sm">
+                                    <img src="<?php echo e(URL::asset('assets/images/logo-sm.png')); ?>" alt="">
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                             <div class="text-center mt-2">
                                 <h5 class="text-primary">Welcome Back !</h5>
                                 <p class="text-muted">Sign in to continue to MLBB MOD Support.</p>

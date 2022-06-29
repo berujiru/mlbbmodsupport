@@ -6,11 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\MailboxController;
+use App\Http\Controllers\ModinfractionController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamDeputyController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +50,11 @@ Route::group(['middleware' => ['auth']], function() {
     //sheetdb
     Route::get('/mailbox',[MailboxController::class,'index'])->name('mailbox');
     Route::get('/mailbox/{id}',[MailboxController::class,'show'])->name('mailboxview');
+
+    //evaluation assigning of infractions
+    Route::get('/evaluation',[ModinfractionController::class,'index'])->name('modeval');
+    Route::post('/evaluation',[ModinfractionController::class,'store'])->name('modevalstore');
+    Route::get('/evaluation/destroy/{id}',[ModinfractionController::class,'destroy'])->name('modevaldestroy');
 });
 
 //public reset pass
