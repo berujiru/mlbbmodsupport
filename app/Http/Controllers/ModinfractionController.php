@@ -38,7 +38,7 @@ class ModinfractionController extends Controller
         foreach($request->infractions as $infraction){
 
             //infraction in within same day cant be added
-            $checkerofinfra = Modinfraction::where('date',$request->date)->where('infraction_id',$infraction)->get();
+            $checkerofinfra = Modinfraction::where('date',$request->date)->where('infraction_id',$infraction)->where('mod_id',$request->mod_id)->get();
             if(count($checkerofinfra)==0){
                 $newmodinfra = new Modinfraction;
                 $newmodinfra->date = $request->date;

@@ -77,6 +77,10 @@
                     </div>
                 </li> <!-- end Team -->
                 <li class="nav-item">
+                    <a href="{{ route('modeval') }}" class="nav-link" >
+                    <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('mailbox') }}" class="nav-link" >
                     <i class="ri-mail-line"></i> <span data-key="t-landing">@lang('translation.mailbox')</a>
                 </li>
