@@ -15,12 +15,25 @@ class Team extends Model
      * @var string
      */
     protected $table = 'team';
+    protected $primaryKey = 'team_id';
 
     protected $fillable = [
         'team_id',
+        'team_code',
         'team_name',
         'created_by',
+        'updated_by',
         'created_at',
         'updated_at',
     ];
+
+    public function createdby()
+    {
+        return $this->hasOne(Dbsc::class, 'id', 'created_by');
+    }
+
+    public function updatedby()
+    {
+        return $this->hasOne(Dbsc::class, 'id', 'updated_by');
+    }
 }
