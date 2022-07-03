@@ -172,6 +172,12 @@
                                                                                                             <p align='center' style='color:#700000;font-size:10pt;line-height:10pt;margin:0px;'><i>Accuracy</i></p>
                                                                                                             <br>
                                                                                                             <?php endif; ?>
+                                                                                                            <p align='center' style='color:#700000;font-size:12pt;line-height:12pt;margin:0px;'>specific items</p>
+                                                                                                            <br>
+                                                                                                            <?php $__currentLoopData = $markdowns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $markdown): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                                                                <p align='center' style='color:#700000;font-size:10pt;line-height:10pt;margin:0px;'><i><?php echo e($markdown->Form_Attribute); ?></i></p>
+                                                                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                                                                                                         <?php endif; ?>
                                                                                                             <br>
                                                                                                             <i>If you have any questions and concerns, contact your assigned QA Specialist.</i><u></u><u></u></span></p>

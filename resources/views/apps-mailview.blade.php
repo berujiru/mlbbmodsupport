@@ -172,6 +172,12 @@
                                                                                                             <p align='center' style='color:#700000;font-size:10pt;line-height:10pt;margin:0px;'><i>Accuracy</i></p>
                                                                                                             <br>
                                                                                                             @endif
+                                                                                                            <p align='center' style='color:#700000;font-size:12pt;line-height:12pt;margin:0px;'>specific items</p>
+                                                                                                            <br>
+                                                                                                            @foreach($markdowns as $markdown)
+                                                                                                                <p align='center' style='color:#700000;font-size:8pt;line-height:10pt;margin:0px;'><i>{{$markdown->Infractions}} count/s of {{$markdown->Form_Attribute}}</i></p>
+                                                                                                            @endforeach
+
                                                                                                         @endif
                                                                                                             <br>
                                                                                                             <i>If you have any questions and concerns, contact your assigned QA Specialist.</i><u></u><u></u></span></p>

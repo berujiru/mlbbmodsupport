@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Masterfile;
 use App\Models\Dbsc;
+use App\Models\Markdowns;
 
 class MailboxController extends Controller
 {
@@ -36,10 +37,11 @@ class MailboxController extends Controller
     {
         $dbsc = Dbsc::find(auth()->user()->id);
         $mail =  Masterfile::where('MERGED',$id)->first();
+        $markdowns = Markdowns::where('MERGED',$id)->get();
         //check if the mod id matches
         
         if($mail['MOD_ID']==$dbsc->modid){
-            return view('apps-mailview',compact('mail'),compact('dbsc'));
+            return view('apps-mailview',compact('mail'),compact(['dbsc','markdowns']));
         }
         return response()->view('errors.404');
 

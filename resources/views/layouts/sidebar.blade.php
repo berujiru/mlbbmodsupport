@@ -54,7 +54,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->
-                @endif
+
                 <li class="nav-item"> <!-- start Infractions -->
                     <a class="nav-link" aria-expanded="false" href="{{ route('infraction.index') }}">
                         <i class="bx bx-message-alt-error"></i> <span >Infraction</span>
@@ -80,6 +80,7 @@
                     <a href="{{ route('modeval') }}" class="nav-link" >
                     <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a href="{{ route('mailbox') }}" class="nav-link" >
                     <i class="ri-mail-line"></i> <span data-key="t-landing">@lang('translation.mailbox')</a>

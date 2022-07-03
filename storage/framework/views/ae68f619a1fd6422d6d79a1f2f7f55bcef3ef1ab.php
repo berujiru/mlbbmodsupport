@@ -60,6 +60,26 @@
                         <i class="bx bx-message-alt-error"></i> <span >Infraction</span>
                     </a>
                 </li> <!-- end Infractions -->
+                <li class="nav-item"> <!-- start Team -->
+                    <a class="nav-link menu-link" href="#sidebarTeam" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarTeam">
+                        <i class="bx bxs-user-account"></i> <span >Team Management</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarTeam">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="<?php echo e(route('team.index')); ?>" class="nav-link" >Teams</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo e(route('team-deputy.index')); ?>" class="nav-link" >Deputy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li> <!-- end Team -->
+                <li class="nav-item">
+                    <a href="<?php echo e(route('modeval')); ?>" class="nav-link" >
+                    <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
+                </li>
                 <li class="nav-item">
                     <a href="<?php echo e(route('mailbox')); ?>" class="nav-link" >
                     <i class="ri-mail-line"></i> <span data-key="t-landing"><?php echo app('translator')->get('translation.mailbox'); ?></a>
