@@ -36,4 +36,9 @@ class Team extends Model
     {
         return $this->hasOne(Dbsc::class, 'id', 'updated_by');
     }
+
+    public function deputy()
+    {
+        return $this->hasOne(DeputyTeam::class, 'team_id', 'team_id');
+    }
 }

@@ -54,10 +54,17 @@ class HomeController extends Controller
             $greeting_name = $dbsc->firstname;
         }
 
-        $list_teams = Dbsc::select('team',DB::raw('COUNT(*) AS number_people'))
-                        ->groupby('team')
-                        ->orderby('team')
-                        ->get();
+        $list_teams = Dbsc::select('dbsc.team_id','team.team_name',
+                DB::raw('COUNT(*) AS number_people'),
+                DB::raw("(SELECT CONCAT(dbsc.`firstname`,' ',dbsc.`lastname`)
+                    FROM `deputy_team` INNER JOIN dbsc ON deputy_team.`profile_id` = dbsc.`id`
+                    WHERE deputy_team.`team_id` = team.`team_id`) AS headed_by"))
+                ->join('team', 'team.team_id', '=', 'dbsc.team_id')
+                //->join('deputy_team', 'deputy_team.team_id', '=', 'team.team_id')
+                //->groupby('dbsc.team_id','team.team_name','team.team_id')
+                ->groupby('dbsc.team_id')
+                ->orderby('team_name')
+                ->get();
 
         //active mapped accounts
         $active_accounts = DB::table('users')
@@ -81,13 +88,20 @@ class HomeController extends Controller
             ->where('users.status',1)
             ->where('dbsc.sex','female')
             ->count();
-
+        //newly registered active accounts
+        $total_newly_registered = DB::table('dbsc')
+            ->join('users', 'users.id', '=', 'dbsc.id')
+            ->where('users.status',1)
+            ->where(DB::raw("DATEDIFF(DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(dbsc.created_at,'%Y-%m-%d'))"),"<",31)
+            ->count();
+        //number of teams
+        $total_teams = DB::table('team')->count();
         //echo auth()->user()->id;
         // echo "<pre>";
         // print_r($list_teams);
         // echo "</pre>";
         // exit;
-        return view('index',compact('dbsc','greeting','active_accounts','today_birthdays','total_male','total_female','list_teams'));
+        return view('index',compact('dbsc','greeting','active_accounts','today_birthdays','total_male','total_female','list_teams','total_newly_registered','total_teams'));
         //return view('index');
     }
 
