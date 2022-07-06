@@ -184,7 +184,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="col-lg-2">
                                     <div class="mb-3">
                                         <label for="sexinput" class="form-label">Sex</label>
-                                        <?php echo Form::select('sex', array('male' => 'Male', 'female' => 'Female'), 'S',['class'=>'form-control']); ?>
+                                        <?php echo Form::select('sex', array('male' => 'Male', 'female' => 'Female'),$dbsc?$dbsc->sex:'',['class'=>'form-control']); ?>
 
                                         <?php $__errorArgs = ['sex'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -297,11 +297,8 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="skillsInput" class="form-label">Team</label>
-                                        <select class="form-control" name="team" data-choices
-                                            data-choices-text-unique-true id="teamuInput">
-                                            <option value="Community">Community</option>
-                                            <option value="MIL">MIL</option>
-                                        </select>
+                                        <?php echo Form::select('team', array('Community' => 'Community', 'MIL' => 'MIL'),$dbsc?$dbsc->team:"",['class'=>'form-control']); ?>
+
                                         <?php $__errorArgs = ['team'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -318,11 +315,8 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="skillsInput" class="form-label">Designation</label>
-                                        <select class="form-control" name="designation" data-choices
-                                            data-choices-text-unique-true id="skillsInput">
-                                            <option value="Moderator">Moderator</option>
-                                            <option value="Deputy">Deputy</option>
-                                        </select>
+                                        <?php echo Form::select('designation', array('Moderator' => 'Moderator', 'Deputy' => 'Deputy'),$dbsc?$dbsc->designation:"",['class'=>'form-control']); ?>
+
                                         <?php $__errorArgs = ['designation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

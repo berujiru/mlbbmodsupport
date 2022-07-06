@@ -143,7 +143,7 @@
                                 <div class="col-lg-2">
                                     <div class="mb-3">
                                         <label for="sexinput" class="form-label">Sex</label>
-                                        {!! Form::select('sex', array('male' => 'Male', 'female' => 'Female'), 'S',['class'=>'form-control']) !!}
+                                        {!! Form::select('sex', array('male' => 'Male', 'female' => 'Female'),$dbsc?$dbsc->sex:'',['class'=>'form-control']) !!}
                                         @error('sex')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -209,11 +209,7 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="skillsInput" class="form-label">Team</label>
-                                        <select class="form-control" name="team" data-choices
-                                            data-choices-text-unique-true id="teamuInput">
-                                            <option value="Community">Community</option>
-                                            <option value="MIL">MIL</option>
-                                        </select>
+                                        {!! Form::select('team', array('Community' => 'Community', 'MIL' => 'MIL'),$dbsc?$dbsc->team:"",['class'=>'form-control']) !!}
                                         @error('team')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -223,11 +219,7 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="skillsInput" class="form-label">Designation</label>
-                                        <select class="form-control" name="designation" data-choices
-                                            data-choices-text-unique-true id="skillsInput">
-                                            <option value="Moderator">Moderator</option>
-                                            <option value="Deputy">Deputy</option>
-                                        </select>
+                                        {!! Form::select('designation', array('Moderator' => 'Moderator', 'Deputy' => 'Deputy'),$dbsc?$dbsc->designation:"",['class'=>'form-control']) !!}
                                         @error('designation')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

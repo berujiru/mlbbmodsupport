@@ -54,7 +54,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->
-                <?php endif; ?>
+
                 <li class="nav-item"> <!-- start Infractions -->
                     <a class="nav-link" aria-expanded="false" href="<?php echo e(route('infraction.index')); ?>">
                         <i class="bx bx-message-alt-error"></i> <span >Infraction</span>
@@ -80,6 +80,7 @@
                     <a href="<?php echo e(route('modeval')); ?>" class="nav-link" >
                     <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
                 </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a href="<?php echo e(route('mailbox')); ?>" class="nav-link" >
                     <i class="ri-mail-line"></i> <span data-key="t-landing"><?php echo app('translator')->get('translation.mailbox'); ?></a>
