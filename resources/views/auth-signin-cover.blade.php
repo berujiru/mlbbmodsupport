@@ -157,10 +157,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> Velzon. Crafted with <i
-                                    class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                            <p class="mb-0 text-muted"><script>document.write(new Date().getFullYear())</script> &copy; MLBBMODSUPPORT</p>
                         </div>
                     </div>
                 </div>
