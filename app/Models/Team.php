@@ -21,6 +21,7 @@ class Team extends Model
         'team_id',
         'team_code',
         'team_name',
+        'status_id',
         'created_by',
         'updated_by',
         'created_at',
@@ -40,5 +41,10 @@ class Team extends Model
     public function deputy()
     {
         return $this->hasOne(DeputyTeam::class, 'team_id', 'team_id');
+    }
+
+    public function teamstatus()
+    {
+        return $this->hasOne(TeamStatus::class, 'team_status_id', 'status_id');
     }
 }
