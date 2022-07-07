@@ -60,6 +60,7 @@ class HomeController extends Controller
                     FROM `deputy_team` INNER JOIN dbsc ON deputy_team.`profile_id` = dbsc.`id`
                     WHERE deputy_team.`team_id` = team.`team_id`) AS headed_by"))
                 ->join('team', 'team.team_id', '=', 'dbsc.team_id')
+                ->where('team.status_id',1)
                 //->join('deputy_team', 'deputy_team.team_id', '=', 'team.team_id')
                 //->groupby('dbsc.team_id','team.team_name','team.team_id')
                 ->groupby('dbsc.team_id')
@@ -95,7 +96,7 @@ class HomeController extends Controller
             ->where(DB::raw("DATEDIFF(DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(dbsc.created_at,'%Y-%m-%d'))"),"<",31)
             ->count();
         //number of teams
-        $total_teams = DB::table('team')->count();
+        $total_teams = DB::table('team')->where('status_id',1)->count();
         //echo auth()->user()->id;
         // echo "<pre>";
         // print_r($list_teams);

@@ -92,7 +92,7 @@
                                     <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
                                             data-target="{{number_format($total_teams,2)}}">0</span></h2>
                                     <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
-                                            Total Teams</p>
+                                            Total Active Teams</p>
                                 </div>
                                 <div>
                                     <div class="avatar-sm flex-shrink-0">
@@ -157,7 +157,7 @@
                 <div class="col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Teams</h4>
+                            <h4 class="card-title mb-0 flex-grow-1">Active Teams</h4>
                         </div><!-- end card header -->
 
                         <div class="card-body">
