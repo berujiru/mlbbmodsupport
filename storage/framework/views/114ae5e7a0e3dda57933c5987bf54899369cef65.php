@@ -297,7 +297,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="skillsInput" class="form-label">Team</label>
-                                        <?php echo Form::select('team', array('Community' => 'Community', 'MIL' => 'MIL'),$dbsc?$dbsc->team:"",['class'=>'form-control']); ?>
+                                        <?php echo Form::select('team_id', $team,$dbsc?$dbsc->team_id:"",['class'=>'form-control']); ?>
 
                                         <?php $__errorArgs = ['team'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -311,6 +311,8 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
+                                <?php echo e($team); ?>
+
                                 <!--end col-->
                                 <div class="col-lg-6">
                                     <div class="mb-3">

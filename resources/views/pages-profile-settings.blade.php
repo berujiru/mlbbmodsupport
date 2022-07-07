@@ -209,7 +209,7 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="skillsInput" class="form-label">Team</label>
-                                        {!! Form::select('team', array('Community' => 'Community', 'MIL' => 'MIL'),$dbsc?$dbsc->team:"",['class'=>'form-control']) !!}
+                                        {!! Form::select('team_id', $team,$dbsc?$dbsc->team_id:"",['class'=>'form-control']) !!}
                                         @error('team')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

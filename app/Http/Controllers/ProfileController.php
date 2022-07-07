@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dbsc;
+use App\Models\Team;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
@@ -44,8 +45,9 @@ class ProfileController extends Controller
     public function edit()
     {
         $dbsc = Dbsc::find(auth()->user()->id);
-        
-        return view('pages-profile-settings',compact('dbsc'));
+        $team = Team::get();
+        $team=$team->pluck('team_name','team_id');
+        return view('pages-profile-settings',compact(['dbsc','team']));
     }
 
      /**
@@ -66,7 +68,7 @@ class ProfileController extends Controller
             'contactno'=> 'required',
             'email'=> 'required|email',
             'fblink'=> 'required',
-            'team'=> 'required',
+            'team_id'=> 'required',
             'designation'=> 'required',
             'birthday'=> 'required',
             'age'=> 'required|numeric',
@@ -92,7 +94,7 @@ class ProfileController extends Controller
                 'contactno' => $request->contactno,
                 'email' => $request->email,
                 'fblink' => $request->fblink,
-                'team' => $request->team,
+                'team_id' => $request->team_id,
                 'designation' => $request->designation,
                 'birthday' => $request->birthday,
                 'age' => $request->age,

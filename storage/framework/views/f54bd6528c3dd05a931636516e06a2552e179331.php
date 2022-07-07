@@ -60,7 +60,53 @@
                         </div><!-- end card body -->
                     </div> <!-- end card-->
                 </div> <!-- end col-->
-
+                <!--newly registered -->
+                <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-uppercase fw-medium text-muted mb-0">Newly Registered</p>
+                                    <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
+                                            data-target="<?php echo e(number_format($total_newly_registered,2)); ?>">0</span></h2>
+                                    <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
+                                            Total New Active</p>
+                                </div>
+                                <div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-soft-info rounded-circle fs-2">
+                                            <i data-feather="users" class="text-primary"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+                <!-- number of teams -->
+                <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-uppercase fw-medium text-muted mb-0">Number of Teams</p>
+                                    <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
+                                            data-target="<?php echo e(number_format($total_teams,2)); ?>">0</span></h2>
+                                    <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
+                                            Total Active Teams</p>
+                                </div>
+                                <div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-soft-info rounded-circle fs-2">
+                                            <i data-feather="users" class="text-primary"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+                <!--
                 <div class="col-xl-4 col-md-6">
                     <div class="card card-animate">
                         <div class="card-body">
@@ -81,9 +127,9 @@
                                 </div>
                             </div>
                         </div><!-- end card body -->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-
+                <!--    </div> <!-- end card-->
+                <!--</div> <!-- end col-->
+                <!--
                 <div class="col-xl-4 col-md-6">
                     <div class="card card-animate">
                         <div class="card-body">
@@ -104,15 +150,15 @@
                                 </div>
                             </div>
                         </div><!-- end card body -->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
+                <!--    </div> <!-- end card-->
+            <!--    </div> <!-- end col-->
             </div> <!-- end row-->
 
             <div class="row">
-                <div class="col-xl-6">
+                <div class="col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Teams</h4>
+                            <h4 class="card-title mb-0 flex-grow-1">Active Teams</h4>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -142,7 +188,7 @@
                                             </td>
                                             <td><span class="text-success"><?php echo e($lt->number_people); ?></span></td>
                                             <td><span class="text-danger">no data yet</span></td>
-                                            <td><span class="text-danger">no data yet</span></td>
+                                            <td><?= empty($lt->headed_by) ? "<span class='text-danger'>no data yet</span>" : "<span class='text-primary'>$lt->headed_by</span>" ?></td>
                                         </tr><!-- end tr -->
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                             <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
@@ -153,7 +199,7 @@
                         </div>
                     </div> <!-- .card-->
                 </div> <!-- .col-->
-                <div class="col-xl-6">
+                <div class="col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Today's Birthday</h4>
@@ -194,7 +240,7 @@
                     </div>
                 </div>
             </div> <!-- end row-->
-        </div> <!-- end .h-100-->
+        <!--</div> <!-- end .h-100-->
 
     </div> <!-- end col -->
 
