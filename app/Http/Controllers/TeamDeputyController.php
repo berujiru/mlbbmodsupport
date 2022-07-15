@@ -6,9 +6,11 @@ use App\Models\DeputyTeam;
 use App\Http\Requests\StoreDeputyTeamRequest;
 use App\Http\Requests\UpdateDeputyTeamRequest;
 use App\Models\Dbsc;
+use App\Models\DeputyTeamHistory;
 use App\Models\Team;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TeamDeputyController extends Controller
 {
@@ -32,7 +34,7 @@ class TeamDeputyController extends Controller
      */
     public function create()
     {
-        $list_teams = Team::all();
+        $list_teams = Team::all()->where('status_id',1);
         $list_profiles = Dbsc::all();
         return view('team-deputy.create',compact('list_teams','list_profiles'));
     }
@@ -85,10 +87,18 @@ class TeamDeputyController extends Controller
      * @param  \App\Models\DeputyTeam  $deputyTeam
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    // public function edit($id)
+    // {
+    //     $deputy = DeputyTeam::find($id);
+    //     $list_teams = Team::all();
+    //     $list_profiles = Dbsc::all();
+    //     return view('team-deputy.edit',compact('deputy','list_teams','list_profiles'));
+    // }
+
+    public function updatedeputy($id)
     {
         $deputy = DeputyTeam::find($id);
-        $list_teams = Team::all();
+        $list_teams = Team::all()->where('status_id',1);
         $list_profiles = Dbsc::all();
         return view('team-deputy.edit',compact('deputy','list_teams','list_profiles'));
     }
@@ -100,23 +110,50 @@ class TeamDeputyController extends Controller
      * @param  \App\Models\DeputyTeam  $deputyTeam
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updaterecord(Request $request, $id)
     {
         $this->validate($request, [
             //'team_id' => 'required',
             'profile_id' => 'required',
         ]);
-    
+        DB::beginTransaction();
+
+        $old_rec = DeputyTeam::find($id);
+        $old_profile = $old_rec->profile_id;
+        $old_team = $old_rec->team_id;
+
         $input = $request->all();
         $deputy = DeputyTeam::find($id);
         $deputy->profile_id = $input['profile_id'];
         //$deputy->team_id = $input['team_id'];
         $deputy->updated_by = auth()->user()->id;
         $deputy->updated_at = date("Y-m-d H:i:s");
+
         if($deputy->save()) {
-            $show = 'success';
-            $message = 'Team deputy was updated successfully.';
+            if($old_profile == $input['profile_id']) {
+                DB::rollBack();
+                $show = 'success';
+                $message = 'No changes made';
+            } else {
+                $rec_history = new DeputyTeamHistory();
+                $rec_history->profile_id = $old_profile;
+                $rec_history->team_id = $old_team;
+                $rec_history->date_changed = date("Y-m-d H:i:s");
+                $rec_history->action_taken = 1; //update
+                $rec_history->created_by = auth()->user()->id;
+                $rec_history->created_at = date("Y-m-d H:i:s");
+                if($rec_history->save()) {
+                    DB::commit();
+                    $show = 'success';
+                    $message = 'Team deputy was updated successfully.';
+                } else {
+                    DB::rollBack();
+                    $show = 'error';
+                    $message = 'Team deputy was not updated.';
+                }
+            }
         } else {
+            DB::rollback();
             $show = 'error';
             $message = 'Team deputy was not updated.';
         }
@@ -131,11 +168,31 @@ class TeamDeputyController extends Controller
      */
     public function destroy($id)
     {
-        $delete = DeputyTeam::find($id)->delete();
-        if($delete) {
-            $show = 'success';
-            $message = 'Team deputy deleted successfully.';
+        DB::beginTransaction();
+        $deputy = DeputyTeam::find($id);
+        $old_profile = $deputy->profile_id;
+        $old_team = $deputy->team_id;
+        $old_team_name = Team::find($deputy->team_id)->team_name;
+        if($deputy->delete()) {
+            $rec_history = new DeputyTeamHistory();
+            $rec_history->profile_id = $old_profile;
+            $rec_history->team_id = $old_team;
+            $rec_history->date_changed = date("Y-m-d H:i:s");
+            $rec_history->action_taken = 2; //delete
+            $rec_history->deleted_team_name = $old_team_name;
+            $rec_history->created_by = auth()->user()->id;
+            $rec_history->created_at = date("Y-m-d H:i:s");
+            if($rec_history->save()) {
+                DB::commit();
+                $show = 'success';
+                $message = 'Team deputy deleted successfully.';
+            } else {
+                DB::rollBack();
+                $show = 'error';
+                $message = 'Failed to delete team deputy.';
+            }
         } else {
+            DB::rollBack();
             $show = 'error';
             $message = 'Failed to delete team deputy.';
         }

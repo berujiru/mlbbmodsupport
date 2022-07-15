@@ -29,6 +29,7 @@
               <th scope="col">Code</th>
               <th scope="col">Team Name</th>
               <th scope="col">Added by</th>
+              <th scope="col">Team Status</th>
               <th scope="col">Action</th>
           </tr>
       </thead>
@@ -38,11 +39,13 @@
               <td style="width:10%;">{{++$i}}</td>
               <td style="width:20%;">{{ $team->team_code }}</td>
               <td style="width:30%;">{{ $team->team_name }}</td>
-              <td style="width:30%;">{{ !empty($team->createdby) ? $team->createdby->firstname." ".$team->createdby->lastname : null }}</td>
-              <td style="width:10%;">
+              <td style="width:20%;">{{ !empty($team->createdby) ? $team->createdby->firstname." ".$team->createdby->lastname : null }}</td>
+              <td style="width:20%;"><?= !empty($team->teamstatus) ? ($team->status_id == 1 ? "<label class='badge bg-success text-wrap'>".$team->teamstatus->status."</label>" : "<label class='badge bg-danger text-wrap'>".$team->teamstatus->status."</label>" ) : null ?></td>
+              <td style="width:15%;">
                 <a class="btn btn-sm btn-info" href="{{route('team.show',$team->team_id)}}" title="View Team"><i class="bx bx-fw bx-show bx-xs"></i></a>
                 <a class="btn btn-sm btn-primary" href="{{route('team.edit',$team->team_id)}}" title="Edit Team"><i class="bx bx-fw bx-edit-alt bx-xs"></i></a>
-                <!-- <a class="btn btn-sm btn-danger" href="{{route('team.destroy',$team->team_id)}}"><i class="bx bx-fw bx bx-trash"></i></a> -->
+                <a class="btn btn-sm btn-danger" href="{{route('team.delete',$team->team_id)}}" title="Remove Team"><i class="bx bx-fw bx bx-trash"></i></a>
+                <a <?= ($team->status_id == 2 ? 'class="btn btn-sm btn-success" title="Enable"' : 'class="btn btn-sm btn-danger" title="Disable"') ?> href="{{route('team.enable',$team->team_id)}}"><?= ($team->status_id == 2 ? '<i class="bx bx-check-circle"></i>' : '<i class="bx bx-block"></i>') ?></a>
               </td>
           </tr>
         @empty
@@ -57,40 +60,4 @@
 @endsection
 @section('script')
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-<script text="text/javascript">
-$('body').on('click', '.deleteProduct', function () {
-     
-     var product_id = $(this).data("id");
-     confirm("Are You sure want to delete !");
-   
-     $.ajax({
-         type: "DELETE",
-         url: "{{ route('team.store') }}"+'/'+product_id,
-         success: function (data) {
-             table.draw();
-         },
-         error: function (data) {
-             console.log('Error:', data);
-         }
-     });
- });
-
- Swal.fire({
-  title: '<strong>HTML <u>example</u></strong>',
-  icon: 'info',
-  html:
-    'You can use <b>bold text</b>, ' +
-    '<a href="//sweetalert2.github.io">links</a> ' +
-    'and other HTML tags',
-  showCloseButton: true,
-  showCancelButton: true,
-  focusConfirm: false,
-  confirmButtonText:
-    '<i class="fa fa-thumbs-up"></i> Great!',
-  confirmButtonAriaLabel: 'Thumbs up, great!',
-  cancelButtonText:
-    '<i class="fa fa-thumbs-down"></i>',
-  cancelButtonAriaLabel: 'Thumbs down'
-})
-</script>
 @endsection

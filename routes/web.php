@@ -10,6 +10,8 @@ use App\Http\Controllers\MailboxController;
 use App\Http\Controllers\ModinfractionController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamDeputyController;
+use App\Http\Controllers\TeamDeputyHistoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,10 +44,18 @@ Route::group(['middleware' => ['auth']], function() {
 
     //infraction
     Route::resource('infraction', InfractionController::class);
+    Route::get('/infraction/delete/{id}',[InfractionController::class,'destroy'])->name('infraction.delete');
 
     //team management
     Route::resource('team-deputy', TeamDeputyController::class);
+    Route::get('/team-deputy/delete/{id}',[TeamDeputyController::class,'destroy'])->name('team-deputy.delete');
+    Route::get('/team-deputy/update-deputy/{id}', [TeamDeputyController::class, 'updatedeputy'])->name('team-deputy.update-deputy');
+    Route::patch('/team-deputy/update-record/{id}', [TeamDeputyController::class, 'updaterecord'])->name('team-deputy.update-record');
     Route::resource('team', TeamController::class);
+    Route::get('/team/delete/{id}',[TeamController::class,'destroy'])->name('team.delete');
+    Route::get('/team/enable/{id}',[TeamController::class,'activate'])->name('team.enable');
+    Route::resource('team-deputy-history', TeamDeputyHistoryController::class);
+    
 
     //sheetdb
     Route::get('/mailbox',[MailboxController::class,'index'])->name('mailbox');

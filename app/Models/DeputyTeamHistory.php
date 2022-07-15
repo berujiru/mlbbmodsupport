@@ -15,13 +15,18 @@ class DeputyTeamHistory extends Model
      * @var string
      */
     protected $table = 'deputy_team_history';
+    protected $primaryKey = 'deputy_team_history_id';
 
     protected $fillable = [
         'deputy_team_history_id',
         'profile_id',
         'team_id',
+        'date_changed',
+        'action_taken',
+        'deleted_team_name',
         'created_by',
         'created_at',
+        'updated_at',
     ];
 
     public function team()
@@ -32,5 +37,10 @@ class DeputyTeamHistory extends Model
     public function profile()
     {
         return $this->hasOne(Dbsc::class, 'id', 'profile_id');
+    }
+
+    public function createdby()
+    {
+        return $this->hasOne(Dbsc::class, 'id', 'created_by');
     }
 }

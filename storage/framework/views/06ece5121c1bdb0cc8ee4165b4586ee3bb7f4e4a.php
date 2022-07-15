@@ -41,8 +41,8 @@
               <td style="width:30%;"><?php echo e(!empty($dep->createdby) ? $dep->createdby->firstname." ".$dep->createdby->lastname : null); ?></td>
               <td style="width:10%;">
                 <a class="btn btn-sm btn-info" href="<?php echo e(route('team-deputy.show',$dep->deputy_team_id)); ?>" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
-                <a class="btn btn-sm btn-primary" href="<?php echo e(route('team-deputy.edit',$dep->deputy_team_id)); ?>" title="Edit Details"><i class="bx bx-fw bx-edit-alt bx-xs"></i></a>
-                <!-- <a class="btn btn-sm btn-danger" href="<?php echo e(route('team-deputy.destroy',$dep->deputy_team_id)); ?>"><i class="bx bx-fw bx bx-trash"></i></a> -->
+                <a class="btn btn-sm btn-primary" href="<?php echo e(route('team-deputy.update-deputy',$dep->deputy_team_id)); ?>" title="Update Deputy"><i class="bx bx-fw bx-user-voice bx bx-xs"></i></a>
+                <a class="btn btn-sm btn-danger" href="<?php echo e(route('team-deputy.delete',$dep->deputy_team_id)); ?>"><i class="bx bx-fw bx bx-trash"></i></a>
               </td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

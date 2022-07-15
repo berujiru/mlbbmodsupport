@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dbsc;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TeamController extends Controller
 {
@@ -121,14 +123,50 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Team::find($id)->delete();
-        if($delete) {
+        $check_profile = DB::table('dbsc')->join('team', 'team.team_id', '=', 'dbsc.team_id')->where('dbsc.team_id',$id)->count();
+        $check_deputy = DB::table('deputy_team')->join('team', 'team.team_id', '=', 'deputy_team.team_id')->where('deputy_team.team_id',$id)->count();
+        $check_history = DB::table('deputy_team_history')->join('team', 'team.team_id', '=', 'deputy_team_history.team_id')->where('deputy_team_history.team_id',$id)->count();
+
+        if($check_profile > 0 || $check_deputy > 0 || $check_history > 0) {
+            $show = 'error';
+            $message = "Can't delete team due to existing related records.";
+        } else {
+            $delete = Team::find($id)->delete();
+            //$delete = DB::table('team')->where('team_id', '=', (int) $id)->delete();
+            if($delete) {
+                $show = 'success';
+                $message = 'Team deleted successfully.';
+            } else {
+                $show = 'error';
+                $message = 'Failed to delete team.';
+            }
+        }
+        return redirect()->route('team.index')->with($show,$message);
+    }
+
+    public function activate($id)
+    {
+        $check_profile = DB::table('team')->where('team_id',$id)->count();
+        $check_deputy = DB::table('deputy_team')->join('team', 'team.team_id', '=', 'deputy_team.team_id')->where('deputy_team.team_id',$id)->count();
+        $check_history = DB::table('deputy_team_history')->join('team', 'team.team_id', '=', 'deputy_team_history.team_id')->where('deputy_team_history.team_id',$id)->count();
+
+        $check_team = Team::find($id);
+        $team = Team::find($id);
+        if($check_team->status_id == 1) {
+            $team->status_id = 2;
+            $message = 'Team deactivated successfully.';
+        } else {
+            $team->status_id = 1;
+            $message = 'Team activated successfully.';
+        }
+
+        if($team->save()) {
             $show = 'success';
-            $message = 'Team deleted successfully.';
         } else {
             $show = 'error';
-            $message = 'Failed to delete team.';
+            $message = 'Failed to activate/deactivate team.';
         }
+
         return redirect()->route('team.index')->with($show,$message);
     }
 }

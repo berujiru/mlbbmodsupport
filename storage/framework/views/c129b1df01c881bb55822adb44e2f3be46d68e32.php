@@ -42,7 +42,7 @@
               <td style="width:10%;">
                 <a class="btn btn-sm btn-info" href="<?php echo e(route('infraction.show',$infra->id)); ?>" title="View Infraction"><i class="bx bx-fw bx-show bx-xs"></i></a>
                 <a class="btn btn-sm btn-primary" href="<?php echo e(route('infraction.edit',$infra->id)); ?>" title="Edit Infraction"><i class="bx bx-fw bx-edit-alt bx-xs"></i></a>
-                <!-- <a class="btn btn-sm btn-danger" href="<?php echo e(route('infraction.destroy',$infra->id)); ?>"><i class="bx bx-fw bx bx-trash"></i></a> -->
+                <a class="btn btn-sm btn-danger" href="<?php echo e(route('infraction.delete',$infra->id)); ?>"><i class="bx bx-fw bx bx-trash"></i></a>
               </td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

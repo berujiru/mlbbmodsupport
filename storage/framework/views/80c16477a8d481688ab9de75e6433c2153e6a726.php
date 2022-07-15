@@ -28,7 +28,7 @@
   </div>
 <?php endif; ?>
 
-<?php echo Form::model($deputy, ['route' => ['team-deputy.update', $deputy->deputy_team_id],'method' => 'PATCH']); ?>
+<?php echo Form::model($deputy, ['route' => ['team-deputy.update-record', $deputy->deputy_team_id],'method' => 'PATCH']); ?>
 
 <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4">
