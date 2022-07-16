@@ -17,15 +17,15 @@
                     <div class="col">
                         <ul class="nav nav-tabs nav-tabs-custom nav-success gap-1 text-center border-bottom-0" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link fw-semibold active" href="#">
+                                <a class="nav-link fw-semibold" href="#">
                                     <i class="ri-inbox-fill align-bottom d-inline-block"></i>
                                     <span class="ms-1 d-none d-sm-inline-block">QA Scores</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link fw-semibold" href="#">
+                                <a class="nav-link fw-semibold active" href="#">
                                     <i class="ri-file-edit-line align-bottom d-inline-block"></i>
-                                    <span class="ms-1 d-none d-sm-inline-block">NTE <span class="bg-success badge me-2">soon</span></span>
+                                    <span class="ms-1 d-none d-sm-inline-block">NTE <span class="bg-success badge me-2">New</span></span>
                                 </a>
                             </li>
                         </ul>
@@ -406,4 +406,4 @@
 <!-- <script src="<?php echo e(URL::asset('assets/js/pages/mailbox.init.js')); ?>"></script> -->
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp8\htdocs\mlbbmodsupport\resources\views/apps-mailbox.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp8\htdocs\mlbbmodsupport\resources\views/apps-nte.blade.php ENDPATH**/ ?>

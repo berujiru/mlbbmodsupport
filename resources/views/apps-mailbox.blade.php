@@ -31,7 +31,7 @@
                         </ul>
                     </div>
                     <div class="col-auto">
-                        <div class="text-muted">1-50 of 154</div>
+                        <div class="text-muted">{{count($data)}} mails</div>
                     </div>
                 </div>
             </div>

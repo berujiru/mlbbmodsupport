@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MailboxController;
+use App\Http\Controllers\NteController;
 use App\Http\Controllers\ModinfractionController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamDeputyController;
@@ -57,9 +58,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('team-deputy-history', TeamDeputyHistoryController::class);
     
 
-    //sheetdb
+    //mailbox
     Route::get('/mailbox',[MailboxController::class,'index'])->name('mailbox');
     Route::get('/mailbox/{id}',[MailboxController::class,'show'])->name('mailboxview');
+
+    //ntes
+    Route::get('/notice/{id}',[NteController::class,'show'])->name('nteview');
 
     //evaluation assigning of infractions
     Route::get('/evaluation',[ModinfractionController::class,'index'])->name('modeval');
