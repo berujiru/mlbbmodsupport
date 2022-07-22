@@ -17,7 +17,7 @@
                     <div class="col">
                         <ul class="nav nav-tabs nav-tabs-custom nav-success gap-1 text-center border-bottom-0" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link fw-semibold" href="#">
+                                <a class="nav-link fw-semibold" href="{{ route('mailbox') }}">
                                     <i class="ri-inbox-fill align-bottom d-inline-block"></i>
                                     <span class="ms-1 d-none d-sm-inline-block">QA Scores</span>
                                 </a>
@@ -49,17 +49,14 @@
                             <button type="button" class="btn avatar-xs p-0 favourite-btn fs-15 active">
                                 <i class="ri-star-fill"></i>
                             </button>
-                            <a href="{{ route('mailboxview',$mail->Merged) }}" class="title">MLBB MIL-QA</a>
+                            <a href="{{ route('nteview',$mail->id) }}" class="title">MLBB MIL-QA</a>
                         </div>
                         <div class="col-mail col-mail-2">
-                            <a href="{{ route('mailboxview',$mail->Merged) }}" class="subject">
-                                @if($mail->OVERALLSCORE=="100.00%")
-                                    <span class="bg-success badge me-2">Perfect</span>
-                                    Hello - <span class="teaser">Keep up the good work!</span>
-                                @else
-                                    <span class="bg-warning badge me-2">Infractions</span>
-                                    Hello - <span class="teaser">Needs Improvement from the following:</span>
-                                @endif
+                            <a href="{{ route('nteview',$mail->id) }}" class="subject">
+
+                                    <span class="bg-warning badge me-2">{{$mail->RecommendedAction}}</span>
+                                    <b>{{$mail->RecommendedAction}}</b> - <span class="teaser">{{$mail->KeyAttribute}}</span>
+
                             
                                
                             </a>

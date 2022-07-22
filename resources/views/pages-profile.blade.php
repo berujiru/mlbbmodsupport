@@ -57,7 +57,7 @@
                     </li>
                 </ul>
                 <div class="flex-shrink-0">
-                    <a href="{{ route('editProfile') }}" class="btn btn-soft-success waves-effect waves-light"><i
+                    <a href="{{ route('editProfile') }}" class="btn btn-soft-success waves-effect waves-light" style="color:#fff"><i
                             class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
                 </div>
             </div>

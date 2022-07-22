@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Masterfile extends Model
+class Nte extends Model
 {
     use HasFactory;
 
@@ -14,5 +14,6 @@ class Masterfile extends Model
      *
      * @var string
      */
-    protected $table = 'masterfile';
+    protected $table = 'nte';
+
 }

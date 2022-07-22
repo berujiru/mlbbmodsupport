@@ -23,15 +23,15 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link fw-semibold" href="#">
+                                <a class="nav-link fw-semibold" href="<?php echo e(route('nteindex')); ?>">
                                     <i class="ri-file-edit-line align-bottom d-inline-block"></i>
-                                    <span class="ms-1 d-none d-sm-inline-block">NTE <span class="bg-success badge me-2">soon</span></span>
+                                    <span class="ms-1 d-none d-sm-inline-block">NTE </span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-auto">
-                        <div class="text-muted">1-50 of 154</div>
+                        <div class="text-muted"><?php echo e(count($data)); ?> mails</div>
                     </div>
                 </div>
             </div>

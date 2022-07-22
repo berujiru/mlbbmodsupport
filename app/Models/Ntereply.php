@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Masterfile extends Model
+class Ntereply extends Model
 {
     use HasFactory;
 
@@ -14,5 +14,14 @@ class Masterfile extends Model
      *
      * @var string
      */
-    protected $table = 'masterfile';
+    protected $table = 'ntereply';
+
+    protected $fillable = [
+        'id',
+        'ntecode',
+        'content',
+        'created_at',
+        'updated_at',
+    ];
+
 }

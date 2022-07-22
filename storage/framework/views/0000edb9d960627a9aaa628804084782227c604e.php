@@ -1,6 +1,6 @@
-@extends('layouts.master')
-@section('title') @lang('translation.mailbox') @endsection
-@section('content')
+
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.mailbox'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -13,22 +13,22 @@
                                 <div class="col-md-auto">
                                     <div class="avatar-md mb-md-0 mb-4">
                                         <div class="avatar-title bg-white rounded-circle">
-                                            <img src="{{ URL::asset('assets/images/companies/img-4.png') }}" alt="" class="avatar-sm" />
+                                            <img src="<?php echo e(URL::asset('assets/images/companies/img-4.png')); ?>" alt="" class="avatar-sm" />
                                         </div>
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-md">
-                                    <h4 class="fw-semibold">{{$mail->uniqueID}} Notice to Explain</h4>
+                                    <h4 class="fw-semibold"><?php echo e($mail->uniqueID); ?> Notice to Explain</h4>
                                     <div class="hstack gap-3 flex-wrap">
                                         <div class="text-muted"><i class="ri-building-line align-bottom me-1"></i>
                                             MLBB QA</div>
                                         <div class="vr"></div>
-                                        <div class="text-muted">Escalation Date : <span class="fw-medium">{{$mail->EscalationDate}}</span></div>
+                                        <div class="text-muted">Escalation Date : <span class="fw-medium"><?php echo e($mail->EscalationDate); ?></span></div>
                                         <div class="vr"></div>
-                                        <div class="text-muted">Infraction Date : <span class="fw-medium">{{$mail->InfractionDate}}</span></div>
+                                        <div class="text-muted">Infraction Date : <span class="fw-medium"><?php echo e($mail->InfractionDate); ?></span></div>
                                         <div class="vr"></div>
-                                        <div class="badge rounded-pill bg-warning fs-12">{{$mail->RecommendedAction}}</div>
+                                        <div class="badge rounded-pill bg-warning fs-12"><?php echo e($mail->RecommendedAction); ?></div>
                                     </div>
                                 </div>
                                 <!--end col-->
@@ -59,35 +59,38 @@
 
                 <h6 class="fw-semibold text-uppercase mb-3">Case Details</h6>
                 <ul class="text-muted vstack gap-2 mb-4">
-                    <li>Severity: <b>{{$mail->Severity}}</b></li>
-                    <li>Corrective Action: <b>{{$mail->RecommendedAction}}</b></li>
-                    <li>Listed Infractions: <b>{{$mail->Attribute}}</b></li>
+                    <li>Severity: <b><?php echo e($mail->Severity); ?></b></li>
+                    <li>Corrective Action: <b><?php echo e($mail->RecommendedAction); ?></b></li>
+                    <li>Listed Infractions: <b><?php echo e($mail->Attribute); ?></b></li>
                 </ul>
-                <p class="text-muted">{{$mail->Summary}}</p>
+                <p class="text-muted"><?php echo e($mail->Summary); ?></p>
 
             </div>
             <!--end card-body-->
             <div class="card-body p-4">
                 <h5 class="card-title mb-4">SMART Commitment</h5>
-                @foreach ($mailreply as $key => $data)
+                <?php $__currentLoopData = $mailreply; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div data-simplebar style="height: 100px;" class="px-3 mx-n3">
                         <div class="d-flex mb-4">
                             <div class="flex-shrink-0">
-                                <img src="{{ URL::asset('assets/images/users/avatar-6.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                                <img src="<?php echo e(URL::asset('assets/images/users/avatar-6.jpg')); ?>" alt="" class="avatar-xs rounded-circle" />
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h5 class="fs-13">{{$dbsc->firstname}} {{$dbsc->lastname}} <small class="text-muted">{{$data->created_at}}</small></h5>
-                                <p class="text-muted">{{$data->content}}</p>
+                                <h5 class="fs-13"><?php echo e($dbsc->firstname); ?> <?php echo e($dbsc->lastname); ?> <small class="text-muted"><?php echo e($data->created_at); ?></small></h5>
+                                <p class="text-muted"><?php echo e($data->content); ?></p>
                             </div>
                         </div>
                     </div>
-                @endforeach
-                {!! Form::open(array('route' => 'ntestore','method'=>'POST')) !!}
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php echo Form::open(array('route' => 'ntestore','method'=>'POST')); ?>
+
                 <div class="row g-3">
                     <div class="col-xs-8 col-sm-8 col-md-8">
                         <div class="form-floating">
-                            {!! Form::hidden('ntecode', $mail->UniqueID, array('placeholder' => 'Code','class' => 'form-control','autocomplete'=>'off','id'=>'teamNamefloatingInput')) !!}
-                            {!! Form::hidden('nteid', $mail->id, array('placeholder' => 'Code','class' => 'form-control','autocomplete'=>'off','id'=>'teamNamefloatingInput')) !!}
+                            <?php echo Form::hidden('ntecode', $mail->UniqueID, array('placeholder' => 'Code','class' => 'form-control','autocomplete'=>'off','id'=>'teamNamefloatingInput')); ?>
+
+                            <?php echo Form::hidden('nteid', $mail->id, array('placeholder' => 'Code','class' => 'form-control','autocomplete'=>'off','id'=>'teamNamefloatingInput')); ?>
+
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -98,7 +101,8 @@
                         <button type="submit" class="btn btn-success"><i class="bx bx-fw bx-save"></i>Leave a SMART Commitment</button>
                     </div>
                 </div>
-                {!! Form::close() !!}
+                <?php echo Form::close(); ?>
+
             </div>
             <!-- end card body -->
         </div>
@@ -134,11 +138,11 @@
                             </tr>
                             <tr>
                                 <td class="fw-medium">Escalation Date</td>
-                                <td>{{$mail->EscalationDate}}</td>
+                                <td><?php echo e($mail->EscalationDate); ?></td>
                             </tr>
                             <tr>
                                 <td class="fw-medium">Infraction Date</td>
-                                <td>{{$mail->InfractionDate}}</td>
+                                <td><?php echo e($mail->InfractionDate); ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -152,8 +156,9 @@
 </div>
 <!--end row-->
 
-@endsection
-@section('script')
-<script src="{{ URL::asset('assets/libs/@ckeditor/@ckeditor.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(URL::asset('assets/libs/@ckeditor/@ckeditor.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\mlbbmodsupport\resources\views/apps-nteview.blade.php ENDPATH**/ ?>

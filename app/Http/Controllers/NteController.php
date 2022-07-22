@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Models\Masterfile;
+use App\Models\Nte;
+use App\Models\Ntereply;
 use App\Models\Dbsc;
-use App\Models\Markdowns;
 
 class NteController extends Controller
 {
@@ -14,13 +14,12 @@ class NteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $dbsc = Dbsc::find(auth()->user()->id);
         if($dbsc){
-            // $data = Masterfile::where('MOD_ID',$dbsc->modid)->orderBy('MERGED','DESC')->get();
-            // return $data; exit;
-            return view('apps-mailbox',compact('data'));
+            $data = Nte::where('MODID',$dbsc->modid)->orderBy('id','DESC')->get();
+            return view('apps-nte',compact('data'));
         }
 
         return response()->view('errors.404');
@@ -35,16 +34,41 @@ class NteController extends Controller
      */
     public function show($id)
     {
-        return view('apps-nteview');
-        // $dbsc = Dbsc::find(auth()->user()->id);
-        // $mail =  Masterfile::where('MERGED',$id)->first();
-        // $markdowns = Markdowns::where('MERGED',$id)->get();
-        // //check if the mod id matches
         
-        // if($mail['MOD_ID']==$dbsc->modid){
-        //     return view('apps-mailview',compact('mail'),compact(['dbsc','markdowns']));
-        // }
-        // return response()->view('errors.404');
+        $dbsc = Dbsc::find(auth()->user()->id);
+        $mail =  Nte::where('id',$id)->first();
+        //check if the mod id matches
+        if($mail['MODID']==$dbsc->modid){
+            $mailreply = Ntereply::where('ntecode',$mail->UniqueID)->get();
+            return view('apps-nteview',compact('mail'),compact(['dbsc','mailreply']));
+        }
+        return response()->view('errors.404');
 
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'content' => 'required',
+        ]);
+
+        $input = $request->all();
+        $nte = new Ntereply();
+        $nte->ntecode = $input['ntecode'];
+        $nte->content = $input['content'];
+        if($nte->save()) {
+            $show = 'success';
+            $message = 'Replied successfully.';
+        } else {
+            $show = 'error';
+            $message = 'Reply failed.';
+        }
+        return redirect()->route('nteview',$input['nteid'])->with($show,$message);
     }
 }

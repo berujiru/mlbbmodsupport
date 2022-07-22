@@ -1,6 +1,6 @@
-@extends('layouts.master')
-@section('title') @lang('translation.mailbox') @endsection
-@section('content')
+
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.mailbox'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <div class="email-wrapper d-lg-flex gap-1 mx-n4 mt-n4 p-1">
     <div class="email-content">
         <div class="p-4 pb-0">
@@ -17,21 +17,21 @@
                     <div class="col">
                         <ul class="nav nav-tabs nav-tabs-custom nav-success gap-1 text-center border-bottom-0" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link fw-semibold active" href="#">
+                                <a class="nav-link fw-semibold" href="<?php echo e(route('mailbox')); ?>">
                                     <i class="ri-inbox-fill align-bottom d-inline-block"></i>
                                     <span class="ms-1 d-none d-sm-inline-block">QA Scores</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link fw-semibold" href="{{ route('nteindex') }}">
+                                <a class="nav-link fw-semibold active" href="#">
                                     <i class="ri-file-edit-line align-bottom d-inline-block"></i>
-                                    <span class="ms-1 d-none d-sm-inline-block">NTE </span>
+                                    <span class="ms-1 d-none d-sm-inline-block">NTE <span class="bg-success badge me-2">New</span></span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-auto">
-                        <div class="text-muted">{{count($data)}} mails</div>
+                        <div class="text-muted"><?php echo e(count($data)); ?> mails</div>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="message-list-content mx-n4 px-4 message-list-scroll" data-simplebar>
                 <ul class="message-list">
 
-                @foreach ($data as $key => $mail)
+                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $mail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li>
                         <div class="col-mail col-mail-1">
                             <div class="form-check checkbox-wrapper-mail fs-14">
@@ -49,24 +49,21 @@
                             <button type="button" class="btn avatar-xs p-0 favourite-btn fs-15 active">
                                 <i class="ri-star-fill"></i>
                             </button>
-                            <a href="{{ route('mailboxview',$mail->Merged) }}" class="title">MLBB MIL-QA</a>
+                            <a href="<?php echo e(route('nteview',$mail->id)); ?>" class="title">MLBB MIL-QA</a>
                         </div>
                         <div class="col-mail col-mail-2">
-                            <a href="{{ route('mailboxview',$mail->Merged) }}" class="subject">
-                                @if($mail->OVERALLSCORE=="100.00%")
-                                    <span class="bg-success badge me-2">Perfect</span>
-                                    Hello - <span class="teaser">Keep up the good work!</span>
-                                @else
-                                    <span class="bg-warning badge me-2">Infractions</span>
-                                    Hello - <span class="teaser">Needs Improvement from the following:</span>
-                                @endif
+                            <a href="<?php echo e(route('nteview',$mail->id)); ?>" class="subject">
+
+                                    <span class="bg-warning badge me-2"><?php echo e($mail->RecommendedAction); ?></span>
+                                    <b><?php echo e($mail->RecommendedAction); ?></b> - <span class="teaser"><?php echo e($mail->KeyAttribute); ?></span>
+
                             
                                
                             </a>
-                            <div class="date">{{$mail->Date}}</div>
+                            <div class="date"><?php echo e($mail->Date); ?></div>
                         </div>
                     </li>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     
 
                 </ul>
@@ -100,7 +97,7 @@
                             <a role="button" class="btn w-100 text-start px-0 bg-transparent shadow-none" data-bs-toggle="collapse" href="#email-collapseOne" aria-expanded="true" aria-controls="email-collapseOne">
                                 <div class="d-flex align-items-center text-muted">
                                     <div class="flex-shrink-0 avatar-xs me-3">
-                                        <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" class="img-fluid rounded-circle">
+                                        <img src="<?php echo e(URL::asset('assets/images/logo-sm.png')); ?>" alt="" class="img-fluid rounded-circle">
                                     </div>
                                     <div class="flex-grow-1 overflow-hidden">
                                         <h5 class="fs-14 text-truncate mb-0">MLBBMODSUPPORT TEAM</h5>
@@ -400,9 +397,10 @@
 </div>
 <!-- end email wrapper -->
 
-@endsection
-@section('script')
-<script src="{{ URL::asset('assets/libs/@ckeditor/@ckeditor.min.js') }}"></script>
-<!-- <script src="{{ URL::asset('assets/js/pages/mailbox.init.js') }}"></script> -->
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(URL::asset('assets/libs/@ckeditor/@ckeditor.min.js')); ?>"></script>
+<!-- <script src="<?php echo e(URL::asset('assets/js/pages/mailbox.init.js')); ?>"></script> -->
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\mlbbmodsupport\resources\views/apps-nte.blade.php ENDPATH**/ ?>

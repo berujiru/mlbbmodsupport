@@ -64,6 +64,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     //ntes
     Route::get('/notice/{id}',[NteController::class,'show'])->name('nteview');
+    Route::get('/notice',[NteController::class,'index'])->name('nteindex');
+    Route::post('/notice/store',[NteController::class,'store'])->name('ntestore');
 
     //evaluation assigning of infractions
     Route::get('/evaluation',[ModinfractionController::class,'index'])->name('modeval');
