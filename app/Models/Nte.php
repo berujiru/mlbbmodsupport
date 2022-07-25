@@ -16,4 +16,9 @@ class Nte extends Model
      */
     protected $table = 'nte';
 
+    public function profile()
+    {
+        return $this->hasOne(Dbsc::class, 'modid', 'MODID');
+    }
+
 }

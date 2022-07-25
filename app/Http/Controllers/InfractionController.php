@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Infractions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InfractionController extends Controller
 {
@@ -140,15 +141,22 @@ class InfractionController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Infractions::find($id)->delete();
-        //return response()->json(['success'=>'Infraction deleted successfully.']);
-        if($delete) {
-            $show = 'success';
-            $message = 'Infraction deleted successfully.';
-        } else {
+        $check_infra = DB::table('mod_infraction')->join('infractions', 'infractions.id', '=', 'mod_infraction.infraction_id')->where('infractions.id',$id)->count();
+
+        if($check_infra > 0) {
             $show = 'error';
-            $message = 'Failed to delete infraction.';
+            $message = "Can't delete infraction due to existing related records.";
+        } else {
+            $delete = Infractions::find($id)->delete();
+            if($delete) {
+                $show = 'success';
+                $message = 'Infraction deleted successfully.';
+            } else {
+                $show = 'error';
+                $message = 'Failed to delete infraction.';
+            }
         }
+
         return redirect()->route('infraction.index')->with($show,$message);
     }
 }

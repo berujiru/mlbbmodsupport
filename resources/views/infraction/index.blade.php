@@ -42,7 +42,7 @@
               <td style="width:10%;">
                 <a class="btn btn-sm btn-info" href="{{route('infraction.show',$infra->id)}}" title="View Infraction"><i class="bx bx-fw bx-show bx-xs"></i></a>
                 <a class="btn btn-sm btn-primary" href="{{route('infraction.edit',$infra->id)}}" title="Edit Infraction"><i class="bx bx-fw bx-edit-alt bx-xs"></i></a>
-                <!-- <a class="btn btn-sm btn-danger" href="{{route('infraction.destroy',$infra->id)}}"><i class="bx bx-fw bx bx-trash"></i></a> -->
+                <a class="btn btn-sm btn-danger" href="{{route('infraction.delete',$infra->id)}}"><i class="bx bx-fw bx bx-trash"></i></a>
               </td>
           </tr>
         @empty

@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MailboxController;
 use App\Http\Controllers\NteController;
 use App\Http\Controllers\ModinfractionController;
+use App\Http\Controllers\NtereplyController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamDeputyController;
 use App\Http\Controllers\TeamDeputyHistoryController;
@@ -66,6 +67,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/notice/{id}',[NteController::class,'show'])->name('nteview');
     Route::get('/notice',[NteController::class,'index'])->name('nteindex');
     Route::post('/notice/store',[NteController::class,'store'])->name('ntestore');
+
+    //nte replies
+    Route::resource('ntereply', NtereplyController::class);
+    Route::get('/notice-reply',[NtereplyController::class,'index'])->name('ntereply.index');
+    Route::get('/notice-reply/view/{id}',[NtereplyController::class,'show'])->name('ntereply.show');
+    Route::get('/notice-reply/search',[NtereplyController::class,'searchreply'])->name('ntereply.search');
 
     //evaluation assigning of infractions
     Route::get('/evaluation',[ModinfractionController::class,'index'])->name('modeval');

@@ -24,4 +24,8 @@ class Ntereply extends Model
         'updated_at',
     ];
 
+    public function nte()
+    {
+        return $this->hasOne(Nte::class, 'id', 'id');
+    }
 }
