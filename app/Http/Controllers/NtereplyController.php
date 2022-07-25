@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class NtereplyController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+         $this->middleware('permission:ntereply-list', ['only' => ['index']]);
+    }
     
     public function index(Request $request)
     {
@@ -18,22 +28,22 @@ class NtereplyController extends Controller
             $mod_id = (int) $request->input('mod_id');
             $nte_code = $request->input('nte_code');
             if($mod_id > 0 && !empty($nte_code)) {
-                $data = Ntereply::select('ntereply.*')->join('nte', 'ntereply.id', '=', 'nte.id')
-                    ->where('ntereply.ntecode','LIKE',"%{$nte_code}%")->where('nte.MODID',$mod_id)
-                    ->orderBy('ntereply.ntecode','ASC')->get();
+                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
+                    ->where('nte.UniqueID','LIKE',"%{$nte_code}%")->where('nte.MODID',$mod_id)
+                    ->orderBy('nte.id','DESC')->get();
             } elseif($mod_id > 0 && empty(trim($nte_code))) {
-                $data = Ntereply::select('ntereply.*')->join('nte', 'ntereply.id', '=', 'nte.id')
+                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
                     ->where('nte.MODID',$mod_id)
-                    ->orderBy('ntereply.ntecode','ASC')->get();
+                    ->orderBy('nte.id','DESC')->get();
             } elseif($mod_id < 1 && !empty(trim($nte_code))) {
-                $data = Ntereply::select('ntereply.*')->join('nte', 'ntereply.id', '=', 'nte.id')
-                    ->where('ntereply.ntecode','LIKE',"%{$nte_code}%")
-                    ->orderBy('ntereply.ntecode','ASC')->get();
+                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
+                    ->where('nte.UniqueID','LIKE',"%{$nte_code}%")
+                    ->orderBy('nte.id','DESC')->get();
             } else {
-                $data = Ntereply::orderBy('ntereply.ntecode','ASC')->get();
+                $data = Nte::orderBy('nte.id','DESC')->get();
             }
         } else {
-           $data = Ntereply::orderBy('ntereply.ntecode','ASC')->get();
+           $data = Nte::orderBy('nte.id','DESC')->get();
         }
 
         //$data = Ntereply::orderBy('ntereply.ntecode','ASC')->get();

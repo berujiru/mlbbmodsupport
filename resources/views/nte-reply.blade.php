@@ -60,12 +60,13 @@
         @forelse($data as $key => $reply)
           <tr>
               <td style="width:10%;">{{++$i}}</td>
-              <td>{{ date("M-d-Y",strtotime($reply->created_at)) }}</td>
-              <td>{{ $reply->ntecode }}</td>
+              <td>{{ date("M-d-Y",strtotime($reply->InfractionDate)) }}</td>
+              <td>{{ $reply->UniqueID }}</td>
               <td style="word-wrap: break-word">{{ $reply->content}}</td>
-              <td >{{ !empty($reply->nte->profile) ? $reply->nte->profile->firstname." ".$reply->nte->profile->lastname : 'No profile found of MOD ID : '.$reply->nte->MODID }}</td>
+              <td >{{ !empty($reply->MODID) ? $reply->MODID." - ".$reply->profile?->firstname." ".$reply->profile?->lastname : 'No MOD ID'  }}</td>
               <td style="width:15%;">
-                <a class="btn btn-sm btn-info" href="{{route('ntereply.show',$reply->id)}}" title="View Reply"><i class="bx bx-fw bx-show"></i></a>
+                <!-- <a class="btn btn-sm btn-info" href="{{route('ntereply.show',$reply->id)}}" title="View Reply"><i class="bx bx-fw bx-show"></i></a> -->
+                -None yet so far-
           </tr>
         @empty
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
