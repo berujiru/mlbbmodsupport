@@ -40,10 +40,10 @@ class NtereplyController extends Controller
                     ->where('nte.UniqueID','LIKE',"%{$nte_code}%")
                     ->orderBy('nte.id','DESC')->get();
             } else {
-                $data = Nte::orderBy('nte.id','DESC')->get();
+                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->orderBy('nte.id','DESC')->get();
             }
         } else {
-           $data = Nte::orderBy('nte.id','DESC')->get();
+           $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->orderBy('nte.id','DESC')->get();
         }
 
         //$data = Ntereply::orderBy('ntereply.ntecode','ASC')->get();

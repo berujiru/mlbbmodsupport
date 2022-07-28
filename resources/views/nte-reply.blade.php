@@ -51,7 +51,7 @@
               <th scope="col">#</th>
               <th scope="col">Date</th>
               <th scope="col">NTE Code</th>
-              <th scope="col">Content</th>
+              <th scope="col" width="40%">Content</th>
               <th scope="col">Moderator</th>
               <th scope="col">Action</th>
           </tr>
@@ -62,7 +62,7 @@
               <td style="width:10%;">{{++$i}}</td>
               <td>{{ date("M-d-Y",strtotime($reply->InfractionDate)) }}</td>
               <td>{{ $reply->UniqueID }}</td>
-              <td style="word-wrap: break-word">{{ $reply->content}}</td>
+              <td style="width: 500px;">{{ $reply->content}}</td>
               <td >{{ !empty($reply->MODID) ? $reply->MODID." - ".$reply->profile?->firstname." ".$reply->profile?->lastname : 'No MOD ID'  }}</td>
               <td style="width:15%;">
                 <!-- <a class="btn btn-sm btn-info" href="{{route('ntereply.show',$reply->id)}}" title="View Reply"><i class="bx bx-fw bx-show"></i></a> -->
