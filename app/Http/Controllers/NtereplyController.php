@@ -19,7 +19,7 @@ class NtereplyController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:ntereply-list', ['only' => ['index']]);
+        //$this->middleware('permission:ntereply-list', ['only' => ['index']]);
     }
     
     public function index(Request $request)
@@ -30,27 +30,29 @@ class NtereplyController extends Controller
             if($mod_id > 0 && !empty($nte_code)) {
                 $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
                     ->where('nte.UniqueID','LIKE',"%{$nte_code}%")->where('nte.MODID',$mod_id)
-                    ->orderBy('nte.id','DESC')->get();
+                    ->orderBy('nte.id','DESC')->paginate(20);
             } elseif($mod_id > 0 && empty(trim($nte_code))) {
                 $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
                     ->where('nte.MODID',$mod_id)
-                    ->orderBy('nte.id','DESC')->get();
+                    ->orderBy('nte.id','DESC')->paginate(20);
             } elseif($mod_id < 1 && !empty(trim($nte_code))) {
                 $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
                     ->where('nte.UniqueID','LIKE',"%{$nte_code}%")
-                    ->orderBy('nte.id','DESC')->get();
+                    ->orderBy('nte.id','DESC')->paginate(20);
             } else {
-                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->orderBy('nte.id','DESC')->get();
+                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->orderBy('nte.id','DESC')->paginate(20);
             }
         } else {
-           $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->orderBy('nte.id','DESC')->get();
+           $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->orderBy('nte.id','DESC')->paginate(20);
         }
 
         //$data = Ntereply::orderBy('ntereply.ntecode','ASC')->get();
         $infractions = Infractions::select(['id','code','detail'])->where('status',1)->get();
         $mods = Dbsc::select(['id','modid','firstname','lastname'])->get();
     
-        return view('nte-reply',compact('data'),compact(['infractions','mods']))
+        //return view('nte-reply',compact('data'),compact(['infractions','mods']))
+        //    ->with('i', ($request->input('page', 1) - 1) * 50);
+        return view('nte-reply',compact(['data','infractions','mods']))
             ->with('i', ($request->input('page', 1) - 1) * 50);
         
     }

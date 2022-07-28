@@ -53,33 +53,47 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
     <div class="card">
+    <div class="table-responsive">
     <table class="table table-hover table-nowrap mb-0 align-middle">
       <thead>
           <tr>
-              <th scope="col">#</th>
-              <th scope="col">Date</th>
-              <th scope="col">NTE Code</th>
-              <th scope="col">Content</th>
-              <th scope="col">Moderator</th>
-              <th scope="col">Action</th>
+              <th scope="col" style="width: 10%;">#</th>
+              <th scope="col" style="width: 15%;">Date</th>
+              <th scope="col" style="width: 20%;">NTE Code</th>
+              <th scope="col" style="width: 30%;">Content</th>
+              <th scope="col" style="width: 15%;">Moderator</th>
+              <th scope="col" style="width: 10%;">Action</th>
           </tr>
       </thead>
       <tbody>
         <?php $__empty_1 = true; $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $reply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
           <tr>
               <td style="width:10%;"><?php echo e(++$i); ?></td>
-              <td><?php echo e(date("M-d-Y",strtotime($reply->created_at))); ?></td>
-              <td><?php echo e($reply->ntecode); ?></td>
-              <td style="word-wrap: break-word"><?php echo e($reply->content); ?></td>
-              <td ><?php echo e(!empty($reply->nte->profile) ? $reply->nte->profile->firstname." ".$reply->nte->profile->lastname : 'No profile found of MOD ID : '.$reply->nte->MODID); ?></td>
-              <td style="width:15%;">
-                <a class="btn btn-sm btn-info" href="<?php echo e(route('ntereply.show',$reply->id)); ?>" title="View Reply"><i class="bx bx-fw bx-show"></i></a>
+              <td style="width: 15%;"><?php echo e(date("M-d-Y",strtotime($reply->InfractionDate))); ?></td>
+              <td style="width: 20%;"><?php echo e($reply->UniqueID); ?></td>
+              <td class="text-first" style="width: 30%;"><?php echo e(!empty($reply->content) ? substr($reply->content,0,50).' ...' : ''); ?></td>
+              <td style="width: 15%;"><?php echo e(!empty($reply->MODID) ? $reply->MODID." - ".$reply->profile?->firstname." ".$reply->profile?->lastname : 'No MOD ID'); ?></td>
+              <!-- <td><?php echo e(!empty($reply->content) && !empty($reply->netreply) ? '<a class="btn btn-sm btn-info" href="route(\'ntereply.show\',$reply->id)" title="View Reply"><i class="bx bx-fw bx-show"></i></a>' : '-None yet so far-'); ?>
+
+              </td> -->
+              <td style="width: 10%;">
+                <?php if(!empty($reply->content) && !empty($reply->netreply)): ?>
+                    <a class="btn btn-sm btn-info" href="<?php echo e(route('ntereply.show',$reply->id)); ?>" title="View Reply"><i class="bx bx-fw bx-show"></i></a>
+                <?php else: ?>
+                    -None yet so far-
+                <?php endif; ?>
+              </td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-          <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
+          <tr><td colspan="6" class="text-muted">No data to be displayed</td></tr>
         <?php endif; ?>
       </tbody>
     </table>
+    </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <?php echo e($data->links()); ?>
+
     </div>
 </div>
 <?php echo Form::close(); ?>

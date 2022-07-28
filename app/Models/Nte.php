@@ -21,4 +21,9 @@ class Nte extends Model
         return $this->hasOne(Dbsc::class, 'modid', 'MODID');
     }
 
+    public function netreply()
+    {
+        return $this->hasOne(Ntereply::class, 'id', 'id');
+    }
+
 }

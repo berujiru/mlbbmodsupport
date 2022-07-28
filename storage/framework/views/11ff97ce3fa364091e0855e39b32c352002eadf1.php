@@ -25,7 +25,7 @@
                         <table class="table table-borderless mb-0">
                             <tbody>
                                 <tr>
-                                    <td class="text-end">MOD ID : </td>
+                                    <td class="text-end" width="25%">MOD ID : </td>
                                     <td class="text-first"><?php echo e(!empty($netreply->nte) ? $netreply->nte->MODID : 'Mod ID not found'); ?></td>
                                 </tr>
                                 <tr>
@@ -34,7 +34,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-end">Content : </td>
-                                    <td class="text-first"><?php echo e($netreply->content); ?></td>
+                                    <td class="text-first" style="text-align: justify;"><?php echo e($netreply->content); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="text-end">Date Created : </td>

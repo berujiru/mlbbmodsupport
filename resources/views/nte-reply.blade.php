@@ -45,34 +45,45 @@
         </div>
     </div>
     <div class="card">
+    <div class="table-responsive">
     <table class="table table-hover table-nowrap mb-0 align-middle">
       <thead>
           <tr>
-              <th scope="col">#</th>
-              <th scope="col">Date</th>
-              <th scope="col">NTE Code</th>
-              <th scope="col" width="40%">Content</th>
-              <th scope="col">Moderator</th>
-              <th scope="col">Action</th>
+              <th scope="col" style="width: 10%;">#</th>
+              <th scope="col" style="width: 15%;">Date</th>
+              <th scope="col" style="width: 20%;">NTE Code</th>
+              <th scope="col" style="width: 30%;">Content</th>
+              <th scope="col" style="width: 15%;">Moderator</th>
+              <th scope="col" style="width: 10%;">Action</th>
           </tr>
       </thead>
       <tbody>
         @forelse($data as $key => $reply)
           <tr>
               <td style="width:10%;">{{++$i}}</td>
-              <td>{{ date("M-d-Y",strtotime($reply->InfractionDate)) }}</td>
-              <td>{{ $reply->UniqueID }}</td>
-              <td style="width: 500px;">{{ $reply->content}}</td>
-              <td >{{ !empty($reply->MODID) ? $reply->MODID." - ".$reply->profile?->firstname." ".$reply->profile?->lastname : 'No MOD ID'  }}</td>
-              <td style="width:15%;">
-                <!-- <a class="btn btn-sm btn-info" href="{{route('ntereply.show',$reply->id)}}" title="View Reply"><i class="bx bx-fw bx-show"></i></a> -->
-                -None yet so far-
+              <td style="width: 15%;">{{ date("M-d-Y",strtotime($reply->InfractionDate)) }}</td>
+              <td style="width: 20%;">{{ $reply->UniqueID }}</td>
+              <td class="text-first" style="width: 30%;">{{ !empty($reply->content) ? substr($reply->content,0,50).' ...' : '' }}</td>
+              <td style="width: 15%;">{{ !empty($reply->MODID) ? $reply->MODID." - ".$reply->profile?->firstname." ".$reply->profile?->lastname : 'No MOD ID'  }}</td>
+              <!-- <td>{{!empty($reply->content) && !empty($reply->netreply) ? '<a class="btn btn-sm btn-info" href="route(\'ntereply.show\',$reply->id)" title="View Reply"><i class="bx bx-fw bx-show"></i></a>' : '-None yet so far-'}}
+              </td> -->
+              <td style="width: 10%;">
+                <?php if(!empty($reply->content) && !empty($reply->netreply)): ?>
+                    <a class="btn btn-sm btn-info" href="{{route('ntereply.show',$reply->id)}}" title="View Reply"><i class="bx bx-fw bx-show"></i></a>
+                <?php else: ?>
+                    -None yet so far-
+                <?php endif; ?>
+              </td>
           </tr>
         @empty
-          <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
+          <tr><td colspan="6" class="text-muted">No data to be displayed</td></tr>
         @endforelse
       </tbody>
     </table>
+    </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $data->links() }}
     </div>
 </div>
 {!! Form::close() !!}
