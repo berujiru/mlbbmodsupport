@@ -68,7 +68,7 @@ unset($__errorArgs, $__bag); ?>
       <tbody>
         <?php $__empty_1 = true; $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $reply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
           <tr>
-              <td style="width:10%;"><?php echo e($reply->id); ?></td>
+              <td style="width:10%;"><?php echo e(++$i); ?></td>
               <td style="width: 15%;"><?php echo e(date("M-d-Y",strtotime($reply->InfractionDate))); ?></td>
               <td style="width: 20%;"><?php echo e($reply->UniqueID); ?></td>
               <td class="text-first" style="width: 30%;"><?php echo e(!empty($reply->content) ? substr($reply->content,0,50).' ...' : ''); ?></td>
