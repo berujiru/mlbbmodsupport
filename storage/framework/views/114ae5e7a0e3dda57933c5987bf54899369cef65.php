@@ -311,8 +311,6 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
-                                <?php echo e($team); ?>
-
                                 <!--end col-->
                                 <div class="col-lg-6">
                                     <div class="mb-3">

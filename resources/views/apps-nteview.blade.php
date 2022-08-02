@@ -73,7 +73,7 @@
                     <div data-simplebar style="height: 100px;" class="px-3 mx-n3">
                         <div class="d-flex mb-4">
                             <div class="flex-shrink-0">
-                                <img src="{{ URL::asset('assets/images/users/avatar-6.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                                <img src="{{ URL::asset('images/' . Auth::user()->avatar) }}" alt="" class="avatar-xs rounded-circle" />
                             </div>
                             <div class="flex-grow-1 ms-3">
                                 <h5 class="fs-13">{{$dbsc->firstname}} {{$dbsc->lastname}} <small class="text-muted">{{$data->created_at}}</small></h5>
@@ -116,15 +116,15 @@
                         <tbody>
                             <tr>
                                 <td class="fw-medium">Department</td>
-                                <td>Stats Collection</td>
+                                <td>{{$mail->Team}}</td>
                             </tr>
                             <tr>
                                 <td class="fw-medium">MOD ID</td>
-                                <td>481</td>
+                                <td>{{$dbsc->modid}}</td>
                             </tr>
                             <tr>
                                 <td class="fw-medium">Full Name</td>
-                                <td>Bergel Cutara</td>
+                                <td>{{$dbsc->firstname}} {{$dbsc->lastname}}</td>
                             </tr>
                             <tr>
                                 <td class="fw-medium">Priority</td>

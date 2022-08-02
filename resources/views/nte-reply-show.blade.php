@@ -22,15 +22,16 @@
                 </div>
                 <div class="card-body pt-2">
                     <div class="table-responsive">
+
                         <table class="table table-borderless mb-0">
                             <tbody>
                                 <tr>
                                     <td class="text-end" width="25%">MOD ID : </td>
-                                    <td class="text-first">{{ !empty($netreply->nte) ? $netreply->nte->MODID : 'Mod ID not found' }}</td>
+                                    <td class="text-first">{{ $netreply->nte->MODID }}</td>
                                 </tr>
                                 <tr>
                                     <td class="text-end">Moderator Name : </td>
-                                    <td class="text-first">{{ !empty($netreply->nte->profile) ? $netreply->nte->profile->firstname." ".$netreply->nte->profile->lastname : 'No profile found of '.$reply->nte->mod_id }}</td>
+                                    <td class="text-first">{{ !empty($netreply->nte->profile) ? $netreply->nte->profile->firstname." ".$netreply->nte->profile->lastname : 'No profile found of '}}</td>
                                 </tr>
                                 <tr>
                                     <td class="text-end">Content : </td>

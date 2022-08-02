@@ -26,6 +26,6 @@ class Ntereply extends Model
 
     public function nte()
     {
-        return $this->hasOne(Nte::class, 'id', 'id');
+        return $this->hasOne(Nte::class, 'UniqueID', 'ntecode');
     }
 }

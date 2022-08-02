@@ -28,22 +28,25 @@ class NtereplyController extends Controller
             $mod_id = (int) $request->input('mod_id');
             $nte_code = $request->input('nte_code');
             if($mod_id > 0 && !empty($nte_code)) {
-                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
+                $data = Nte::select('nte.*','ntereply.content as content','ntereply.id as replyid')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
                     ->where('nte.UniqueID','LIKE',"%{$nte_code}%")->where('nte.MODID',$mod_id)
+                    ->groupBy('nte.UniqueID')
                     ->orderBy('nte.id','DESC')->paginate(20);
             } elseif($mod_id > 0 && empty(trim($nte_code))) {
-                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
+                $data = Nte::select('nte.*','ntereply.content as content','ntereply.id as replyid')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
                     ->where('nte.MODID',$mod_id)
+                    ->groupBy('nte.UniqueID')
                     ->orderBy('nte.id','DESC')->paginate(20);
             } elseif($mod_id < 1 && !empty(trim($nte_code))) {
-                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
+                $data = Nte::select('nte.*','ntereply.content as content','ntereply.id as replyid')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')
                     ->where('nte.UniqueID','LIKE',"%{$nte_code}%")
+                    ->groupBy('nte.UniqueID')
                     ->orderBy('nte.id','DESC')->paginate(20);
             } else {
-                $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->orderBy('nte.id','DESC')->paginate(20);
+                $data = Nte::select('nte.*','ntereply.content as content','ntereply.id as replyid')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->groupBy('nte.UniqueID')->orderBy('nte.id','DESC')->paginate(20);
             }
         } else {
-           $data = Nte::select('nte.*','ntereply.content as content')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->orderBy('nte.id','DESC')->paginate(20);
+           $data = Nte::select('nte.*','ntereply.content as content','ntereply.id as replyid')->leftJoin('ntereply', 'nte.UniqueID', '=', 'ntereply.ntecode')->groupBy('nte.UniqueID')->orderBy('nte.id','DESC')->paginate(20);
         }
 
         //$data = Ntereply::orderBy('ntereply.ntecode','ASC')->get();

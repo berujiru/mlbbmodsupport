@@ -60,7 +60,7 @@
       <tbody>
         @forelse($data as $key => $reply)
           <tr>
-              <td style="width:10%;">{{++$i}}</td>
+              <td style="width:10%;">{{$reply->id}}</td>
               <td style="width: 15%;">{{ date("M-d-Y",strtotime($reply->InfractionDate)) }}</td>
               <td style="width: 20%;">{{ $reply->UniqueID }}</td>
               <td class="text-first" style="width: 30%;">{{ !empty($reply->content) ? substr($reply->content,0,50).' ...' : '' }}</td>
@@ -68,11 +68,11 @@
               <!-- <td>{{!empty($reply->content) && !empty($reply->netreply) ? '<a class="btn btn-sm btn-info" href="route(\'ntereply.show\',$reply->id)" title="View Reply"><i class="bx bx-fw bx-show"></i></a>' : '-None yet so far-'}}
               </td> -->
               <td style="width: 10%;">
-                <?php if(!empty($reply->content) && !empty($reply->netreply)): ?>
-                    <a class="btn btn-sm btn-info" href="{{route('ntereply.show',$reply->id)}}" title="View Reply"><i class="bx bx-fw bx-show"></i></a>
-                <?php else: ?>
+                @if ($reply->content)
+                    <a class="btn btn-sm btn-info" href="{{route('ntereply.show',$reply->replyid)}}" title="View Reply"><i class="bx bx-fw bx-show"></i></a>
+                @else
                     -None yet so far-
-                <?php endif; ?>
+                @endif
               </td>
           </tr>
         @empty

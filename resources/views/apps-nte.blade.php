@@ -55,12 +55,12 @@
                             <a href="{{ route('nteview',$mail->id) }}" class="subject">
 
                                     <span class="bg-warning badge me-2">{{$mail->RecommendedAction}}</span>
-                                    <b>{{$mail->RecommendedAction}}</b> - <span class="teaser">{{$mail->KeyAttribute}}</span>
+                                    <b>{{$mail->RecommendedAction}}</b> - <span class="teaser">{{$mail->Attribute}}</span>
 
                             
                                
                             </a>
-                            <div class="date">{{$mail->Date}}</div>
+                            <div class="date">{{$mail->InfractionDate}}</div>
                         </div>
                     </li>
                 @endforeach
