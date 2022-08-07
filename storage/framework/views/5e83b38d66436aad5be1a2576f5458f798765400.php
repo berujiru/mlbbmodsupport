@@ -77,8 +77,8 @@ unset($__errorArgs, $__bag); ?>
 
               </td> -->
               <td style="width: 10%;">
-                <?php if(!empty($reply->content) && !empty($reply->netreply)): ?>
-                    <a class="btn btn-sm btn-info" href="<?php echo e(route('ntereply.show',$reply->id)); ?>" title="View Reply"><i class="bx bx-fw bx-show"></i></a>
+                <?php if($reply->content): ?>
+                    <a class="btn btn-sm btn-info" href="<?php echo e(route('ntereply.show',$reply->replyid)); ?>" title="View Reply"><i class="bx bx-fw bx-show"></i></a>
                 <?php else: ?>
                     -None yet so far-
                 <?php endif; ?>

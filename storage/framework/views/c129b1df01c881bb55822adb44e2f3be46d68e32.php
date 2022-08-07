@@ -5,6 +5,12 @@
 <?php $__env->slot('li_1'); ?> Infractions <?php $__env->endSlot(); ?>
 <?php $__env->slot('title'); ?> Index  <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
+
+<?php
+  $search_opt = isset($_GET['search_opt']) ? $_GET['search_opt'] : '';
+  $word_search = isset($_GET['k_search']) ? $_GET['k_search'] : '';
+?>
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -14,6 +20,34 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
+  <?php echo Form::open(array('route' => 'infraction.index','method'=>'GET')); ?>
+
+<div class="row">
+  <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top: 10px;">
+      <div class="mb-3">
+          <label for="search_opt" class="form-label">Search by : </label>
+          <select class="form-control" name="search_opt" data-choices id="search_opt">
+              <option value="" selected disabled hidden>What to search ... </option>
+              <option value="code" <?= ($search_opt === 'code' ? "selected" : "") ?>> Code </option>
+              <option value="detail" <?= ($search_opt === 'detail' ? "selected" : "") ?>> Detail </option>
+          </select>
+      </div>
+  </div>
+  <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top: 10px;">
+      <div class="mb-3">
+          <label for="k_search" class="form-label">Keyword</label>
+          <input type="text" name="k_search" value="<?php echo e($word_search); ?>" autocomplete="off" autocapitalize="true" class="form-control" placeholder="Search ... " />
+      </div>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:16px;">
+      <div class="mb-3">
+          <br>
+          <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
+      </div>
+  </div>
+</div>
+<?php echo Form::close(); ?>
+
   <div class="card">
     <div class="card-header align-items-center d-flex">
       <h4 class="card-title mb-0 flex-grow-1">
@@ -46,11 +80,15 @@
               </td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-          <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
+          <tr><td colspan="5" class="text-muted">No data to be displayed</td></tr>
         <?php endif; ?>
       </tbody>
     </table>
   </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <?php echo e($data->links()); ?>
+
   </div>
 </div>
 

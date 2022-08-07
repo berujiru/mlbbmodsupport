@@ -55,12 +55,12 @@
                             <a href="<?php echo e(route('nteview',$mail->id)); ?>" class="subject">
 
                                     <span class="bg-warning badge me-2"><?php echo e($mail->RecommendedAction); ?></span>
-                                    <b><?php echo e($mail->RecommendedAction); ?></b> - <span class="teaser"><?php echo e($mail->KeyAttribute); ?></span>
+                                    <b><?php echo e($mail->RecommendedAction); ?></b> - <span class="teaser"><?php echo e($mail->Attribute); ?></span>
 
                             
                                
                             </a>
-                            <div class="date"><?php echo e($mail->Date); ?></div>
+                            <div class="date"><?php echo e($mail->InfractionDate); ?></div>
                         </div>
                     </li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -5,6 +5,11 @@
 @slot('li_1') Roles @endslot
 @slot('title') Index  @endslot
 @endcomponent
+
+<?php
+  $word_search = isset($_GET['search']) ? $_GET['search'] : '';
+?>
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -17,6 +22,22 @@
         </div>
     </div>
 </div>
+{!! Form::open(array('route' => 'roles.index','method'=>'GET')) !!}
+<div class="row">
+  <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top: 10px;">
+      <div class="mb-3">
+          <label for="search" class="form-label">Search : </label>
+          <input type="text" name="search" value="{{$word_search}}" autocomplete="off" autocapitalize="true" class="form-control" placeholder="Search ... " />
+      </div>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:16px;">
+      <div class="mb-3">
+          <br>
+          <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
+      </div>
+  </div>
+</div>
+{!! Form::close() !!}
 
 <table class="table table-bordered">
   <tr>
@@ -24,7 +45,7 @@
      <th>Name</th>
      <th width="280px">Action</th>
   </tr>
-    @foreach ($roles as $key => $role)
+    @forelse ($roles as $key => $role)
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $role->name }}</td>
@@ -36,8 +57,13 @@
            
         </td>
     </tr>
-    @endforeach
+    @empty
+        <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
+    @endforelse
 </table>
+<div class="d-flex justify-content-center">
+    {{ $roles->links() }}
+</div>
 
 
 @endsection

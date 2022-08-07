@@ -30,9 +30,28 @@ class InfractionController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Infractions::orderBy('code','ASC')->paginate(50);
+        if(isset($_GET['search_opt']) && isset($_GET['k_search'])) {
+            $search_opt = $request->input('search_opt');
+            $word_search = $request->input('k_search');
+            if(!empty($search_opt) && $search_opt === 'code') {
+                $data = Infractions::select('*')
+                    ->where('code','LIKE',"%{$word_search}%")
+                    ->orderBy('code','ASC')->paginate(10);
+            } elseif (!empty($search_opt) && $search_opt === 'detail') {
+                $data = Infractions::select('*')
+                    ->where('detail','LIKE',"%{$word_search}%")
+                    ->orderBy('code','ASC')->paginate(10);
+            } else {
+                $data = Infractions::orderBy('code','ASC')->paginate(10);
+            }
+        } else {
+            $data = Infractions::orderBy('code','ASC')->paginate(10);
+        }
+        
+        //$data = Infractions::orderBy('code','ASC')->paginate(50);
         return view('infraction.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 50);
+            //->with('i', ($request->input('page', 1) - 1) * 50);
+            ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
     /**

@@ -33,9 +33,29 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id','DESC')->paginate(1000);
+
+        if(isset($_GET['search_opt']) && isset($_GET['k_search'])) {
+            $search_opt = $request->input('search_opt');
+            $word_search = $request->input('k_search');
+            if(!empty($search_opt) && $search_opt === 'name') {
+                $data = User::select('*')
+                    ->where('name','LIKE',"%{$word_search}%")
+                    ->orderBy('id','DESC')->paginate(20);
+            } elseif (!empty($search_opt) && $search_opt === 'email') {
+                $data = User::select('*')
+                    ->where('email','LIKE',"%{$word_search}%")
+                    ->orderBy('id','DESC')->paginate(20);
+            } else {
+                $data = User::orderBy('id','DESC')->paginate(20);
+            }
+        } else {
+            $data = User::orderBy('id','DESC')->paginate(20);
+        }
+
+        //$data = User::orderBy('id','DESC')->paginate(1000);
         return view('users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 1000);
+            //->with('i', ($request->input('page', 1) - 1) * 1000);
+            ->with('i', ($request->input('page', 1) - 1) * 20);
     }
     
     /**
