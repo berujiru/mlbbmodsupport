@@ -46,11 +46,17 @@ class ProfileController extends Controller
         $users = Dbsc::select(DB::raw("CONCAT(firstname,' ',lastname) as full_name"),'users.avatar as avatar')->leftJoin('users', 'users.id', '=', 'dbsc.id')->where('firstname', 'LIKE', '%'.$request->matchvalue.'%')->orwhere('lastname', 'LIKE', '%'.$request->matchvalue.'%')->get();
 
         $list="";
-        foreach($users as $user){
-            $list .= '<a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2"><img src="'."assets/images/users/".$user->avatar.'" class="me-3 rounded-circle avatar-xs"
-            alt="user-pic"><div class="flex-1">
-            <h6 class="m-0">'.$user->full_name.'</h6><span class="fs-11 mb-0 text-muted">Manager</span></div></a>';
+
+        if($users){
+            foreach($users as $user){
+                $list .= '<a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2"><img src="'.'images/'.$user->avatar.'" class="me-3 rounded-circle avatar-xs"
+                alt="user-pic"><div class="flex-1">
+                <h6 class="m-0">'.$user->full_name.'</h6><span class="fs-11 mb-0 text-muted">Manager</span></div></a>';
+            }
+        }else{
+            $list .= 'Not Found';
         }
+        
         return($list);
     }
 

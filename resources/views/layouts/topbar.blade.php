@@ -49,33 +49,7 @@
                             </div>
 
                             <div id="notification-list">
-                                <!-- item -->
-                                <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" class="me-3 rounded-circle avatar-xs"
-                                        alt="user-pic">
-                                    <div class="flex-1">
-                                        <h6 class="m-0">Angela Bernier</h6>
-                                        <span class="fs-11 mb-0 text-muted">Manager</span>
-                                    </div>
-                                </a>
-                                <!-- item -->
-                                <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" class="me-3 rounded-circle avatar-xs"
-                                        alt="user-pic">
-                                    <div class="flex-1">
-                                        <h6 class="m-0">David Grasso</h6>
-                                        <span class="fs-11 mb-0 text-muted">Web Designer</span>
-                                    </div>
-                                </a>
-                                <!-- item -->
-                                <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-5.jpg') }}" class="me-3 rounded-circle avatar-xs"
-                                        alt="user-pic">
-                                    <div class="flex-1">
-                                        <h6 class="m-0">Mike Bunch</h6>
-                                        <span class="fs-11 mb-0 text-muted">React Developer</span>
-                                    </div>
-                                </a>
+                                <p class="text-overflow text-muted mb-2 text-uppercase">Type And Enter to Search</p>
                             </div>
                         </div>
 
