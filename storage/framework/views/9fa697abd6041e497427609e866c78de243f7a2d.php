@@ -5,6 +5,11 @@
 <?php $__env->slot('li_1'); ?> Roles <?php $__env->endSlot(); ?>
 <?php $__env->slot('title'); ?> Index  <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
+
+<?php
+  $word_search = isset($_GET['search']) ? $_GET['search'] : '';
+?>
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -17,6 +22,24 @@
         </div>
     </div>
 </div>
+<?php echo Form::open(array('route' => 'roles.index','method'=>'GET')); ?>
+
+<div class="row">
+  <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top: 10px;">
+      <div class="mb-3">
+          <label for="search" class="form-label">Search : </label>
+          <input type="text" name="search" value="<?php echo e($word_search); ?>" autocomplete="off" autocapitalize="true" class="form-control" placeholder="Search ... " />
+      </div>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:16px;">
+      <div class="mb-3">
+          <br>
+          <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
+      </div>
+  </div>
+</div>
+<?php echo Form::close(); ?>
+
 
 <table class="table table-bordered">
   <tr>
@@ -24,7 +47,7 @@
      <th>Name</th>
      <th width="280px">Action</th>
   </tr>
-    <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php $__empty_1 = true; $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
     <tr>
         <td><?php echo e(++$i); ?></td>
         <td><?php echo e($role->name); ?></td>
@@ -36,8 +59,14 @@
            
         </td>
     </tr>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+        <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
+    <?php endif; ?>
 </table>
+<div class="d-flex justify-content-center">
+    <?php echo e($roles->links()); ?>
+
+</div>
 
 
 <?php $__env->stopSection(); ?>

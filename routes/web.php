@@ -38,7 +38,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('profile', [ProfileController::class,'index'])->name('profile');
     Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('editProfile');
     Route::post('/update-profile', [ProfileController::class, 'update'])->name('updateProfile');
-
+    // Route::post('/search-profile', [ProfileController::class, 'search'])->name('searchProfile');
+    Route::post('/search-profile',[ProfileController::class, 'search']);
+    Route::get('/search-profile',[ProfileController::class, 'search']);
     //user edit login credential
     Route::get('changeprofile', ['as' => 'profileedit', 'uses' => 'App\Http\Controllers\ProfileController@loginedit']);
     Route::put('settingprofile', ['as' => 'profileupdate', 'uses' => 'App\Http\Controllers\ProfileController@loginupdate']);

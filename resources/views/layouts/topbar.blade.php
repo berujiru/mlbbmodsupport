@@ -32,7 +32,7 @@
                 </button>
 
                 <!-- App Search-->
-                <form class="app-search d-none d-md-block">
+                <form class="app-search d-none d-md-block" onsubmit="return false;">
                     <div class="position-relative">
                         <input type="text" class="form-control" placeholder="Search..." autocomplete="off"
                             id="search-options" value="">
@@ -41,47 +41,14 @@
                             id="search-close-options"></span>
                     </div>
                     <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
-                        <div data-simplebar style="max-height: 320px;">
-                            <!-- item-->
-                            <div class="dropdown-header">
-                                <h6 class="text-overflow text-muted mb-0 text-uppercase">Recent Searches</h6>
-                            </div>
-
-                            <div class="dropdown-item bg-transparent text-wrap">
-                                <a href="index" class="btn btn-soft-secondary btn-sm btn-rounded">how to setup <i
-                                        class="mdi mdi-magnify ms-1"></i></a>
-                                <a href="index" class="btn btn-soft-secondary btn-sm btn-rounded">buttons <i
-                                        class="mdi mdi-magnify ms-1"></i></a>
-                            </div>
-                            <!-- item-->
-                            <div class="dropdown-header mt-2">
-                                <h6 class="text-overflow text-muted mb-1 text-uppercase">Pages</h6>
-                            </div>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="ri-bubble-chart-line align-middle fs-18 text-muted me-2"></i>
-                                <span>Analytics Dashboard</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="ri-lifebuoy-line align-middle fs-18 text-muted me-2"></i>
-                                <span>Help Center</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="ri-user-settings-line align-middle fs-18 text-muted me-2"></i>
-                                <span>My account settings</span>
-                            </a>
+                        <div id="user-result" data-simplebar style="max-height: 320px;">
 
                             <!-- item-->
                             <div class="dropdown-header mt-2">
                                 <h6 class="text-overflow text-muted mb-2 text-uppercase">Members</h6>
                             </div>
 
-                            <div class="notification-list">
+                            <div id="notification-list">
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
                                     <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" class="me-3 rounded-circle avatar-xs"
@@ -112,10 +79,10 @@
                             </div>
                         </div>
 
-                        <div class="text-center pt-3 pb-1">
+                        <!-- <div class="text-center pt-3 pb-1">
                             <a href="pages-search-results" class="btn btn-primary btn-sm">View All Results <i
                                     class="ri-arrow-right-line ms-1"></i></a>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>
@@ -459,3 +426,25 @@
         </div>
     </div>
 </header>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+    $("#search-options").on('change', function (){
+        
+        var matchvalue = $(this).val(); // this.value
+        $.ajax({ 
+            url: 'search-profile',
+            data: { matchvalue: matchvalue ,_token: "{{ csrf_token() }}"},
+            type: 'post'
+        }).done(function(responseData) {
+            $("#notification-list").html(responseData)
+            
+        }).fail(function() {
+            console.log('Failed');
+        });
+    });
+}); 
+
+</script>
+
