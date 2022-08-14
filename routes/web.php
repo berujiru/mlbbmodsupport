@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MailboxController;
+use App\Http\Controllers\ModBirthdayPictureController;
 use App\Http\Controllers\NteController;
 use App\Http\Controllers\ModinfractionController;
 use App\Http\Controllers\NtereplyController;
@@ -80,6 +81,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/evaluation',[ModinfractionController::class,'index'])->name('modeval');
     Route::post('/evaluation',[ModinfractionController::class,'store'])->name('modevalstore');
     Route::get('/evaluation/destroy/{id}',[ModinfractionController::class,'destroy'])->name('modevaldestroy');
+
+    //birthday card
+    Route::resource('birthday-card', ModBirthdayPictureController::class);
+    Route::get('/birthday-card/delete/{id}',[ModBirthdayPictureController::class,'destroy'])->name('birthday-card.delete');
 });
 
 //public reset pass

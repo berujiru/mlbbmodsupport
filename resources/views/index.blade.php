@@ -206,34 +206,41 @@
 
                         <div class="card-body">
                             <div class="table-responsive table-card">
-                                <table
-                                    class="table table-hover table-centered align-middle table-nowrap mb-0">
-                                    <tbody>
-                                        @forelse($today_birthdays as $tb)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div
-                                                        class="avatar-sm bg-light rounded p-1 me-2">
-                                                        <img src="{{ URL::asset('assets/images/companies/img-1.png') }}"
-                                                            alt="" class="img-fluid d-block" />
-                                                    </div>
-                                                    <div>
-                                                        <h5 class="fs-14 my-1">{{$tb->firstname." ".$tb->lastname}}</h5>
-                                                        <span class="text-muted">{{$tb->modid}}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 class="fs-14 my-1 fw-normal">{{date("F j",strtotime($tb->birthday))}}</h5>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        @empty
+                                <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                                    @forelse($today_birthdays as $tb)
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    </div>
+                                    <div class="carousel-inner" role="listbox" style="width:100%;max-height: 400px !important;">
+                                        <div class="carousel-item active" data-interval="2000">
+                                            <img src="{{URL::asset('img_birthday/photo_2022-08-14_18-51-49.jpg')}}" class="d-block w-100 img-fluid mx-auto" alt="...">
+                                        </div>
+                                        <div class="carousel-item" data-interval="2000">
+                                            <img src="{{URL::asset('images/' . Auth::user()->avatar)}}" class="d-block w-100 img-fluid mx-auto" alt="...">
+                                        </div>
+                                        <div class="carousel-item" data-interval="2000">
+                                            <img src="{{URL::asset('images/1657195292.jpg')}}" class="d-block w-100 img-fluid mx-auto" alt="...">
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" role="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" role="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                    @empty
+                                    <!--  no display -->
+                                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                                        <tbody>
                                             <tr><td colspan="3" class="text-muted">No birthday celebrant today</td></tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                    @endforelse
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -254,5 +261,6 @@
 <script src="{{ URL::asset('assets/libs/swiper/swiper.min.js')}}"></script>
 <!-- dashboard init -->
 <script src="{{ URL::asset('/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
+<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection

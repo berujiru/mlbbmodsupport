@@ -80,6 +80,10 @@
                     </div>
                 </li> <!-- end Team -->
                 <li class="nav-item">
+                    <a href="{{ route('birthday-card.index') }}" class="nav-link" >
+                    <i class="bx bx-images"></i> <span data-key="t-eval">Birthday Card</a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('modeval') }}" class="nav-link" >
                     <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
                 </li>
