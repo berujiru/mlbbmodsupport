@@ -40,9 +40,9 @@
               <td style="width:30%;">{{ !empty($bd->profile) ? $bd->profile->firstname." ".$bd->profile->lastname : 'Profile not found' }}</td>
               <td style="width:30%;">{{ !empty($bd->profile->birthday) ? date("m/d/Y",strtotime($bd->profile->birthday)) : 'Birthday not specified' }}</td>
               <td style="width:10%;">
-                <!-- <a class="btn btn-sm btn-info" href="{{route('birthday-card.show',$bd->id)}}" title="View Birthday Card"><i class="bx bx-fw bx-show bx-xs"></i></a>
+                <a class="btn btn-sm btn-info" href="{{route('birthday-card.show',$bd->id)}}" title="View Birthday Card"><i class="bx bx-fw bx-show bx-xs"></i></a>
                 <a class="btn btn-sm btn-primary" href="{{route('birthday-card.edit',$bd->id)}}" title="Update Birthday Card"><i class="bx bx-fw bx-image bx-xs"></i></a>
-                <a class="btn btn-sm btn-danger" href="{{route('birthday-card.delete',$bd->id)}}" title="Delete Birthday Card"><i class="bx bx-fw bx-trash"></i></a> -->
+                <a class="btn btn-sm btn-danger" href="{{route('birthday-card.delete',$bd->id)}}" title="Delete Birthday Card"><i class="bx bx-fw bx-trash"></i></a>
               </td>
           </tr>
         @empty

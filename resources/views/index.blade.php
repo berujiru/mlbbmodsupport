@@ -9,6 +9,10 @@
 @slot('li_1') Dashboards @endslot
 @slot('title') Dashboard @endslot
 @endcomponent
+<?php
+$num_ind = 0;
+$num_img = 0;
+?>
 <div class="row">
     <div class="col">
 
@@ -206,40 +210,78 @@
 
                         <div class="card-body">
                             <div class="table-responsive table-card">
-                                <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                                    @forelse($today_birthdays as $tb)
+                                <div id="carouselExampleIndicators" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                                    @if(count($today_birthdays) > 0 && count($birthday_cards) > 0)
                                     <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                        @if(count($birthday_cards) > 1)
+                                            @foreach($birthday_cards as $tb)
+                                            <?php if($num_ind == 0): ?>
+                                            <button type="button" class="active" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$num_ind}}" aria-current="true" aria-label="{{$tb->mod_id}}"></button>
+                                            <?php else: ?>
+                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$num_ind}}" aria-current="true" aria-label="{{$tb->mod_id}}"></button>
+                                            <?php 
+                                                endif;
+                                                $num_ind++;
+                                            ?>
+                                            @endforeach
+                                        @endif
                                     </div>
                                     <div class="carousel-inner" role="listbox" style="width:100%;max-height: 400px !important;">
-                                        <div class="carousel-item active" data-interval="2000">
-                                            <img src="{{URL::asset('img_birthday/photo_2022-08-14_18-51-49.jpg')}}" class="d-block w-100 img-fluid mx-auto" alt="...">
-                                        </div>
-                                        <div class="carousel-item" data-interval="2000">
-                                            <img src="{{URL::asset('images/' . Auth::user()->avatar)}}" class="d-block w-100 img-fluid mx-auto" alt="...">
-                                        </div>
-                                        <div class="carousel-item" data-interval="2000">
-                                            <img src="{{URL::asset('images/1657195292.jpg')}}" class="d-block w-100 img-fluid mx-auto" alt="...">
-                                        </div>
+                                    <?php
+                                        foreach($birthday_cards as $bpic):    
+                                            if($num_img == 0): ?>
+                                            <div class="carousel-item active" data-interval="2000">
+                                                <img src="{{URL::asset('img_birthday/'.$bpic->pic_filename)}}" class="d-block w-100 img-fluid mx-auto" alt="{{$bpic->mod_id}}">
+                                            </div>
+                                            <?php else: ?>
+                                            <div class="carousel-item" data-interval="2000">
+                                                <img src="{{URL::asset('img_birthday/'.$bpic->pic_filename)}}" class="d-block w-100 img-fluid mx-auto" alt="{{$bpic->mod_id}}">
+                                            </div>
+                                            <?php
+                                            endif;
+                                            $num_img++;
+                                            ?>
+                                    <?php endforeach; ?>
                                     </div>
-                                    <button class="carousel-control-prev" type="button" role="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" role="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-                                    @empty
+                                    @if(count($birthday_cards) > 1)
+                                        <button class="carousel-control-prev" type="button" role="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" role="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    @endif
+                                    @else
                                     <!--  no display -->
                                     <table class="table table-hover table-centered align-middle table-nowrap mb-0">
                                         <tbody>
-                                            <tr><td colspan="3" class="text-muted">No birthday celebrant today</td></tr>
+                                            @forelse($today_birthdays as $tb)
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div
+                                                                class="avatar-sm bg-light rounded p-1 me-2">
+                                                                <img src="{{ URL::asset('images/' . Auth::user()->avatar) }}"
+                                                                    alt="" class="img-fluid d-block" />
+                                                            </div>
+                                                            <div>
+                                                                <h5 class="fs-14 my-1">{{$tb->firstname." ".$tb->lastname}}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1 fw-normal">{{date("F j",strtotime($tb->birthday))}}</h5>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            @empty
+                                                <tr><td colspan="3" class="text-muted">No birthday celebrant today</td></tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
-                                    @endforelse
+                                    @endif
                                 </div>
                             </div>
                         </div>

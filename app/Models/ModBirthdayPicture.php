@@ -30,4 +30,14 @@ class ModBirthdayPicture extends Model
     {
         return $this->hasOne(Dbsc::class, 'modid', 'mod_id');
     }
+
+    public function attachedby()
+    {
+        return $this->hasOne(Dbsc::class, 'id', 'uploader_id');
+    }
+
+    public function reattachedby()
+    {
+        return $this->hasOne(Dbsc::class, 'id', 're_attached_by');
+    }
 }

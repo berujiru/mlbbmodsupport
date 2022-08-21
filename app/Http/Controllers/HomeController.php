@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Password;
 use App\Models\Dbsc;
+use App\Models\ModBirthdayPicture;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -95,6 +96,16 @@ class HomeController extends Controller
             ->where('users.status',1)
             ->where(DB::raw("DATEDIFF(DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(dbsc.created_at,'%Y-%m-%d'))"),"<",31)
             ->count();
+        $birthday_cards = ModBirthdayPicture::select('mod_id','pic_name','pic_filename','birthday')
+            ->join('dbsc', 'dbsc.modid', '=', 'mod_birthday_pic.mod_id')
+            ->where(DB::raw("DATE_FORMAT(birthday,'%m-%d')"),date("m-d"))
+            ->orderByRaw('firstname')
+            ->get();
+
+            // echo "<pre>";
+            // print_r($birthday_cards);
+            // exit;
+            // echo "</pre>";
         //number of teams
         $total_teams = DB::table('team')->where('status_id',1)->count();
         //echo auth()->user()->id;
@@ -102,7 +113,7 @@ class HomeController extends Controller
         // print_r($list_teams);
         // echo "</pre>";
         // exit;
-        return view('index',compact('dbsc','greeting','active_accounts','today_birthdays','total_male','total_female','list_teams','total_newly_registered','total_teams'));
+        return view('index',compact('dbsc','greeting','active_accounts','today_birthdays','total_male','total_female','list_teams','total_newly_registered','total_teams','birthday_cards'));
         //return view('index');
     }
 

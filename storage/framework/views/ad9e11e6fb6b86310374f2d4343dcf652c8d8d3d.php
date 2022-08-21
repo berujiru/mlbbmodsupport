@@ -3,12 +3,12 @@
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
 <?php $__env->slot('li_1'); ?> Birthday Card <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Upload  <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Update  <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Upload Birthday Card</h2>
+            <h2>Update Birthday Card</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-sm btn-primary" href="<?php echo e(route('birthday-card.index')); ?>"> <i class="bx bx-arrow-back"></i></a>
@@ -28,7 +28,7 @@
   </div>
 <?php endif; ?>
 
-<?php echo Form::open(array('route' => 'birthday-card.store','method'=>'POST','enctype'=>'multipart/form-data','class'=>'needs-validation')); ?>
+<?php echo Form::model($bdpic, ['route' => ['birthday-card.update', $bdpic->id],'method' => 'PATCH','enctype'=>'multipart/form-data','class'=>'needs-validation']); ?>
 
 <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6">
@@ -41,7 +41,7 @@
                     <select class="form-select" id="profileSelect" name="mod_id" required>
                         <option value="">Select Profile ...</option>
                         <?php $__currentLoopData = $list_mods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pr): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($pr->modid); ?>"><?php echo e($pr->firstname.' '.$pr->lastname); ?></option>
+                            <option value="<?php echo e($pr->modid); ?>" <?= $bdpic->mod_id == $pr->modid ? 'selected' : '' ?>><?php echo e($pr->firstname.' '.$pr->lastname); ?></option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                     <!-- <label for="profileSelect">Select Profile</label> -->
@@ -89,5 +89,4 @@ unset($__errorArgs, $__bag); ?>
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp2\htdocs\mlbbmodsupport\resources\views/birthday-picture/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp2\htdocs\mlbbmodsupport\resources\views/birthday-picture/edit.blade.php ENDPATH**/ ?>

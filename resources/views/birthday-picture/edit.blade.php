@@ -3,12 +3,12 @@
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Birthday Card @endslot
-@slot('title') Upload  @endslot
+@slot('title') Update  @endslot
 @endcomponent
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Upload Birthday Card</h2>
+            <h2>Update Birthday Card</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-sm btn-primary" href="{{ route('birthday-card.index') }}"> <i class="bx bx-arrow-back"></i></a>
@@ -28,7 +28,7 @@
   </div>
 @endif
 
-{!! Form::open(array('route' => 'birthday-card.store','method'=>'POST','enctype'=>'multipart/form-data','class'=>'needs-validation')) !!}
+{!! Form::model($bdpic, ['route' => ['birthday-card.update', $bdpic->id],'method' => 'PATCH','enctype'=>'multipart/form-data','class'=>'needs-validation']) !!}
 <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6">
         <div class="card">
@@ -40,7 +40,7 @@
                     <select class="form-select" id="profileSelect" name="mod_id" required>
                         <option value="">Select Profile ...</option>
                         @foreach($list_mods as $pr)
-                            <option value="{{$pr->modid}}">{{ $pr->firstname.' '.$pr->lastname }}</option>
+                            <option value="{{$pr->modid}}" <?= $bdpic->mod_id == $pr->modid ? 'selected' : '' ?>>{{ $pr->firstname.' '.$pr->lastname }}</option>
                         @endforeach
                     </select>
                     <!-- <label for="profileSelect">Select Profile</label> -->
