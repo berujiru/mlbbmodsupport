@@ -16,8 +16,22 @@ class ModBirthdayPictureController extends Controller
      */
     public function index(Request $request)
     {
-        $data = ModBirthdayPicture::orderBy('mod_id','ASC')->paginate(30);
-        return view('birthday-picture.index',compact('data'))
+        if(isset($_GET['mod_id'])) {
+            $mod_id = (int) $request->input('mod_id');
+            if($mod_id > 0) {
+                $data = ModBirthdayPicture::select('*')
+                    ->where('mod_id',$mod_id)
+                    ->orderBy('mod_id','ASC')->paginate(30);
+            } else {
+                $data = ModBirthdayPicture::orderBy('mod_id','ASC')->paginate(30);
+            }
+        } else {
+            $data = ModBirthdayPicture::orderBy('mod_id','ASC')->paginate(30);
+        }
+        $mods = Dbsc::select(['id','modid','firstname','lastname'])->get();
+        //$data = ModBirthdayPicture::orderBy('mod_id','ASC')->paginate(30);
+
+        return view('birthday-picture.index',compact('data','mods'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 

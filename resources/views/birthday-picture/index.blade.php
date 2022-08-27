@@ -5,6 +5,11 @@
 @slot('li_1') Birthday Cards @endslot
 @slot('title') Index  @endslot
 @endcomponent
+
+<?php
+  $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
+?>
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -14,6 +19,32 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
+  {!! Form::open(array('route' => 'birthday-card.index','method'=>'GET')) !!}
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">Moderator</label>
+          <select class="form-control" name="mod_id" data-choices
+                id="modInput">
+              <option value="" selected disabled hidden>Select moderator </option>
+              <option value=""> -none- </option>
+              @foreach($mods as $moderator)
+                  <option value="{{$moderator->modid}}" <?= ($mod_id_selected == $moderator->modid ? "selected" : "") ?> >{{ $moderator->modid.'- '.$moderator->firstname.' '.$moderator->lastname}}</option>
+              @endforeach
+          </select>
+          @error('mod_id')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:9px;">
+        <div class="mb-3">
+            <br>
+            <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
+        </div>
+    </div>
+  </div>
+  {!! Form::close() !!}
   <div class="card">
     <div class="card-header align-items-center d-flex">
       <h4 class="card-title mb-0 flex-grow-1">
@@ -51,6 +82,9 @@
       </tbody>
     </table>
   </div>
+  </div>
+  <div class="d-flex justify-content-center">
+      {{ $data->links() }}
   </div>
 </div>
 

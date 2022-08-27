@@ -5,6 +5,11 @@
 <?php $__env->slot('li_1'); ?> Birthday Cards <?php $__env->endSlot(); ?>
 <?php $__env->slot('title'); ?> Index  <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
+
+<?php
+  $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
+?>
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -14,6 +19,41 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
+  <?php echo Form::open(array('route' => 'birthday-card.index','method'=>'GET')); ?>
+
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">Moderator</label>
+          <select class="form-control" name="mod_id" data-choices
+                id="modInput">
+              <option value="" selected disabled hidden>Select moderator </option>
+              <option value=""> -none- </option>
+              <?php $__currentLoopData = $mods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $moderator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <option value="<?php echo e($moderator->modid); ?>" <?= ($mod_id_selected == $moderator->modid ? "selected" : "") ?> ><?php echo e($moderator->modid.'- '.$moderator->firstname.' '.$moderator->lastname); ?></option>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+          </select>
+          <?php $__errorArgs = ['mod_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+              <div class="alert alert-danger"><?php echo e($message); ?></div>
+          <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:9px;">
+        <div class="mb-3">
+            <br>
+            <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
+        </div>
+    </div>
+  </div>
+  <?php echo Form::close(); ?>
+
   <div class="card">
     <div class="card-header align-items-center d-flex">
       <h4 class="card-title mb-0 flex-grow-1">
@@ -51,6 +91,10 @@
       </tbody>
     </table>
   </div>
+  </div>
+  <div class="d-flex justify-content-center">
+      <?php echo e($data->links()); ?>
+
   </div>
 </div>
 
