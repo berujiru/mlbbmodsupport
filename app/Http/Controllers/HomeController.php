@@ -74,7 +74,8 @@ class HomeController extends Controller
             ->where('users.status',1)
             ->count();
 
-        $today_birthdays = Dbsc::select('modid','firstname','lastname','birthday')
+        $today_birthdays = Dbsc::select('modid','firstname','lastname','birthday','users.avatar as avatar')
+            ->leftJoin('users', 'users.id', '=', 'dbsc.id')
             ->where(DB::raw("DATE_FORMAT(birthday,'%m-%d')"),date("m-d"))
             ->orderByRaw('lastname, firstname')
             ->get();

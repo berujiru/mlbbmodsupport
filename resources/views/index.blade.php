@@ -263,8 +263,8 @@ $num_img = 0;
                                                         <div class="d-flex align-items-center">
                                                             <div
                                                                 class="avatar-sm bg-light rounded p-1 me-2">
-                                                                <img src="{{ URL::asset('images/' . Auth::user()->avatar) }}"
-                                                                    alt="" class="img-fluid d-block" />
+                                                                <img src="{{ URL::asset('images/' . $tb->avatar) }}"
+                                                                    alt="" class="rounded-circle img-thumbnail avatax-xs" />
                                                             </div>
                                                             <div>
                                                                 <h5 class="fs-14 my-1">{{$tb->firstname." ".$tb->lastname}}</h5>

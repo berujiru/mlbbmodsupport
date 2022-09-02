@@ -80,9 +80,15 @@
                     </div>
                 </li> <!-- end Team -->
                 <li class="nav-item">
+                    <a href="<?php echo e(route('birthday-card.index')); ?>" class="nav-link" >
+                    <i class="bx bx-images"></i> <span data-key="t-eval">Birthday Card</a>
+                </li>
+                <li class="nav-item">
                     <a href="<?php echo e(route('modeval')); ?>" class="nav-link" >
                     <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
                 </li>
+                <?php endif; ?>
+                <?php if(Auth::user()->hasRole('NTE monitor')): ?>
                 <li class="nav-item">
                     <a href="<?php echo e(route('ntereply.index')); ?>" class="nav-link" >
                     <i class="bx bx-note"></i> <span data-key="t-eval">NTE  Replies</a>

@@ -9,6 +9,10 @@
 <?php $__env->slot('li_1'); ?> Dashboards <?php $__env->endSlot(); ?>
 <?php $__env->slot('title'); ?> Dashboard <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
+<?php
+$num_ind = 0;
+$num_img = 0;
+?>
 <div class="row">
     <div class="col">
 
@@ -207,34 +211,79 @@
 
                         <div class="card-body">
                             <div class="table-responsive table-card">
-                                <table
-                                    class="table table-hover table-centered align-middle table-nowrap mb-0">
-                                    <tbody>
-                                        <?php $__empty_1 = true; $__currentLoopData = $today_birthdays; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tb): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div
-                                                        class="avatar-sm bg-light rounded p-1 me-2">
-                                                        <img src="<?php echo e(URL::asset('assets/images/companies/img-1.png')); ?>"
-                                                            alt="" class="img-fluid d-block" />
-                                                    </div>
-                                                    <div>
-                                                        <h5 class="fs-14 my-1"><?php echo e($tb->firstname." ".$tb->lastname); ?></h5>
-                                                        <span class="text-muted"><?php echo e($tb->modid); ?></span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 class="fs-14 my-1 fw-normal"><?php echo e(date("F j",strtotime($tb->birthday))); ?></h5>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                                            <tr><td colspan="3" class="text-muted">No birthday celebrant today</td></tr>
+                                <div id="carouselExampleIndicators" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                                    <?php if(count($today_birthdays) > 0 && count($birthday_cards) > 0): ?>
+                                    <div class="carousel-indicators">
+                                        <?php if(count($birthday_cards) > 1): ?>
+                                            <?php $__currentLoopData = $birthday_cards; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tb): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($num_ind == 0): ?>
+                                            <button type="button" class="active" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo e($num_ind); ?>" aria-current="true" aria-label="<?php echo e($tb->mod_id); ?>"></button>
+                                            <?php else: ?>
+                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo e($num_ind); ?>" aria-current="true" aria-label="<?php echo e($tb->mod_id); ?>"></button>
+                                            <?php 
+                                                endif;
+                                                $num_ind++;
+                                            ?>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <?php endif; ?>
-                                    </tbody>
-                                </table>
+                                    </div>
+                                    <div class="carousel-inner" role="listbox" style="width:100%;max-height: 400px !important;">
+                                    <?php
+                                        foreach($birthday_cards as $bpic):    
+                                            if($num_img == 0): ?>
+                                            <div class="carousel-item active" data-interval="2000">
+                                                <img src="<?php echo e(URL::asset('img_birthday/'.$bpic->pic_filename)); ?>" class="d-block w-100 img-fluid mx-auto" alt="<?php echo e($bpic->mod_id); ?>">
+                                            </div>
+                                            <?php else: ?>
+                                            <div class="carousel-item" data-interval="2000">
+                                                <img src="<?php echo e(URL::asset('img_birthday/'.$bpic->pic_filename)); ?>" class="d-block w-100 img-fluid mx-auto" alt="<?php echo e($bpic->mod_id); ?>">
+                                            </div>
+                                            <?php
+                                            endif;
+                                            $num_img++;
+                                            ?>
+                                    <?php endforeach; ?>
+                                    </div>
+                                    <?php if(count($birthday_cards) > 1): ?>
+                                        <button class="carousel-control-prev" type="button" role="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" role="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    <?php endif; ?>
+                                    <?php else: ?>
+                                    <!--  no display -->
+                                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                                        <tbody>
+                                            <?php $__empty_1 = true; $__currentLoopData = $today_birthdays; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tb): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div
+                                                                class="avatar-sm bg-light rounded p-1 me-2">
+                                                                <img src="<?php echo e(URL::asset('images/' . Auth::user()->avatar)); ?>"
+                                                                    alt="" class="img-fluid d-block" />
+                                                            </div>
+                                                            <div>
+                                                                <h5 class="fs-14 my-1"><?php echo e($tb->firstname." ".$tb->lastname); ?></h5>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1 fw-normal"><?php echo e(date("F j",strtotime($tb->birthday))); ?></h5>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                                <tr><td colspan="3" class="text-muted">No birthday celebrant today</td></tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -255,6 +304,7 @@
 <script src="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.js')); ?>"></script>
 <!-- dashboard init -->
 <script src="<?php echo e(URL::asset('/assets/js/pages/dashboard-ecommerce.init.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
