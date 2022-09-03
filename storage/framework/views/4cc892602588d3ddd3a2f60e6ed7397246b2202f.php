@@ -13,7 +13,7 @@
     <div class="row g-4">
         <div class="col-auto">
             <div class="avatar-lg">
-                <img src="<?php if($dbsc->avatar != ''): ?><?php echo e(URL::asset('images/' . $dbsc->avatar )); ?><?php else: ?><?php echo e(URL::asset('assets/images/users/avatar-1.jpg')); ?><?php endif; ?>" alt="user-img"
+                <img src="<?php if($user->avatar != ''): ?><?php echo e(URL::asset('images/' . $user->avatar )); ?><?php else: ?><?php echo e(URL::asset('assets/images/users/avatar-1.jpg')); ?><?php endif; ?>" alt="user-img"
                     class="img-thumbnail rounded-circle" />
             </div>
         </div>
@@ -200,9 +200,66 @@
                         <!--end col-->
                     </div>
                     <!--end row-->
+
+                    <div class="row">
+                        <div class="col-xxl-3">
+                        </div>
+                        <!--end col-->
+                        <div class="col-xxl-9">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Last 10 Weeks Performance</h5>
+                                    <div class="row">
+                                        
+                                        <div class="col-12 col-md-12">
+                                            <div class="message-list-content mx-n4 px-4 message-list-scroll" data-simplebar>
+                                                <ul class="message-list">
+
+                                                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $mail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <li>
+                                                        <div class="col-mail col-mail-1">
+                                                            <div class="form-check checkbox-wrapper-mail fs-14">
+                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheck20">
+                                                                <label class="form-check-label" for="flexCheck20"></label>
+                                                            </div>
+                                                            <button type="button" class="btn avatar-xs p-0 favourite-btn fs-15 active">
+                                                                <i class="ri-star-fill"></i>
+                                                            </button>
+                                                            <a href="#" class="title">MLBB MIL-QA</a>
+                                                        </div>
+                                                        <div class="col-mail col-mail-2">
+                                                            <a href="#" class="subject">
+                                                                <?php if($mail->OVERALLSCORE=="100.00%"): ?>
+                                                                    <span class="bg-success badge me-2">Perfect</span>
+                                                                    Hello - <span class="teaser">Keep up the good work!</span>
+                                                                <?php else: ?>
+                                                                    <span class="bg-warning badge me-2">Infractions</span>
+                                                                    Hello - <span class="teaser">Needs Improvement from the following:</span>
+                                                                <?php endif; ?>
+                                                            
+                                                            
+                                                            </a>
+                                                            <div class="date"><?php echo e($mail->Date); ?></div>
+                                                        </div>
+                                                    </li>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end card-body-->
+                            </div><!-- end card -->
+                        </div>
+                        <!--end col-->
+                    </div>
+
                 </div>
             </div>
-            <!--end tab-content-->
+
         </div>
     </div>
     <!--end col-->

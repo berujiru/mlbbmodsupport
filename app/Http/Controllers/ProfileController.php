@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Dbsc;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Masterfile;
 
 class ProfileController extends Controller
 {
@@ -44,7 +46,13 @@ class ProfileController extends Controller
     public function moderator($moderator_email)
     {
         $dbsc = Dbsc::find($moderator_email);
-        return view('pages-profile-visit',compact('dbsc'));
+        $user = User::select('users.avatar as avatar')->find($moderator_email);
+        $data = false;
+        IF($dbsc){
+            $data = Masterfile::where('MOD_ID',$dbsc->modid)->orderBy('MERGED','DESC')->limit(10)->get();
+        }
+
+        return view('pages-profile-visit',compact('dbsc','user','data'));
     }
 
     /**
@@ -62,7 +70,7 @@ class ProfileController extends Controller
             foreach($users as $user){
                 $list .= '<a href="/profile/'.$user->username.'" class="d-flex dropdown-item notify-item py-2"><img src="'.'images/'.$user->avatar.'" class="me-3 rounded-circle avatar-xs"
                 alt="user-pic"><div class="flex-1">
-                <h6 class="m-0">'.$user->full_name.'</h6><span class="fs-11 mb-0 text-muted">Manager</span></div></a>';
+                <h6 class="m-0">'.$user->full_name.'</h6><span class="fs-11 mb-0 text-muted">Moderator</span></div></a>';
             }
         }else{
             $list .= 'Not Found';

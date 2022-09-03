@@ -13,7 +13,7 @@
     <div class="row g-4">
         <div class="col-auto">
             <div class="avatar-lg">
-                <img src="@if ($dbsc->avatar != ''){{ URL::asset('images/' . $dbsc->avatar ) }}@else{{ URL::asset('assets/images/users/avatar-1.jpg') }}@endif" alt="user-img"
+                <img src="@if ($user->avatar != ''){{ URL::asset('images/' . $user->avatar ) }}@else{{ URL::asset('assets/images/users/avatar-1.jpg') }}@endif" alt="user-img"
                     class="img-thumbnail rounded-circle" />
             </div>
         </div>
@@ -200,9 +200,66 @@
                         <!--end col-->
                     </div>
                     <!--end row-->
+
+                    <div class="row">
+                        <div class="col-xxl-3">
+                        </div>
+                        <!--end col-->
+                        <div class="col-xxl-9">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Last 10 Weeks Performance</h5>
+                                    <div class="row">
+                                        
+                                        <div class="col-12 col-md-12">
+                                            <div class="message-list-content mx-n4 px-4 message-list-scroll" data-simplebar>
+                                                <ul class="message-list">
+
+                                                @foreach ($data as $key => $mail)
+                                                    <li>
+                                                        <div class="col-mail col-mail-1">
+                                                            <div class="form-check checkbox-wrapper-mail fs-14">
+                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheck20">
+                                                                <label class="form-check-label" for="flexCheck20"></label>
+                                                            </div>
+                                                            <button type="button" class="btn avatar-xs p-0 favourite-btn fs-15 active">
+                                                                <i class="ri-star-fill"></i>
+                                                            </button>
+                                                            <a href="#" class="title">MLBB MIL-QA</a>
+                                                        </div>
+                                                        <div class="col-mail col-mail-2">
+                                                            <a href="#" class="subject">
+                                                                @if($mail->OVERALLSCORE=="100.00%")
+                                                                    <span class="bg-success badge me-2">Perfect</span>
+                                                                    Hello - <span class="teaser">Keep up the good work!</span>
+                                                                @else
+                                                                    <span class="bg-warning badge me-2">Infractions</span>
+                                                                    Hello - <span class="teaser">Needs Improvement from the following:</span>
+                                                                @endif
+                                                            
+                                                            
+                                                            </a>
+                                                            <div class="date">{{$mail->Date}}</div>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                                    
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end card-body-->
+                            </div><!-- end card -->
+                        </div>
+                        <!--end col-->
+                    </div>
+
                 </div>
             </div>
-            <!--end tab-content-->
+
         </div>
     </div>
     <!--end col-->
