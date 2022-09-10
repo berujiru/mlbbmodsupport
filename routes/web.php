@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeputyModsController;
 use App\Http\Controllers\InfractionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -61,8 +62,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/team/delete/{id}',[TeamController::class,'destroy'])->name('team.delete');
     Route::get('/team/enable/{id}',[TeamController::class,'activate'])->name('team.enable');
     Route::resource('team-deputy-history', TeamDeputyHistoryController::class);
-    
 
+    //deputy mods
+    Route::resource('deputy-mods', DeputyModsController::class);
+    
     //mailbox
     Route::get('/mailbox',[MailboxController::class,'index'])->name('mailbox');
     Route::get('/mailbox/{id}',[MailboxController::class,'show'])->name('mailboxview');

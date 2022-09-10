@@ -47,4 +47,9 @@ class Team extends Model
     {
         return $this->hasOne(TeamStatus::class, 'team_status_id', 'status_id');
     }
+
+    public function dbscteam()
+    {
+        return $this->hasMany(Dbsc::class, 'team_id', 'team_id');
+    }
 }

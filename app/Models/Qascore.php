@@ -23,4 +23,9 @@ class Qascore extends Model
         'score',
         'details',
     ];
+
+    public function modprofile()
+    {
+        return $this->hasOne(Dbsc::class, 'modid', 'modid');
+    }
 }

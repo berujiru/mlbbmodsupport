@@ -42,4 +42,9 @@ class Dbsc extends Model
     {
         return $this->hasOne(Team::class, 'team_id', 'team_id');
     }
+
+    public function deputyteam()
+    {
+        return $this->hasOne(DeputyTeam::class, 'team_id', 'team_id');
+    }
 }
