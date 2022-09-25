@@ -11,6 +11,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Masterfile;
+use App\Models\Nte;
 
 class ProfileController extends Controller
 {
@@ -50,9 +51,10 @@ class ProfileController extends Controller
         $data = false;
         IF($dbsc){
             $data = Masterfile::where('MOD_ID',$dbsc->modid)->orderBy('MERGED','DESC')->limit(10)->get();
+            $data_nte = Nte::where('MODID',$dbsc->modid)->orderBy('id','DESC')->get();
         }
 
-        return view('pages-profile-visit',compact('dbsc','user','data'));
+        return view('pages-profile-visit',compact('dbsc','user','data','data_nte'));
     }
 
     /**
