@@ -21,6 +21,10 @@ class Qascore extends Model
         'modid',
         'subject',
         'score',
+        'weekending_num',
+        'merged_num',
+        'merged_pos',
+        'score',
         'details',
     ];
 

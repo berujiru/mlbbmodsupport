@@ -13,8 +13,13 @@
     </div>
 </div>
 <br>
-
-<div class="col-xl-4">
+<?php
+// echo "<pre>";
+// print_r($markdown);
+// echo "</pre>";
+?>
+<div class="row">
+    <div class="col-xl-4">
         <div class="sticky-side-div">
             <div class="card">
                 <div class="card-header border-bottom-dashed">
@@ -45,8 +50,39 @@
                                     <td class="text-end"><?php echo e(!empty($score->score) ? number_format($score->score,2).' %' : 'Score not found'); ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Details : </td>
+                                    <td>Date : </td>
                                     <td class="text-end"><?php echo e(!empty($score->details) ? $score->details : ''); ?></td>
+                                </tr>
+                                <?php if(!empty($markdown[0]->Form_Attribute)): ?>
+                                <tr>
+                                    <td>Markdown Details : </td>
+                                    <td class="text-first text-danger"><?php echo e(!empty($markdown[0]->Form_Attribute) ? $markdown[0]->Form_Attribute : ''); ?></td>
+                                </tr>
+                               <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end table-responsive -->
+                </div>
+            </div>
+        </div>
+        <!-- end stickey -->
+
+    </div>
+    <?php if(!empty($score->score) && $score->score < 100): ?>
+    <div class="col-xl-4">
+        <div class="sticky-side-div">
+            <div class="card">
+                <div class="card-header border-bottom-dashed">
+                    <h5 class="card-title mb-0">Reply</h5>
+                </div>
+                <div class="card-body pt-2">
+                    <div class="table-responsive">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>Details :</td>
+                                    <td class="text-end">None</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -58,6 +94,8 @@
         <!-- end stickey -->
 
     </div>
+    <?php endif; ?>
+</div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>

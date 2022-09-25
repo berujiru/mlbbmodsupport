@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dbsc;
+use App\Models\Markdowns;
 use App\Models\Qascore;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,24 @@ class DeputyModsController extends Controller
                     ->where('qascores.modid','=',$search_modid)
                     ->orderby('modid')
                     ->paginate(50);
+            } elseif (empty($search_modid) && !empty($filter_score)) {
+                if($filter_score == 1) {
+                    $data = Qascore::select('qascores.*')
+                        ->join('dbsc', 'dbsc.modid', '=', 'qascores.modid')
+                        ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                        ->where('deputy_team.profile_id',$user)
+                        ->where('score','=',100)
+                        ->orderby('modid')
+                        ->paginate(50);
+                } else {
+                    $data = Qascore::select('qascores.*')
+                        ->join('dbsc', 'dbsc.modid', '=', 'qascores.modid')
+                        ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                        ->where('deputy_team.profile_id',$user)
+                        ->where('score','<',100)
+                        ->orderby('modid')
+                        ->paginate(50);
+                }
             } else {
                 $data = Qascore::select('qascores.*')
                     ->join('dbsc', 'dbsc.modid', '=', 'qascores.modid')
@@ -91,7 +110,13 @@ class DeputyModsController extends Controller
     public function show($id)
     {
         $score = Qascore::find($id);
-        return view('deputy-mods.show',compact('score'));
+        $markdown = Markdowns::select('markdowns.*')
+            ->where('Merged',$score->merged_num)
+            ->where('MOD_ID',$score->modid)
+            ->where('Mergedpos',$score->merged_pos)
+            ->get();
+
+        return view('deputy-mods.show',compact('score','markdown'));
     }
 
     /**
