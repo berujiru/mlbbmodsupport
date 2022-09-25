@@ -89,7 +89,45 @@
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">NTEs Issued</h5>
+                                    <div class="row">
+                                        
+                                        <div class="col-12 col-md-12">
+                                            <div class="message-list-content mx-n4 px-4 message-list-scroll" data-simplebar>
+                                                <ul class="message-list">
 
+                                                <?php $__currentLoopData = $data_nte; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $nte): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <li>
+                                                        <div class="col-mail col-mail-1">
+                                                            <button type="button" class="btn avatar-xs p-0 favourite-btn fs-15 active">
+                                                                <i class="ri-star-fill"></i>
+                                                            </button>
+                                                            <a href="#" class="title"><?php echo e($nte->Attribute); ?></a>
+                                                        </div>
+                                                        <div class="col-mail col-mail-2">
+                                                            <a href="#" class="subject">
+                                                                    <span class="bg-success badge me-2"><?php echo e($nte->RecommendedAction); ?></span>
+                                                                    Hello - <span class="teaser"><?php echo e($nte->Attribute); ?></span>
+
+                                                            
+                                                            
+                                                            </a>
+                                                            <div class="date"><?php echo e($nte->InfractionDate); ?></div>
+                                                        </div>
+                                                    </li>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end card-body-->
+                            </div><!-- end card -->
                         </div>
                         <!--end col-->
                         <div class="col-xxl-9">
@@ -194,18 +232,6 @@
                                 <!--end card-body-->
                             </div><!-- end card -->
 
-
-
-                        </div>
-                        <!--end col-->
-                    </div>
-                    <!--end row-->
-
-                    <div class="row">
-                        <div class="col-xxl-3">
-                        </div>
-                        <!--end col-->
-                        <div class="col-xxl-9">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title mb-3">Last 10 Weeks Performance</h5>
@@ -253,9 +279,11 @@
                                 </div>
                                 <!--end card-body-->
                             </div><!-- end card -->
+
                         </div>
                         <!--end col-->
                     </div>
+                    <!--end row-->
 
                 </div>
             </div>
