@@ -97,10 +97,6 @@
                     <a href="{{ route('modeval') }}" class="nav-link" >
                     <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('ntereply.index') }}" class="nav-link" >
-                    <i class="bx bx-note"></i> <span data-key="t-eval">NTE  Replies</a>
-                </li>
                 @endif
                 @if(Auth::user()->hasRole('NTE monitor'))
                 <li class="nav-item">
