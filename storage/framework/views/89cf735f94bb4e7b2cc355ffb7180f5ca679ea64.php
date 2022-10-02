@@ -69,8 +69,8 @@
         <!-- end stickey -->
 
     </div>
-    <?php if(!empty($score->score) && $score->score < 100): ?>
-    <div class="col-xl-4">
+    <?php //if(!empty($score->score) && $score->score < 100): ?>
+    <!-- <div class="col-xl-4">
         <div class="sticky-side-div">
             <div class="card">
                 <div class="card-header border-bottom-dashed">
@@ -87,14 +87,12 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- end table-responsive -->
                 </div>
             </div>
         </div>
-        <!-- end stickey -->
-
+    -->
     </div>
-    <?php endif; ?>
+    <?php //endif; ?>
 </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>

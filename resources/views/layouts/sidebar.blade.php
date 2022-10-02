@@ -84,6 +84,11 @@
                         <i class="bx bxs-user-account"></i> <span >Mod Scores</span>
                     </a>
                 </li> <!-- end Deputy Mods -->
+                <li class="nav-item"> <!-- start Deputy Mods NTE -->
+                    <a class="nav-link" aria-expanded="false" href="{{ route('deputy-mods-nte.index') }}">
+                        <i class="bx bxs-user-account"></i> <span >Mod NTEs</span>
+                    </a>
+                </li> <!-- end Deputy Mods NTE -->
                 <li class="nav-item">
                     <a href="{{ route('birthday-card.index') }}" class="nav-link" >
                     <i class="bx bx-images"></i> <span data-key="t-eval">Birthday Card</a>
@@ -91,6 +96,10 @@
                 <li class="nav-item">
                     <a href="{{ route('modeval') }}" class="nav-link" >
                     <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('ntereply.index') }}" class="nav-link" >
+                    <i class="bx bx-note"></i> <span data-key="t-eval">NTE  Replies</a>
                 </li>
                 @endif
                 @if(Auth::user()->hasRole('NTE monitor'))
