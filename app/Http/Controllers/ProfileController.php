@@ -12,6 +12,7 @@ use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Masterfile;
 use App\Models\Nte;
+use App\Models\Ticket;
 
 class ProfileController extends Controller
 {
@@ -49,6 +50,7 @@ class ProfileController extends Controller
         $dbsc = Dbsc::find($moderator_email);
         $user = User::select('users.avatar as avatar')->find($moderator_email);
         $data = false;
+        $data_nte = "";
         IF($dbsc){
             $data = Masterfile::where('MOD_ID',$dbsc->modid)->orderBy('MERGED','DESC')->limit(10)->get();
             $data_nte = Nte::where('MODID',$dbsc->modid)->orderBy('id','DESC')->get();
@@ -70,7 +72,7 @@ class ProfileController extends Controller
 
         if($users){
             foreach($users as $user){
-                $list .= '<a href="/profile/'.$user->username.'" class="d-flex dropdown-item notify-item py-2"><img src="'.'images/'.$user->avatar.'" class="me-3 rounded-circle avatar-xs"
+                $list .= '<a href="/profile/'.$user->username.'" class="d-flex dropdown-item notify-item py-2"><img src="'.'images/'.$user?->avatar.'" class="me-3 rounded-circle avatar-xs"
                 alt="user-pic"><div class="flex-1">
                 <h6 class="m-0">'.$user->full_name.'</h6><span class="fs-11 mb-0 text-muted">Moderator</span></div></a>';
             }
@@ -79,6 +81,23 @@ class ProfileController extends Controller
         }
         
         return($list);
+    }
+
+    /**
+     * received a ticket of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ticket(Request $request)
+    {
+
+        $ticket = new Ticket();
+        $ticket->details = $request->matchvalue;
+        if($ticket->save()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

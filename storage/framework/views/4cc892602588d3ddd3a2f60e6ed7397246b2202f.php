@@ -13,7 +13,7 @@
     <div class="row g-4">
         <div class="col-auto">
             <div class="avatar-lg">
-                <img src="<?php if($user->avatar != ''): ?><?php echo e(URL::asset('images/' . $user->avatar )); ?><?php else: ?><?php echo e(URL::asset('assets/images/users/avatar-1.jpg')); ?><?php endif; ?>" alt="user-img"
+                <img src="<?php if($user?->avatar != ''): ?><?php echo e(URL::asset('images/' . $user->avatar )); ?><?php else: ?><?php echo e(URL::asset('assets/images/users/avatar-1.jpg')); ?><?php endif; ?>" alt="user-img"
                     class="img-thumbnail rounded-circle" />
             </div>
         </div>
@@ -63,6 +63,12 @@
                                     <div class="table-responsive">
                                         <table class="table table-borderless mb-0">
                                             <tbody>
+                                                <tr>
+                                                    <th class="ps-0" scope="row"> Mod ID :</th>
+                                                    <td class="text-muted"><b> <?php if($dbsc): ?><?php echo e($dbsc->modid); ?><?php else: ?><?php echo e("None"); ?><?php endif; ?> </b> <br/>
+                                                    <i>Mod ID not accurate?</i> <button type="button" class="btn btn-danger btn-sm" id="ajax-alert">Request Support</button>
+                                                </td>
+                                                </tr>
                                                 <tr>
                                                     <th class="ps-0" scope="row">Full Name :</th>
                                                     <td class="text-muted"><?php if($dbsc): ?><?php echo e($dbsc->firstname." ".$dbsc->middlename.". ".$dbsc->lastname); ?><?php else: ?><?php echo e("None"); ?><?php endif; ?></td>
@@ -297,6 +303,8 @@
 <?php $__env->startSection('script'); ?>
     <script src="<?php echo e(URL::asset('/assets/libs/swiper/swiper.min.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('/assets/js/pages/profile.init.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('/assets/js/pages/sweetalerts.init.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
