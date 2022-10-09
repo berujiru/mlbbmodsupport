@@ -149,7 +149,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="col-xl-2">
                                     <div class="mb-3 mb-xl-0">
                                         <label for="modidinput" class="form-label">MOD ID</label>
-                                        <?php echo Form::text('modid', null, array('placeholder' => 'Enter your Mod ID','class' => 'form-control')); ?>
+                                        <?php echo Form::text('modid', null, array('placeholder' => 'Enter your Mod ID','class' => 'form-control', $dbsc?'readonly':'' )); ?>
 
                                         <?php $__errorArgs = ['modid'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

@@ -84,6 +84,11 @@
                         <i class="bx bxs-user-account"></i> <span >Mod Scores</span>
                     </a>
                 </li> <!-- end Deputy Mods -->
+                <li class="nav-item"> <!-- start Deputy Mods NTE -->
+                    <a class="nav-link" aria-expanded="false" href="<?php echo e(route('deputy-mods-nte.index')); ?>">
+                        <i class="bx bxs-user-account"></i> <span >Mod NTEs</span>
+                    </a>
+                </li> <!-- end Deputy Mods NTE -->
                 <li class="nav-item">
                     <a href="<?php echo e(route('birthday-card.index')); ?>" class="nav-link" >
                     <i class="bx bx-images"></i> <span data-key="t-eval">Birthday Card</a>

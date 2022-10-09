@@ -13,7 +13,7 @@
     <div class="row g-4">
         <div class="col-auto">
             <div class="avatar-lg">
-                <img src="@if ($user->avatar != ''){{ URL::asset('images/' . $user->avatar ) }}@else{{ URL::asset('assets/images/users/avatar-1.jpg') }}@endif" alt="user-img"
+                <img src="@if ($user?->avatar != ''){{ URL::asset('images/' . $user->avatar ) }}@else{{ URL::asset('assets/images/users/avatar-1.jpg') }}@endif" alt="user-img"
                     class="img-thumbnail rounded-circle" />
             </div>
         </div>
@@ -63,6 +63,12 @@
                                     <div class="table-responsive">
                                         <table class="table table-borderless mb-0">
                                             <tbody>
+                                                <tr>
+                                                    <th class="ps-0" scope="row"> Mod ID :</th>
+                                                    <td class="text-muted"><b> @if ($dbsc){{ $dbsc->modid }}@else{{ "None" }}@endif </b> <br/>
+                                                    <i>Mod ID not accurate?</i> <button type="button" class="btn btn-danger btn-sm" id="ajax-alert">Request Support</button>
+                                                </td>
+                                                </tr>
                                                 <tr>
                                                     <th class="ps-0" scope="row">Full Name :</th>
                                                     <td class="text-muted">@if ($dbsc){{ $dbsc->firstname." ".$dbsc->middlename.". ".$dbsc->lastname }}@else{{ "None" }}@endif</td>
@@ -297,5 +303,7 @@
 @section('script')
     <script src="{{ URL::asset('/assets/libs/swiper/swiper.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/pages/profile.init.js') }}"></script>
+    <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/js/pages/sweetalerts.init.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection

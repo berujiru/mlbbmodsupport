@@ -124,7 +124,7 @@
                                 <div class="col-xl-2">
                                     <div class="mb-3 mb-xl-0">
                                         <label for="modidinput" class="form-label">MOD ID</label>
-                                        {!! Form::text('modid', null, array('placeholder' => 'Enter your Mod ID','class' => 'form-control')) !!}
+                                        {!! Form::text('modid', null, array('placeholder' => 'Enter your Mod ID','class' => 'form-control', $dbsc?'readonly':'' )) !!}
                                         @error('modid')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

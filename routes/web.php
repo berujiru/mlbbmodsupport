@@ -45,6 +45,9 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::post('/search-profile', [ProfileController::class, 'search'])->name('searchProfile');
     Route::post('/search-profile',[ProfileController::class, 'search']);
     Route::get('/search-profile',[ProfileController::class, 'search']);
+    //ticket support on profile change mod id
+    // Route::post('/ticket-profile',[ProfileController::class, 'ticket']);
+    Route::post('/ticket-profile',[ProfileController::class, 'ticket']);
     //user edit login credential
     Route::get('changeprofile', ['as' => 'profileedit', 'uses' => 'App\Http\Controllers\ProfileController@loginedit']);
     Route::put('settingprofile', ['as' => 'profileupdate', 'uses' => 'App\Http\Controllers\ProfileController@loginupdate']);
@@ -109,5 +112,5 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('roo
 // Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
 //Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
 
-//Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+// Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
