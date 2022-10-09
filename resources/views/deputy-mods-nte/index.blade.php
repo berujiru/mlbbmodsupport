@@ -9,6 +9,7 @@
 <?php
   $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
   $filtered_seen = isset($_GET['filter_seen']) ? $_GET['filter_seen'] : '';
+  $nte_code = isset($_GET['k_nte_code']) ? $_GET['k_nte_code'] : '';
 ?>
 
 <div class="row">
@@ -22,7 +23,7 @@
   <div class="col-lg-12">
   {!! Form::open(array('route' => 'deputy-mods-nte.index','method'=>'GET')) !!}
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Moderator</label>
           <select class="form-control" name="mod_id" data-choices
@@ -38,7 +39,7 @@
           @enderror
       </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Already Seen</label>
           <select class="form-control" name="filter_seen" data-choices
@@ -50,7 +51,13 @@
           </select>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:9px;">
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="k_nte_code" class="form-label">NTE Code</label>
+          <input type="text" name="k_nte_code" value="{{$nte_code}}" autocomplete="off" autocapitalize="true" class="form-control" placeholder="Search NTE Code ... " />
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:9px;">
         <div class="mb-3">
             <br>
             <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>

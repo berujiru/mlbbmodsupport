@@ -19,57 +19,87 @@ class DeputyModsNteController extends Controller
         $user = (int) auth()->user()->id; //if deputy user
         //$user = 4; //if deputy user
 
-        if(isset($_GET['mod_id']) && isset($_GET['filter_seen'])) {
+        if(isset($_GET['mod_id']) && isset($_GET['filter_seen']) && isset($_GET['k_nte_code'])) {
             $search_modid = $request->input('mod_id');
-            $seen = $request->input('filter_seen');
-            if($search_modid > 0 && !empty($seen) && $seen == 1) {
+            $seen = trim($request->input('filter_seen'));
+            $nte_code = $request->input('k_nte_code');
+
+            if (!empty($nte_code)) {
                 $data = Nte::select('nte.*')
-                    //->join('ntereply', 'ntereply.id', '=', 'nte.id')
-                    ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
-                    ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
-                    ->where('deputy_team.profile_id',$user)
-                    ->where('nte.is_seen','=',1)
-                    ->where('nte.MODID','=',$search_modid)
-                    ->orderby('nte.MODID')
-                    ->paginate(50);
-            } elseif ($search_modid > 0 && !empty($seen) && $seen == 0) {
-                $data = Nte::select('nte.*')
-                    //->join('ntereply', 'ntereply.id', '=', 'nte.id')
-                    ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
-                    ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
-                    ->where('deputy_team.profile_id',$user)
-                    ->where('nte.is_seen','=',0)
-                    ->where('nte.MODID','=',$search_modid)
-                    ->orderby('nte.MODID')
-                    ->paginate(50);
-            } elseif (empty($search_modid) && !empty($seen)) {
-                if($seen == 1) {
+                ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
+                ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                ->where('deputy_team.profile_id',$user)
+                ->where('nte.UniqueID','LIKE',"%{$nte_code}%")
+                ->orderby('nte.MODID')
+                ->paginate(50);
+            } else {
+                if($search_modid > 0 && $seen == 1) {
                     $data = Nte::select('nte.*')
                         //->join('ntereply', 'ntereply.id', '=', 'nte.id')
                         ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                         ->where('deputy_team.profile_id',$user)
                         ->where('nte.is_seen','=',1)
+                        ->where('nte.MODID','=',$search_modid)
                         ->orderby('nte.MODID')
                         ->paginate(50);
-                } else {
+                } elseif ($search_modid > 0 && $seen == 0) {
                     $data = Nte::select('nte.*')
                         //->join('ntereply', 'ntereply.id', '=', 'nte.id')
                         ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                         ->where('deputy_team.profile_id',$user)
                         ->where('nte.is_seen','=',0)
+                        ->where('nte.MODID','=',$search_modid)
                         ->orderby('nte.MODID')
                         ->paginate(50);
-                }
-            } else {
-                $data = Nte::select('nte.*')
-                    //->join('ntereply', 'ntereply.id', '=', 'nte.id')
-                    ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
-                    ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
-                    ->where('deputy_team.profile_id',$user)
-                    ->orderby('nte.MODID')
-                    ->paginate(50);
+                } elseif ($search_modid > 0 && $seen == '') {
+                    $data = Nte::select('nte.*')
+                        //->join('ntereply', 'ntereply.id', '=', 'nte.id')
+                        ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
+                        ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                        ->where('deputy_team.profile_id',$user)
+                        ->where('nte.MODID','=',$search_modid)
+                        ->orderby('nte.MODID')
+                        ->paginate(50);
+                } elseif (empty($search_modid) && $seen >= 0) {
+                    $is_seen = (int) $seen;
+                    if($is_seen == 1) {
+                        $data = Nte::select('nte.*')
+                            //->join('ntereply', 'ntereply.id', '=', 'nte.id')
+                            ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
+                            ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                            ->where('deputy_team.profile_id',$user)
+                            ->where('nte.is_seen','=',1)
+                            ->orderby('nte.MODID')
+                            ->paginate(50);
+                    } else {
+                        $data = Nte::select('nte.*')
+                            //->join('ntereply', 'ntereply.id', '=', 'nte.id')
+                            ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
+                            ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                            ->where('deputy_team.profile_id',$user)
+                            ->where('nte.is_seen','=',0)
+                            ->orderby('nte.MODID')
+                            ->paginate(50);
+                    }
+                } /*elseif (!empty($nte_code)) {
+                    $data = Nte::select('nte.*')
+                        ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
+                        ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                        ->where('deputy_team.profile_id',$user)
+                        ->where('nte.UniqueID','LIKE',"%{$nte_code}%")
+                        ->orderby('nte.MODID')
+                        ->paginate(50);
+                }*/ else {
+                    $data = Nte::select('nte.*')
+                        //->join('ntereply', 'ntereply.id', '=', 'nte.id')
+                        ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
+                        ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                        ->where('deputy_team.profile_id',$user)
+                        ->orderby('nte.MODID')
+                        ->paginate(50);
+                }   
             }
         } else {
             $data = Nte::select('nte.*')

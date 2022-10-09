@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Nte;
 use App\Models\Ntereply;
 use App\Models\Dbsc;
+use App\Models\Nteseen;
 
 class NteController extends Controller
 {
@@ -34,9 +35,19 @@ class NteController extends Controller
      */
     public function show($id)
     {
-        
         $dbsc = Dbsc::find(auth()->user()->id);
         $mail =  Nte::where('id',$id)->first();
+
+        $nte_seen = new Nteseen();
+        $nte_seen->id_nte = $id;
+        $nte_seen->mod_id = $dbsc->modid;
+        $nte_seen->nte_code = $mail->UniqueID;
+        $nte_seen->is_seen = 1; //default seen
+        $nte_seen->date_seen = date("Y-m-d H:i:s");
+        $nte_seen->seen_by = auth()->user()->id;
+        $nte_seen->created_at = date("Y-m-d H:i:s");
+        $nte_seen->save();
+
         //check if the mod id matches
         if($mail['MODID']==$dbsc->modid){
             $mailreply = Ntereply::where('ntecode',$mail->UniqueID)->get();
