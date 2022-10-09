@@ -90,6 +90,7 @@ unset($__errorArgs, $__bag); ?>
       </thead>
       <tbody>
         <?php $__empty_1 = true; $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $nte): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+        <?php print_r($nte->profile->deputyteam); exit; ?>
           <tr>
               <td style="width:5%;"><?php echo e(++$i); ?></td>
               <td style="width:20%;"><?php echo e(!empty($nte->profile->deputyteam) ? $nte->profile->deputyteam->profile->firstname." ".$nte->profile->deputyteam->profile->lastname : 'No deputy profile'); ?></td>
@@ -97,7 +98,7 @@ unset($__errorArgs, $__bag); ?>
               <td style="width:20%;"><?php echo e(!empty($nte->Moderator) ? $nte->Moderator : 'Name not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($nte->UniqueID) ? $nte->UniqueID : 'Code not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($nte->InfractionDate) ? $nte->InfractionDate : 'Data not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($nte->is_seen == 1) ? 'Yes' : 'No'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($nte->nteseen) ? 'Yes' : 'No'); ?></td>
               <td style="width:5%;">
                 <a class="btn btn-sm btn-info" href="<?php echo e(route('deputy-mods-nte.show',$nte->id)); ?>" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
               </td>

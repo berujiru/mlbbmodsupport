@@ -26,4 +26,9 @@ class Nte extends Model
         return $this->hasOne(Ntereply::class, 'id', 'id');
     }
 
+    public function netseen()
+    {
+        return $this->hasOne(Nteseen::class, 'id_nte', 'id');
+    }
+
 }

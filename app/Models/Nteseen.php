@@ -10,6 +10,7 @@ class Nteseen extends Model
     use HasFactory;
 
     protected $table = 'nte_seen';
+    protected $primaryKey = 'nte_seen_id';
 
     protected $fillable = [
         'nte_seen_id',
@@ -22,4 +23,9 @@ class Nteseen extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function nte()
+    {
+        return $this->hasOne(Nte::class, 'id', 'id_nte');
+    }
 }

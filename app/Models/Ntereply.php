@@ -15,6 +15,7 @@ class Ntereply extends Model
      * @var string
      */
     protected $table = 'ntereply';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
