@@ -38,6 +38,11 @@ class NteController extends Controller
         $dbsc = Dbsc::find(auth()->user()->id);
         $mail =  Nte::where('id',$id)->first();
 
+        $nte_up = Nte::find($id);
+        $nte_up->is_seen = 1;
+        $nte_up->date_seen = date("Y-m-d H:i:s");
+        $nte_up->save();
+
         $nte_seen = new Nteseen();
         $nte_seen->id_nte = $id;
         $nte_seen->mod_id = $dbsc->modid;
