@@ -79,8 +79,8 @@
                                     <td class="text-end" style="text-align: justify;"><?php echo e(!empty($nte->SD) ? $nte->SD : ''); ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Seen : </td>
-                                    <td class="text-end" style="text-align: justify;"><?php echo e(!empty($nte->is_seen == 1) ? date("m/d/Y h:i:s A",strtotime($nte->date_seen)) : 'Not yet viewed'); ?></td>
+                                    <td>Date &amp; Time Seen : </td>
+                                    <td class="text-end" style="text-align: justify;"><?php echo e(!empty($nte->nteseen) ? date('m/d/Y h:i:s A',strtotime($nte->nteseen->date_seen)) : 'Not yet viewed'); ?></td>
                                 </tr>
                             </tbody>
                         </table>

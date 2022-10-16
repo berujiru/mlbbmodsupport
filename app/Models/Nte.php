@@ -15,6 +15,7 @@ class Nte extends Model
      * @var string
      */
     protected $table = 'nte';
+    protected $primaryKey = 'id';
 
     public function profile()
     {
@@ -26,7 +27,7 @@ class Nte extends Model
         return $this->hasOne(Ntereply::class, 'id', 'id');
     }
 
-    public function netseen()
+    public function nteseen()
     {
         return $this->hasOne(Nteseen::class, 'id_nte', 'id');
     }

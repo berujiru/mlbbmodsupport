@@ -38,8 +38,9 @@ class DeputyModsNteController extends Controller
                         //->join('ntereply', 'ntereply.id', '=', 'nte.id')
                         ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                        ->join('nte_seen', 'nte_seen.id_nte', '=', 'nte.id')
                         ->where('deputy_team.profile_id',$user)
-                        ->where('nte.is_seen','=',1)
+                        ->where('nte_seen.is_seen','=',1)
                         ->where('nte.MODID','=',$search_modid)
                         ->orderby('nte.MODID')
                         ->paginate(50);
@@ -48,8 +49,9 @@ class DeputyModsNteController extends Controller
                         //->join('ntereply', 'ntereply.id', '=', 'nte.id')
                         ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                        ->leftJoin('nte_seen', 'nte_seen.id_nte', '=', 'nte.id')
                         ->where('deputy_team.profile_id',$user)
-                        ->where('nte.is_seen','=',0)
+                        ->where('nte_seen.is_seen','=',NULL)
                         ->where('nte.MODID','=',$search_modid)
                         ->orderby('nte.MODID')
                         ->paginate(50);
@@ -69,8 +71,9 @@ class DeputyModsNteController extends Controller
                             //->join('ntereply', 'ntereply.id', '=', 'nte.id')
                             ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
                             ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                            ->join('nte_seen', 'nte_seen.id_nte', '=', 'nte.id')
                             ->where('deputy_team.profile_id',$user)
-                            ->where('nte.is_seen','=',1)
+                            ->where('nte_seen.is_seen','=',1)
                             ->orderby('nte.MODID')
                             ->paginate(50);
                     } else {
@@ -78,8 +81,9 @@ class DeputyModsNteController extends Controller
                             //->join('ntereply', 'ntereply.id', '=', 'nte.id')
                             ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
                             ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                            ->leftJoin('nte_seen', 'nte_seen.id_nte', '=', 'nte.id')
                             ->where('deputy_team.profile_id',$user)
-                            ->where('nte.is_seen','=',0)
+                            ->where('nte_seen.is_seen','=',NULL)
                             ->orderby('nte.MODID')
                             ->paginate(50);
                     }

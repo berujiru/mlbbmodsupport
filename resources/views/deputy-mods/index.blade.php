@@ -14,7 +14,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Moderators under this Deputy</h2>
+            <h2>List of Moderators Score</h2>
         </div>
     </div>
 </div>

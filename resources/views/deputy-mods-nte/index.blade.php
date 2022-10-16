@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>NTE of Moderators under this Deputy</h2>
+            <h2>List of Moderators with NTE</h2>
         </div>
     </div>
 </div>
@@ -76,6 +76,7 @@
               <th scope="col">NTE Code</th>
               <th scope="col">Infraction Date</th>
               <th scope="col">Seen</th>
+              <th scope="col">Date Seen</th>
               <th scope="col">Action</th>
           </tr>
       </thead>
@@ -88,7 +89,8 @@
               <td style="width:20%;">{{ !empty($nte->Moderator) ? $nte->Moderator : 'Name not found' }}</td>
               <td style="width:20%;">{{ !empty($nte->UniqueID) ? $nte->UniqueID : 'Code not found' }}</td>
               <td style="width:20%;">{{ !empty($nte->InfractionDate) ? $nte->InfractionDate : 'Data not found' }}</td>
-              <td style="width:20%;">{{ !empty($nte->is_seen == 1) ? 'Yes' : 'No' }}</td>
+              <td style="width:20%;">{{ !empty($nte->nteseen) ? 'Yes' : 'No' }}</td>
+              <td style="width:20%;font-size:12px;">{{ !empty($nte->nteseen) ? date('m/d/Y h:i A',strtotime($nte->nteseen->date_seen)) : '-' }}</td>
               <td style="width:5%;">
                 <a class="btn btn-sm btn-info" href="{{route('deputy-mods-nte.show',$nte->id)}}" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
               </td>
