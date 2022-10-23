@@ -79,7 +79,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Team -->
-                <?php //create role/permision for managing mods ?>
+                @if(Auth::user()->hasRole('Deputy'))
                 <li class="nav-item"> <!-- start Deputy Mods -->
                     <a class="nav-link menu-link" href="#sidebarDeputyMods" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarDeputyMods">
@@ -100,6 +100,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Deputy Mods -->
+                @endif
                 <li class="nav-item">
                     <a href="{{ route('birthday-card.index') }}" class="nav-link" >
                     <i class="bx bx-images"></i> <span data-key="t-eval">Birthday Card</a>

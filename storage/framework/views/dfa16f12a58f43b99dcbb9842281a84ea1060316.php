@@ -9,12 +9,13 @@
 <?php
   $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
   $filtered_seen = isset($_GET['filter_seen']) ? $_GET['filter_seen'] : '';
+  $nte_code = isset($_GET['k_nte_code']) ? $_GET['k_nte_code'] : '';
 ?>
 
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>NTE of Moderators under this Deputy</h2>
+            <h2>List of Moderators with NTE</h2>
         </div>
     </div>
 </div>
@@ -23,7 +24,7 @@
   <?php echo Form::open(array('route' => 'deputy-mods-nte.index','method'=>'GET')); ?>
 
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Moderator</label>
           <select class="form-control" name="mod_id" data-choices
@@ -46,7 +47,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Already Seen</label>
           <select class="form-control" name="filter_seen" data-choices
@@ -58,7 +59,13 @@ unset($__errorArgs, $__bag); ?>
           </select>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:9px;">
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="k_nte_code" class="form-label">NTE Code</label>
+          <input type="text" name="k_nte_code" value="<?php echo e($nte_code); ?>" autocomplete="off" autocapitalize="true" class="form-control" placeholder="Search NTE Code ... " />
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:9px;">
         <div class="mb-3">
             <br>
             <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
@@ -78,6 +85,7 @@ unset($__errorArgs, $__bag); ?>
               <th scope="col">NTE Code</th>
               <th scope="col">Infraction Date</th>
               <th scope="col">Seen</th>
+              <th scope="col">Date Seen</th>
               <th scope="col">Action</th>
           </tr>
       </thead>
@@ -90,7 +98,8 @@ unset($__errorArgs, $__bag); ?>
               <td style="width:20%;"><?php echo e(!empty($nte->Moderator) ? $nte->Moderator : 'Name not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($nte->UniqueID) ? $nte->UniqueID : 'Code not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($nte->InfractionDate) ? $nte->InfractionDate : 'Data not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($nte->is_seen == 1) ? 'Yes' : 'No'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($nte->nteseen) ? 'Yes' : 'No'); ?></td>
+              <td style="width:20%;font-size:12px;"><?php echo e(!empty($nte->nteseen) ? date('m/d/Y h:i A',strtotime($nte->nteseen->date_seen)) : '-'); ?></td>
               <td style="width:5%;">
                 <a class="btn btn-sm btn-info" href="<?php echo e(route('deputy-mods-nte.show',$nte->id)); ?>" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
               </td>

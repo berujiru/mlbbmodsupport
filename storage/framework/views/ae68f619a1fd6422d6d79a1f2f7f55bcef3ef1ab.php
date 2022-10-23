@@ -79,16 +79,28 @@
                         </ul>
                     </div>
                 </li> <!-- end Team -->
+                <?php if(Auth::user()->hasRole('Deputy')): ?>
                 <li class="nav-item"> <!-- start Deputy Mods -->
-                    <a class="nav-link" aria-expanded="false" href="<?php echo e(route('deputy-mods.index')); ?>">
-                        <i class="bx bxs-user-account"></i> <span >Mod Scores</span>
+                    <a class="nav-link menu-link" href="#sidebarDeputyMods" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarDeputyMods">
+                        <i class="bx bxs-user-account"></i> <span >Deputy Management</span>
                     </a>
+                    <div class="collapse menu-dropdown" id="sidebarDeputyMods">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item"> <!-- start Deputy Mods Score -->
+                                <a class="nav-link" aria-expanded="false" href="<?php echo e(route('deputy-mods.index')); ?>">
+                                    <!-- <i class="bx bxs-user-account"></i> --> <span>Moderator's Score</span>
+                                </a>
+                            </li> <!-- end Deputy Mods Score -->
+                            <li class="nav-item"> <!-- start Deputy Mods NTE -->
+                                <a class="nav-link" aria-expanded="false" href="<?php echo e(route('deputy-mods-nte.index')); ?>">
+                                    <!-- <i class="bx bxs-user-account"></i> --> <span >Moderator's NTE</span>
+                                </a>
+                            </li> <!-- end Deputy Mods NTE -->
+                        </ul>
+                    </div>
                 </li> <!-- end Deputy Mods -->
-                <li class="nav-item"> <!-- start Deputy Mods NTE -->
-                    <a class="nav-link" aria-expanded="false" href="<?php echo e(route('deputy-mods-nte.index')); ?>">
-                        <i class="bx bxs-user-account"></i> <span >Mod NTEs</span>
-                    </a>
-                </li> <!-- end Deputy Mods NTE -->
+                <?php endif; ?>
                 <li class="nav-item">
                     <a href="<?php echo e(route('birthday-card.index')); ?>" class="nav-link" >
                     <i class="bx bx-images"></i> <span data-key="t-eval">Birthday Card</a>
