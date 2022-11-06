@@ -120,6 +120,10 @@
                     <a href="<?php echo e(route('mailbox')); ?>" class="nav-link" >
                     <i class="ri-mail-line"></i> <span data-key="t-landing"><?php echo app('translator')->get('translation.mailbox'); ?></a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?php echo e(route('mytickets')); ?>" class="nav-link" >
+                    <i class="ri-ticket-line"></i> <span data-key="t-landing">My Tickets</a>
+                </li>
 
             </ul>
         </div>

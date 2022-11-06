@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth']], function() {
     //ticket support on profile change mod id
     // Route::post('/ticket-profile',[ProfileController::class, 'ticket']);
     Route::post('/ticket',[ProfileController::class, 'ticket']);
-    Route::get('/ticketlist',[TicketsupportController::class, 'index']);
+    Route::get('/ticketlist',[TicketsupportController::class, 'index'])->name('mytickets');
     //user edit login credential
     Route::get('changeprofile', ['as' => 'profileedit', 'uses' => 'App\Http\Controllers\ProfileController@loginedit']);
     Route::put('settingprofile', ['as' => 'profileupdate', 'uses' => 'App\Http\Controllers\ProfileController@loginupdate']);
