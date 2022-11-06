@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dbsc;
 use App\Models\Markdowns;
+use App\Models\Masterfile;
 use App\Models\Qascore;
 use Illuminate\Http\Request;
 
@@ -23,52 +24,60 @@ class DeputyModsController extends Controller
             $search_modid = $request->input('mod_id');
             $filter_score = $request->input('filter_score');
             if($search_modid > 0 && !empty($filter_score) && $filter_score == 1) {
-                $data = Qascore::select('qascores.*')
-                    ->join('dbsc', 'dbsc.modid', '=', 'qascores.modid')
+                $data = Masterfile::select('masterfile.*')
+                    ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
                     ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                     ->where('deputy_team.profile_id',$user)
-                    ->where('score','=',100)
-                    ->where('qascores.modid','=',$search_modid)
+                    ->where('OVERALLSCORE','LIKE','100%')
+                    ->where('masterfile.MOD_ID','=',$search_modid)
                     ->orderby('modid')
                     ->paginate(50);
             } elseif ($search_modid > 0 && !empty($filter_score) && $filter_score == 2) {
-                $data = Qascore::select('qascores.*')
-                    ->join('dbsc', 'dbsc.modid', '=', 'qascores.modid')
+                $data = Masterfile::select('masterfile.*')
+                    ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
                     ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                     ->where('deputy_team.profile_id',$user)
-                    ->where('score','<',100)
-                    ->where('qascores.modid','=',$search_modid)
+                    ->where('OVERALLSCORE','NOT LIKE','100%')
+                    ->where('masterfile.MOD_ID','=',$search_modid)
                     ->orderby('modid')
                     ->paginate(50);
             } elseif (empty($search_modid) && !empty($filter_score)) {
                 if($filter_score == 1) {
-                    $data = Qascore::select('qascores.*')
-                        ->join('dbsc', 'dbsc.modid', '=', 'qascores.modid')
+                    $data = Masterfile::select('masterfile.*')
+                        ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                         ->where('deputy_team.profile_id',$user)
-                        ->where('score','=',100)
+                        ->where('OVERALLSCORE','LIKE','100%')
                         ->orderby('modid')
                         ->paginate(50);
                 } else {
-                    $data = Qascore::select('qascores.*')
-                        ->join('dbsc', 'dbsc.modid', '=', 'qascores.modid')
+                    $data = Masterfile::select('masterfile.*')
+                        ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                         ->where('deputy_team.profile_id',$user)
-                        ->where('score','<',100)
+                        ->where('OVERALLSCORE','NOT LIKE','100%')
                         ->orderby('modid')
                         ->paginate(50);
                 }
+            } elseif ($search_modid > 0 && empty($filter_score)) {
+                $data = Masterfile::select('masterfile.*')
+                    ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
+                    ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
+                    ->where('deputy_team.profile_id',$user)
+                    ->where('masterfile.MOD_ID','=',$search_modid)
+                    ->orderby('modid')
+                    ->paginate(50);
             } else {
-                $data = Qascore::select('qascores.*')
-                    ->join('dbsc', 'dbsc.modid', '=', 'qascores.modid')
+                $data =  Masterfile::select('masterfile.*')
+                    ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
                     ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                     ->where('deputy_team.profile_id',$user)
                     ->orderby('modid')
                     ->paginate(50);
             }
         } else {
-            $data = Qascore::select('qascores.*')
-                ->join('dbsc', 'dbsc.modid', '=', 'qascores.modid')
+            $data = Masterfile::select('masterfile.*')
+                ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
                 ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                 ->where('deputy_team.profile_id',$user)
                 ->orderby('modid')
@@ -109,11 +118,10 @@ class DeputyModsController extends Controller
      */
     public function show($id)
     {
-        $score = Qascore::find($id);
+        $score = Masterfile::find($id);
         $markdown = Markdowns::select('markdowns.*')
-            ->where('Merged',$score->merged_num)
-            ->where('MOD_ID',$score->modid)
-            ->where('Mergedpos',$score->merged_pos)
+            ->where('markdowns.Merged',$id)
+            ->where('MOD_ID',$score->MOD_ID)
             ->get();
 
         return view('deputy-mods.show',compact('score','markdown'));

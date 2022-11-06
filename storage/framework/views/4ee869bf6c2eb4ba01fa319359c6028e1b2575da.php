@@ -87,12 +87,12 @@ unset($__errorArgs, $__bag); ?>
               <td style="width:5%;"><?php echo e(++$i); ?></td>
               <!-- <td style="width:20%;"><?php echo e(!empty($score->modprofile->deputyteam->team) ? $score->modprofile->deputyteam->team->team_name : 'Team not found'); ?></td> -->
               <td style="width:20%;"><?php echo e(!empty($score->modprofile->deputyteam) ? $score->modprofile->deputyteam->profile->firstname." ".$score->modprofile->deputyteam->profile->lastname : 'No deputy profile'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->modid) ? $score->modid : 'Mod ID not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->moderator) ? $score->moderator : 'Name not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->score) ? number_format($score->score,2).' %' : 'Score not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->details) ? $score->details : ''); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->Moderator) ? $score->Moderator : 'Name not found'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->OVERALLSCORE) ? $score->OVERALLSCORE : 'Score not found'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->Date) ? date("m/d/Y",strtotime($score->Date)) : ''); ?></td>
               <td style="width:5%;">
-                <a class="btn btn-sm btn-info" href="<?php echo e(route('deputy-mods.show',$score->id)); ?>" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
+                <a class="btn btn-sm btn-info" href="<?php echo e(route('deputy-mods.show',$score->Merged)); ?>" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
               </td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
