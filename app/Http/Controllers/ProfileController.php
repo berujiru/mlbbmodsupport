@@ -47,6 +47,7 @@ class ProfileController extends Controller
      */
     public function moderator($moderator_email)
     {
+
         $dbsc = Dbsc::find($moderator_email);
         $user = User::select('users.avatar as avatar')->find($moderator_email);
         $data = false;
@@ -92,7 +93,8 @@ class ProfileController extends Controller
     {
 
         $ticket = new Ticket();
-        $ticket->details = $request->matchvalue;
+        $ticket->details = $request->info;
+        $ticket->user = $request->user;
         if($ticket->save()){
             return true;
         }else{

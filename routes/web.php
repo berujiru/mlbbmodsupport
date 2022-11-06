@@ -16,6 +16,7 @@ use App\Http\Controllers\NtereplyController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamDeputyController;
 use App\Http\Controllers\TeamDeputyHistoryController;
+use App\Http\Controllers\TicketsupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,13 +42,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('profile', [ProfileController::class,'index'])->name('profile');
     Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('editProfile');
     Route::post('/update-profile', [ProfileController::class, 'update'])->name('updateProfile');
-    Route::get('profile/{moderator?}', [ProfileController::class,'moderator'])->name('profile');
+    Route::get('profile/{moderator?}', [ProfileController::class,'moderator'])->name('seeprofile');
     // Route::post('/search-profile', [ProfileController::class, 'search'])->name('searchProfile');
     Route::post('/search-profile',[ProfileController::class, 'search']);
     Route::get('/search-profile',[ProfileController::class, 'search']);
     //ticket support on profile change mod id
     // Route::post('/ticket-profile',[ProfileController::class, 'ticket']);
-    Route::post('/ticket-profile',[ProfileController::class, 'ticket']);
+    Route::post('/ticket',[ProfileController::class, 'ticket']);
+    Route::get('/ticketlist',[TicketsupportController::class, 'index']);
     //user edit login credential
     Route::get('changeprofile', ['as' => 'profileedit', 'uses' => 'App\Http\Controllers\ProfileController@loginedit']);
     Route::put('settingprofile', ['as' => 'profileupdate', 'uses' => 'App\Http\Controllers\ProfileController@loginupdate']);

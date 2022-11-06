@@ -304,6 +304,57 @@
     <script src="{{ URL::asset('/assets/libs/swiper/swiper.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/pages/profile.init.js') }}"></script>
     <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/pages/sweetalerts.init.js') }}"></script>
+    <!-- <script src="{{ URL::asset('/assets/js/pages/sweetalerts.init.js') }}"></script> -->
     <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+
+
+    <script>
+          document.getElementById("ajax-alert").addEventListener("click", function () {
+            Swal.fire({
+            title: 'Submit request for MOD ID change',
+            input: 'text',
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            confirmButtonClass: 'btn btn-primary w-xs me-2',
+            cancelButtonClass: 'btn btn-danger w-xs',
+            buttonsStyling: false,
+            showCloseButton: true,
+            preConfirm: function preConfirm(email) {
+                return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                    type:'POST',
+                    url:"/ticket",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        info: email,
+                        user: "{{  auth()->user()->id }}"
+                    },
+                    success:function(data){
+                        resolve();
+                    }
+                });
+                }, 2000)
+            })
+            },
+            allowOutsideClick: true
+            }).then(function (email) {
+            if (email.value) {
+                Swal.fire({
+                icon: 'success',
+                title: 'Ticket submitted to the developers!',
+                confirmButtonClass: 'btn btn-primary w-xs',
+                buttonsStyling: false,
+                html: 'Submitted ticket: Change for MOD ID note ( <i>' + email.value + ')</i>'
+                });
+            }
+            });
+        }); // Custom  Sweatalert
+    </script>
 @endsection

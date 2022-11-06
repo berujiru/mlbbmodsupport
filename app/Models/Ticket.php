@@ -19,7 +19,9 @@ class Ticket extends Model
     protected $fillable = [
         'ticket_id',
         'details',
+        'user',
         'created_at',
         'updated_at',
+        'status'
     ];
 }
