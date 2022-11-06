@@ -39,19 +39,19 @@
                                 </tr>
                                 <tr>
                                     <td>Mod ID : </td>
-                                    <td class="text-end"><?php echo e(!empty($score->modid) ? $score->modid : 'Mod ID not found'); ?></td>
+                                    <td class="text-end"><?php echo e(!empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found'); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Moderator : </td>
-                                    <td class="text-end"><?php echo e(!empty($score->moderator) ? $score->moderator : 'Name not found'); ?></td>
+                                    <td class="text-end"><?php echo e(!empty($score->Moderator) ? $score->Moderator : 'Name not found'); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Score : </td>
-                                    <td class="text-end"><?php echo e(!empty($score->score) ? number_format($score->score,2).' %' : 'Score not found'); ?></td>
+                                    <td class="text-end"><?php echo e(!empty($score->OVERALLSCORE) ? $score->OVERALLSCORE : 'Score not found'); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Date : </td>
-                                    <td class="text-end"><?php echo e(!empty($score->details) ? $score->details : ''); ?></td>
+                                    <td class="text-end"><?php echo e(!empty($score->Date) ? date("m/d/Y",strtotime($score->Date)) : ''); ?></td>
                                 </tr>
                                 <?php if(!empty($markdown[0]->Form_Attribute)): ?>
                                 <tr>

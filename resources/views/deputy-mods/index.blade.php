@@ -78,12 +78,12 @@
               <td style="width:5%;">{{++$i}}</td>
               <!-- <td style="width:20%;">{{ !empty($score->modprofile->deputyteam->team) ? $score->modprofile->deputyteam->team->team_name : 'Team not found' }}</td> -->
               <td style="width:20%;">{{ !empty($score->modprofile->deputyteam) ? $score->modprofile->deputyteam->profile->firstname." ".$score->modprofile->deputyteam->profile->lastname : 'No deputy profile' }}</td>
-              <td style="width:20%;">{{ !empty($score->modid) ? $score->modid : 'Mod ID not found' }}</td>
-              <td style="width:20%;">{{ !empty($score->moderator) ? $score->moderator : 'Name not found' }}</td>
-              <td style="width:20%;">{{ !empty($score->score) ? number_format($score->score,2).' %' : 'Score not found' }}</td>
-              <td style="width:20%;">{{ !empty($score->details) ? $score->details : '' }}</td>
+              <td style="width:20%;">{{ !empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found' }}</td>
+              <td style="width:20%;">{{ !empty($score->Moderator) ? $score->Moderator : 'Name not found' }}</td>
+              <td style="width:20%;">{{ !empty($score->OVERALLSCORE) ? $score->OVERALLSCORE : 'Score not found' }}</td>
+              <td style="width:20%;">{{ !empty($score->Date) ? date("m/d/Y",strtotime($score->Date)) : '' }}</td>
               <td style="width:5%;">
-                <a class="btn btn-sm btn-info" href="{{route('deputy-mods.show',$score->id)}}" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
+                <a class="btn btn-sm btn-info" href="{{route('deputy-mods.show',$score->Merged)}}" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
               </td>
           </tr>
         @empty

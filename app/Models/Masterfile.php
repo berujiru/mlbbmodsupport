@@ -15,4 +15,10 @@ class Masterfile extends Model
      * @var string
      */
     protected $table = 'masterfile';
+    protected $primaryKey = 'Merged';
+
+    public function modprofile()
+    {
+        return $this->hasOne(Dbsc::class, 'modid', 'MOD_ID');
+    }
 }
