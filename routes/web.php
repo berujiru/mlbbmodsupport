@@ -13,6 +13,7 @@ use App\Http\Controllers\ModBirthdayPictureController;
 use App\Http\Controllers\NteController;
 use App\Http\Controllers\ModinfractionController;
 use App\Http\Controllers\NtereplyController;
+use App\Http\Controllers\TeamAssignmentController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamDeputyController;
 use App\Http\Controllers\TeamDeputyHistoryController;
@@ -68,6 +69,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/team/delete/{id}',[TeamController::class,'destroy'])->name('team.delete');
     Route::get('/team/enable/{id}',[TeamController::class,'activate'])->name('team.enable');
     Route::resource('team-deputy-history', TeamDeputyHistoryController::class);
+
+    //mod team assignment
+    Route::resource('team-assignment', TeamAssignmentController::class);
+    Route::get('/team-assignment/assign',[TeamAssignmentController::class,'assign'])->name('team-assignment.assign');
+    Route::post('/team-assignment/mod-assign',[TeamAssignmentController::class,'savemodteam'])->name('team-assignment.mod-assign');
+    Route::get('/team-assignment/remove/{id}',[TeamAssignmentController::class,'remove'])->name('team-assignment.remove');
 
     //deputy mods
     Route::resource('deputy-mods', DeputyModsController::class);

@@ -36,6 +36,8 @@ class Dbsc extends Model
         'ignid',
         'igserver',
         'description',
+        'assigned_team_by',
+        'date_team_assigned',
     ];
 
     public function team()

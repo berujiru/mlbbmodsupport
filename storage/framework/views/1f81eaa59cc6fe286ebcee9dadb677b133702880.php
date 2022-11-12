@@ -27,7 +27,7 @@
   <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top: 10px;">
       <div class="mb-3">
           <label for="search_opt" class="form-label">Search by : </label>
-          <select class="form-control" name="search_opt" data-choices id="search_opt">
+          <select class="form-control" name="search_opt" data-choices id="search_opt" multiple>
               <option value="" selected disabled hidden>What to search ... </option>
               <option value="name" <?= ($search_opt === 'name' ? "selected" : "") ?>> Name </option>
               <option value="email" <?= ($search_opt === 'email' ? "selected" : "") ?>> Email </option>

@@ -96,40 +96,40 @@
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <script text="text/javascript">
-$('body').on('click', '.deleteProduct', function () {
+// $('body').on('click', '.deleteProduct', function () {
      
-     var product_id = $(this).data("id");
-     confirm("Are You sure want to delete !");
+//      var product_id = $(this).data("id");
+//      confirm("Are You sure want to delete !");
    
-     $.ajax({
-         type: "DELETE",
-         url: "<?php echo e(route('infraction.store')); ?>"+'/'+product_id,
-         success: function (data) {
-             table.draw();
-         },
-         error: function (data) {
-             console.log('Error:', data);
-         }
-     });
- });
+//      $.ajax({
+//          type: "DELETE",
+//          url: "<?php echo e(route('infraction.store')); ?>"+'/'+product_id,
+//          success: function (data) {
+//              table.draw();
+//          },
+//          error: function (data) {
+//              console.log('Error:', data);
+//          }
+//      });
+//  });
 
- Swal.fire({
-  title: '<strong>HTML <u>example</u></strong>',
-  icon: 'info',
-  html:
-    'You can use <b>bold text</b>, ' +
-    '<a href="//sweetalert2.github.io">links</a> ' +
-    'and other HTML tags',
-  showCloseButton: true,
-  showCancelButton: true,
-  focusConfirm: false,
-  confirmButtonText:
-    '<i class="fa fa-thumbs-up"></i> Great!',
-  confirmButtonAriaLabel: 'Thumbs up, great!',
-  cancelButtonText:
-    '<i class="fa fa-thumbs-down"></i>',
-  cancelButtonAriaLabel: 'Thumbs down'
-})
+//  Swal.fire({
+//   title: '<strong>HTML <u>example</u></strong>',
+//   icon: 'info',
+//   html:
+//     'You can use <b>bold text</b>, ' +
+//     '<a href="//sweetalert2.github.io">links</a> ' +
+//     'and other HTML tags',
+//   showCloseButton: true,
+//   showCancelButton: true,
+//   focusConfirm: false,
+//   confirmButtonText:
+//     '<i class="fa fa-thumbs-up"></i> Great!',
+//   confirmButtonAriaLabel: 'Thumbs up, great!',
+//   cancelButtonText:
+//     '<i class="fa fa-thumbs-down"></i>',
+//   cancelButtonAriaLabel: 'Thumbs down'
+// })
 </script>
 <?php $__env->stopSection(); ?>
 

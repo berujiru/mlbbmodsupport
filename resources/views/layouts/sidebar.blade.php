@@ -74,6 +74,9 @@
                                 <a href="{{ route('team-deputy.index') }}" class="nav-link" >Deputy</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('team-assignment.index') }}" class="nav-link" >Mod Team Assignment</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ route('team-deputy-history.index') }}" class="nav-link" >Deputy Historical Changes</a>
                             </li>
                         </ul>
