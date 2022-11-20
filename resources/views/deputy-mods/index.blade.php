@@ -9,6 +9,8 @@
 <?php
   $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
   $filtered_score = isset($_GET['filter_score']) ? $_GET['filter_score'] : '';
+  $from = isset($_GET['date_range_f']) ? $_GET['date_range_f'] : '';
+  $to = isset($_GET['date_range_t']) ? $_GET['date_range_t'] : '';
 ?>
 
 <div class="row">
@@ -22,12 +24,12 @@
   <div class="col-lg-12">
   {!! Form::open(array('route' => 'deputy-mods.index','method'=>'GET')) !!}
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Moderator</label>
           <select class="form-control" name="mod_id" data-choices
                 id="modInput">
-              <option value="" selected disabled hidden>Select moderator </option>
+              <option value="" selected disabled hidden>Select moderator ... </option>
               <option value=""> -none- </option>
               @foreach($mods as $moderator)
                   <option value="{{$moderator->modid}}" <?= ($mod_id_selected == $moderator->modid ? "selected" : "") ?> >{{ $moderator->modid.'- '.$moderator->firstname.' '.$moderator->lastname}}</option>
@@ -38,7 +40,7 @@
           @enderror
       </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Score</label>
           <select class="form-control" name="filter_score" data-choices
@@ -55,6 +57,19 @@
             <br>
             <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
         </div>
+    </div>
+    <br>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">From</label>
+          <input type="text" placeholder="Set Date (From) ..." name="date_range_f"  value="<?= $from ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">To</label>
+          <input type="text" placeholder="Set Date (To) ..." name="date_range_t" value="<?= $to ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+      </div>
     </div>
   </div>
   {!! Form::close() !!}

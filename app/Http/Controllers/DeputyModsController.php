@@ -23,6 +23,21 @@ class DeputyModsController extends Controller
         if(isset($_GET['mod_id']) && isset($_GET['filter_score'])) {
             $search_modid = $request->input('mod_id');
             $filter_score = $request->input('filter_score');
+            $date_range_from = $request->input('date_range_f');
+            $date_range_to = $request->input('date_range_t');
+
+            if(isset($_GET['date_range_f'])) {
+                $date_from = !empty($date_range_from) ? date("Y-m-d", strtotime($date_range_from)) : date("Y-01-01");
+            } else {
+                $date_from = date("Y-01-01");
+            }
+
+            if(isset($_GET['date_range_t'])) {
+                $date_to = !empty($date_range_to) ? date("Y-m-d", strtotime($date_range_to)) : date("Y-m-t");
+            } else {
+                $date_to = date("Y-m-t");
+            }
+
             if($search_modid > 0 && !empty($filter_score) && $filter_score == 1) {
                 $data = Masterfile::select('masterfile.*')
                     ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
@@ -30,7 +45,9 @@ class DeputyModsController extends Controller
                     ->where('deputy_team.profile_id',$user)
                     ->where('OVERALLSCORE','LIKE','100%')
                     ->where('masterfile.MOD_ID','=',$search_modid)
-                    ->orderby('modid')
+                    ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                    ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                    ->orderByRaw('modid, STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
                     ->paginate(50);
             } elseif ($search_modid > 0 && !empty($filter_score) && $filter_score == 2) {
                 $data = Masterfile::select('masterfile.*')
@@ -39,7 +56,9 @@ class DeputyModsController extends Controller
                     ->where('deputy_team.profile_id',$user)
                     ->where('OVERALLSCORE','NOT LIKE','100%')
                     ->where('masterfile.MOD_ID','=',$search_modid)
-                    ->orderby('modid')
+                    ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                    ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                    ->orderByRaw('modid, STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
                     ->paginate(50);
             } elseif (empty($search_modid) && !empty($filter_score)) {
                 if($filter_score == 1) {
@@ -48,7 +67,9 @@ class DeputyModsController extends Controller
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                         ->where('deputy_team.profile_id',$user)
                         ->where('OVERALLSCORE','LIKE','100%')
-                        ->orderby('modid')
+                        ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                        ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                        ->orderByRaw('modid, STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
                         ->paginate(50);
                 } else {
                     $data = Masterfile::select('masterfile.*')
@@ -56,7 +77,9 @@ class DeputyModsController extends Controller
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                         ->where('deputy_team.profile_id',$user)
                         ->where('OVERALLSCORE','NOT LIKE','100%')
-                        ->orderby('modid')
+                        ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                        ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                        ->orderByRaw('modid, STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
                         ->paginate(50);
                 }
             } elseif ($search_modid > 0 && empty($filter_score)) {
@@ -65,14 +88,18 @@ class DeputyModsController extends Controller
                     ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                     ->where('deputy_team.profile_id',$user)
                     ->where('masterfile.MOD_ID','=',$search_modid)
-                    ->orderby('modid')
+                    ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                    ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                    ->orderByRaw('modid, STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
                     ->paginate(50);
             } else {
                 $data =  Masterfile::select('masterfile.*')
                     ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
                     ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                     ->where('deputy_team.profile_id',$user)
-                    ->orderby('modid')
+                    ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                    ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                    ->orderByRaw('modid, STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
                     ->paginate(50);
             }
         } else {
@@ -80,7 +107,9 @@ class DeputyModsController extends Controller
                 ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')
                 ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                 ->where('deputy_team.profile_id',$user)
-                ->orderby('modid')
+                ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim(date("2020-01-01"))."'")
+                ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim(date("Y-m-t"))."'")
+                ->orderByRaw('modid, STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
                 ->paginate(50);
         }
         
