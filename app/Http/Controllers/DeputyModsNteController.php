@@ -24,13 +24,32 @@ class DeputyModsNteController extends Controller
             $seen = trim($request->input('filter_seen'));
             $nte_code = $request->input('k_nte_code');
 
+            $date_filter = $request->input('date_filter');
+            $date_range_from = $request->input('date_range_f');
+            $date_range_to = $request->input('date_range_t');
+
+            if(isset($_GET['date_range_f']) && (isset($_GET['date_filter']) && (int)($_GET['date_filter'])>0)) {
+                $date_from = !empty($date_range_from) ? date("Y-m-d", strtotime($date_range_from)) : date("Y-01-01");
+            } else {
+                $date_from = date("Y-01-01");
+            }
+
+            if(isset($_GET['date_range_t']) && (isset($_GET['date_filter']) && (int)($_GET['date_filter'])>0)) {
+                $date_to = !empty($date_range_to) ? date("Y-m-d", strtotime($date_range_to)) : date("Y-m-t");
+            } else {
+                $date_to = date("Y-m-t");
+            }
+
             if (!empty($nte_code)) {
                 $data = Nte::select('nte.*')
                 ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
                 ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                 ->where('deputy_team.profile_id',$user)
                 ->where('nte.UniqueID','LIKE',"%{$nte_code}%")
-                ->orderby('nte.MODID')
+                ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                //->orderby('nte.MODID')
+                ->orderByRaw('STR_TO_DATE(`InfractionDate`, "%m/%d/%Y") DESC, nte.MODID')
                 ->paginate(50);
             } else {
                 if($search_modid > 0 && $seen == 1) {
@@ -42,7 +61,10 @@ class DeputyModsNteController extends Controller
                         ->where('deputy_team.profile_id',$user)
                         ->where('nte_seen.is_seen','=',1)
                         ->where('nte.MODID','=',$search_modid)
-                        ->orderby('nte.MODID')
+                        ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                        ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                        //->orderby('nte.MODID')
+                        ->orderByRaw('STR_TO_DATE(`InfractionDate`, "%m/%d/%Y") DESC, nte.MODID')
                         ->paginate(50);
                 } elseif ($search_modid > 0 && $seen == 0) {
                     $data = Nte::select('nte.*')
@@ -53,7 +75,10 @@ class DeputyModsNteController extends Controller
                         ->where('deputy_team.profile_id',$user)
                         ->where('nte_seen.is_seen','=',NULL)
                         ->where('nte.MODID','=',$search_modid)
-                        ->orderby('nte.MODID')
+                        ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                        ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                        //->orderby('nte.MODID')
+                        ->orderByRaw('STR_TO_DATE(`InfractionDate`, "%m/%d/%Y") DESC, nte.MODID')
                         ->paginate(50);
                 } elseif ($search_modid > 0 && $seen == '') {
                     $data = Nte::select('nte.*')
@@ -62,7 +87,10 @@ class DeputyModsNteController extends Controller
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                         ->where('deputy_team.profile_id',$user)
                         ->where('nte.MODID','=',$search_modid)
-                        ->orderby('nte.MODID')
+                        ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                        ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                        //->orderby('nte.MODID')
+                        ->orderByRaw('STR_TO_DATE(`InfractionDate`, "%m/%d/%Y") DESC, nte.MODID')
                         ->paginate(50);
                 } elseif (empty($search_modid) && $seen >= 0) {
                     $is_seen = (int) $seen;
@@ -74,7 +102,10 @@ class DeputyModsNteController extends Controller
                             ->join('nte_seen', 'nte_seen.id_nte', '=', 'nte.id')
                             ->where('deputy_team.profile_id',$user)
                             ->where('nte_seen.is_seen','=',1)
-                            ->orderby('nte.MODID')
+                            ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                            ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                            //->orderby('nte.MODID')
+                            ->orderByRaw('STR_TO_DATE(`InfractionDate`, "%m/%d/%Y") DESC, nte.MODID')
                             ->paginate(50);
                     } else {
                         $data = Nte::select('nte.*')
@@ -84,7 +115,10 @@ class DeputyModsNteController extends Controller
                             ->leftJoin('nte_seen', 'nte_seen.id_nte', '=', 'nte.id')
                             ->where('deputy_team.profile_id',$user)
                             ->where('nte_seen.is_seen','=',NULL)
-                            ->orderby('nte.MODID')
+                            ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                            ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                            //->orderby('nte.MODID')
+                            ->orderByRaw('STR_TO_DATE(`InfractionDate`, "%m/%d/%Y") DESC, nte.MODID')
                             ->paginate(50);
                     }
                 } /*elseif (!empty($nte_code)) {
@@ -101,7 +135,10 @@ class DeputyModsNteController extends Controller
                         ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
                         ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                         ->where('deputy_team.profile_id',$user)
-                        ->orderby('nte.MODID')
+                        ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                        ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                        //->orderby('nte.MODID')
+                        ->orderByRaw('STR_TO_DATE(`InfractionDate`, "%m/%d/%Y") DESC, nte.MODID')
                         ->paginate(50);
                 }   
             }
@@ -111,7 +148,10 @@ class DeputyModsNteController extends Controller
                 ->join('dbsc', 'dbsc.modid', '=', 'nte.MODID')
                 ->join('deputy_team', 'deputy_team.team_id', '=', 'dbsc.team_id')
                 ->where('deputy_team.profile_id',$user)
-                ->orderby('nte.MODID')
+                ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') >= '".trim(date("2020-01-01"))."'")
+                ->whereRaw("STR_TO_DATE(`InfractionDate`, '%m/%d/%Y') <= '".trim(date("Y-m-t"))."'")
+                //->orderby('nte.MODID')
+                ->orderByRaw('STR_TO_DATE(`InfractionDate`, "%m/%d/%Y") DESC, nte.MODID')
                 ->paginate(50);
         }
         

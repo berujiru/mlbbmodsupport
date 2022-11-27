@@ -10,6 +10,9 @@
   $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
   $filtered_seen = isset($_GET['filter_seen']) ? $_GET['filter_seen'] : '';
   $nte_code = isset($_GET['k_nte_code']) ? $_GET['k_nte_code'] : '';
+  $from = isset($_GET['date_range_f']) ? $_GET['date_range_f'] : '';
+  $to = isset($_GET['date_range_t']) ? $_GET['date_range_t'] : '';
+  $date_filter = isset($_GET['date_filter']) ? $_GET['date_filter'] : '';
 ?>
 
 <div class="row">
@@ -70,6 +73,29 @@ unset($__errorArgs, $__bag); ?>
             <br>
             <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
         </div>
+    </div>
+    <br>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">Date to be Filtered</label>
+          <select class="form-control" name="date_filter" data-choices
+                id="modInput">
+              <option value="1" <?= ($date_filter == 1 ? "selected" : "") ?> >By Infraction Date</option>
+              <option value="2" <?= ($date_filter == 2 ? "selected" : "") ?> >By Date Seen</option>
+          </select>
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">From</label>
+          <input type="text" placeholder="Set Date (From) ..." name="date_range_f"  value="<?= $from ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">To</label>
+          <input type="text" placeholder="Set Date (To) ..." name="date_range_t" value="<?= $to ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+      </div>
     </div>
   </div>
   <?php echo Form::close(); ?>
