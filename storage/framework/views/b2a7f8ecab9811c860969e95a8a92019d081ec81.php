@@ -8,7 +8,7 @@
 
 <?php
   $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
-  $filtered_score = isset($_GET['filter_score']) ? $_GET['filter_score'] : '';
+  //$filtered_score = isset($_GET['filter_score']) ? $_GET['filter_score'] : '';
 ?>
 
 <div class="row">
@@ -20,7 +20,7 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
-  <?php echo Form::open(array('route' => 'deputy-mods.index','method'=>'GET')); ?>
+  <?php echo Form::open(array('route' => 'mod-score-summary.index','method'=>'GET')); ?>
 
   <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4">
@@ -46,18 +46,6 @@ endif;
 unset($__errorArgs, $__bag); ?>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4">
-      <div class="mb-3">
-          <label for="moderator" class="form-label">Score</label>
-          <select class="form-control" name="filter_score" data-choices
-                id="modInput">
-              <option value="" selected disabled hidden>Filter ... </option>
-              <option value=""> -none- </option>
-              <option value="1" <?= ($filtered_score == 1 ? "selected" : "") ?> >Perfect Score</option>
-              <option value="2" <?= ($filtered_score == 2 ? "selected" : "") ?> >Less than 100%</option>
-          </select>
-      </div>
-    </div>
     <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:9px;">
         <div class="mb-3">
             <br>
@@ -72,28 +60,24 @@ unset($__errorArgs, $__bag); ?>
       <thead>
           <tr>
               <th scope="col">#</th>
-              <!-- <th scope="col">Team</th> -->
-              <th scope="col">Deputy</th>
               <th scope="col">Mod ID</th>
               <th scope="col">Moderator</th>
               <th scope="col">Score</th>
-              <th scope="col">Details</th>
-              <th scope="col">Action</th>
+              <th scope="col">Month/Year</th>
+              <!-- <th scope="col">Action</th> -->
           </tr>
       </thead>
       <tbody>
         <?php $__empty_1 = true; $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $score): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
           <tr>
               <td style="width:5%;"><?php echo e(++$i); ?></td>
-              <!-- <td style="width:20%;"><?php echo e(!empty($score->modprofile->deputyteam->team) ? $score->modprofile->deputyteam->team->team_name : 'Team not found'); ?></td> -->
-              <td style="width:20%;"><?php echo e(!empty($score->modprofile->deputyteam) ? $score->modprofile->deputyteam->profile->firstname." ".$score->modprofile->deputyteam->profile->lastname : 'No deputy profile'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->Moderator) ? $score->Moderator : 'Name not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->OVERALLSCORE) ? $score->OVERALLSCORE : 'Score not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->Date) ? date("m/d/Y",strtotime($score->Date)) : ''); ?></td>
-              <td style="width:5%;">
-                <a class="btn btn-sm btn-info" href="<?php echo e(route('deputy-mods.show',$score->Merged)); ?>" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
-              </td>
+              <td style="width:20%;"><?php echo e(!empty($score->MODERATOR) ? $score->MODERATOR : 'Name not found'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->overall_score) ? $score->overall_score : 'Score not found'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->month_yr) ? date("M-Y",strtotime($score->month_yr)) : ''); ?></td>
+              <!-- <td style="width:5%;">
+                <a class="btn btn-sm btn-info" href="" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
+              </td> -->
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>

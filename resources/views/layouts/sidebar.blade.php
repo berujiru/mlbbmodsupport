@@ -100,6 +100,13 @@
                                     <!-- <i class="bx bxs-user-account"></i> --> <span >Moderator's NTE</span>
                                 </a>
                             </li> <!-- end Deputy Mods NTE -->
+                            @if(Auth::user()->hasPermissionTo('modscore-view'))
+                            <li class="nav-item"> <!-- start Mod Score Summary -->
+                                <a class="nav-link" aria-expanded="false" href="{{ route('mod-score-summary.index') }}">
+                                    <!-- <i class="bx bxs-user-account"></i> --> <span >Mod's Score Summary</span>
+                                </a>
+                            </li> <!-- end Mod Score Summary -->
+                            @endif
                         </ul>
                     </div>
                 </li> <!-- end Deputy Mods -->

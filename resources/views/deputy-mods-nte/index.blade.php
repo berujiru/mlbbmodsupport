@@ -73,7 +73,7 @@
           <select class="form-control" name="date_filter" data-choices
                 id="modInput">
               <option value="1" <?= ($date_filter == 1 ? "selected" : "") ?> >By Infraction Date</option>
-              <option value="2" <?= ($date_filter == 2 ? "selected" : "") ?> >By Date Seen</option>
+              <!-- <option value="2" <?= ($date_filter == 2 ? "selected" : "") ?> >By Date Seen</option> -->
           </select>
       </div>
     </div>

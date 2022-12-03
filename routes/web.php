@@ -12,6 +12,7 @@ use App\Http\Controllers\MailboxController;
 use App\Http\Controllers\ModBirthdayPictureController;
 use App\Http\Controllers\NteController;
 use App\Http\Controllers\ModinfractionController;
+use App\Http\Controllers\ModScoreSummaryController;
 use App\Http\Controllers\NtereplyController;
 use App\Http\Controllers\TeamAssignmentController;
 use App\Http\Controllers\TeamController;
@@ -75,6 +76,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/team-assignment/assign',[TeamAssignmentController::class,'assign'])->name('team-assignment.assign');
     Route::post('/team-assignment/mod-assign',[TeamAssignmentController::class,'savemodteam'])->name('team-assignment.mod-assign');
     Route::get('/team-assignment/remove/{id}',[TeamAssignmentController::class,'remove'])->name('team-assignment.remove');
+
+    //mod score summary
+    Route::resource('mod-score-summary', ModScoreSummaryController::class);
 
     //deputy mods
     Route::resource('deputy-mods', DeputyModsController::class);
