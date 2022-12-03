@@ -9,6 +9,8 @@
 <?php
   $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
   $filtered_score = isset($_GET['filter_score']) ? $_GET['filter_score'] : '';
+  $from = isset($_GET['date_range_f']) ? $_GET['date_range_f'] : '';
+  $to = isset($_GET['date_range_t']) ? $_GET['date_range_t'] : '';
 ?>
 
 <div class="row">
@@ -23,12 +25,12 @@
   <?php echo Form::open(array('route' => 'deputy-mods.index','method'=>'GET')); ?>
 
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Moderator</label>
           <select class="form-control" name="mod_id" data-choices
                 id="modInput">
-              <option value="" selected disabled hidden>Select moderator </option>
+              <option value="" selected disabled hidden>Select moderator ... </option>
               <option value=""> -none- </option>
               <?php $__currentLoopData = $mods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $moderator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                   <option value="<?php echo e($moderator->modid); ?>" <?= ($mod_id_selected == $moderator->modid ? "selected" : "") ?> ><?php echo e($moderator->modid.'- '.$moderator->firstname.' '.$moderator->lastname); ?></option>
@@ -46,7 +48,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Score</label>
           <select class="form-control" name="filter_score" data-choices
@@ -63,6 +65,19 @@ unset($__errorArgs, $__bag); ?>
             <br>
             <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
         </div>
+    </div>
+    <br>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">From</label>
+          <input type="text" placeholder="Set Date (From) ..." name="date_range_f"  value="<?= $from ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">To</label>
+          <input type="text" placeholder="Set Date (To) ..." name="date_range_t" value="<?= $to ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+      </div>
     </div>
   </div>
   <?php echo Form::close(); ?>
@@ -87,12 +102,12 @@ unset($__errorArgs, $__bag); ?>
               <td style="width:5%;"><?php echo e(++$i); ?></td>
               <!-- <td style="width:20%;"><?php echo e(!empty($score->modprofile->deputyteam->team) ? $score->modprofile->deputyteam->team->team_name : 'Team not found'); ?></td> -->
               <td style="width:20%;"><?php echo e(!empty($score->modprofile->deputyteam) ? $score->modprofile->deputyteam->profile->firstname." ".$score->modprofile->deputyteam->profile->lastname : 'No deputy profile'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->modid) ? $score->modid : 'Mod ID not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->moderator) ? $score->moderator : 'Name not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->score) ? number_format($score->score,2).' %' : 'Score not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->details) ? $score->details : ''); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->Moderator) ? $score->Moderator : 'Name not found'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->OVERALLSCORE) ? $score->OVERALLSCORE : 'Score not found'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($score->Date) ? date("m/d/Y",strtotime($score->Date)) : ''); ?></td>
               <td style="width:5%;">
-                <a class="btn btn-sm btn-info" href="<?php echo e(route('deputy-mods.show',$score->id)); ?>" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
+                <a class="btn btn-sm btn-info" href="<?php echo e(route('deputy-mods.show',$score->Merged)); ?>" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
               </td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

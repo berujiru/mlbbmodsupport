@@ -56,8 +56,17 @@ class ProfileController extends Controller
             $data = Masterfile::where('MOD_ID',$dbsc->modid)->orderBy('MERGED','DESC')->limit(10)->get();
             $data_nte = Nte::where('MODID',$dbsc->modid)->orderBy('id','DESC')->get();
         }
+        $average = 0;
+        $ctr = 0;
+        foreach($data as $datum){
+            $average += (int)$datum->OVERALLSCORE;
+            $ctr++;
+        }
+        $average = $average / $ctr;
 
-        return view('pages-profile-visit',compact('dbsc','user','data','data_nte'));
+
+        $tenureship = Masterfile::where('MOD_ID',$dbsc->modid)->orderBy('MERGED','DESC')->get()->count();
+        return view('pages-profile-visit',compact('dbsc','user','data','data_nte','average','tenureship'));
     }
 
     /**

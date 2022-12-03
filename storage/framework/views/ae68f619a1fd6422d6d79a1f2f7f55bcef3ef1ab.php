@@ -74,6 +74,9 @@
                                 <a href="<?php echo e(route('team-deputy.index')); ?>" class="nav-link" >Deputy</a>
                             </li>
                             <li class="nav-item">
+                                <a href="<?php echo e(route('team-assignment.index')); ?>" class="nav-link" >Mod Team Assignment</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="<?php echo e(route('team-deputy-history.index')); ?>" class="nav-link" >Deputy Historical Changes</a>
                             </li>
                         </ul>
