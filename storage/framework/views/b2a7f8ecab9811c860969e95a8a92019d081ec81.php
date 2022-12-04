@@ -1,8 +1,8 @@
 
-<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('Deputy Moderator Score'); ?>  <?php $__env->stopSection(); ?>
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('Moderator Score Summary'); ?>  <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Deputy Moderator Score <?php $__env->endSlot(); ?>
+<?php $__env->slot('li_1'); ?> Moderator Score Summary <?php $__env->endSlot(); ?>
 <?php $__env->slot('title'); ?> Index  <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 
@@ -20,7 +20,7 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
-  <?php echo Form::open(array('route' => 'mod-score-summary.index','method'=>'GET')); ?>
+  <?php echo Form::open(array('route' => 'score-summary.index','method'=>'GET')); ?>
 
   <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4">
@@ -64,7 +64,6 @@ unset($__errorArgs, $__bag); ?>
               <th scope="col">Moderator</th>
               <th scope="col">Score</th>
               <th scope="col">Month/Year</th>
-              <!-- <th scope="col">Action</th> -->
           </tr>
       </thead>
       <tbody>
@@ -75,9 +74,6 @@ unset($__errorArgs, $__bag); ?>
               <td style="width:20%;"><?php echo e(!empty($score->MODERATOR) ? $score->MODERATOR : 'Name not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($score->overall_score) ? $score->overall_score : 'Score not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($score->month_yr) ? date("M-Y",strtotime($score->month_yr)) : ''); ?></td>
-              <!-- <td style="width:5%;">
-                <a class="btn btn-sm btn-info" href="" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
-              </td> -->
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>

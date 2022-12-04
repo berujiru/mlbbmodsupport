@@ -26,7 +26,7 @@ class ModScoreSummaryController extends Controller
             if($search_modid > 0) {
                 $data = Masterfile::select("MOD_ID", "MODERATOR",
                 DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM OVERALLSCORE)),2) AS overall_score"),
-                DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"),)
+                DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"))
                     ->where('OVERALLSCORE','NOT LIKE','%A%')
                     ->where('OVERALLSCORE','<>',"''")
                     ->where('MOD_ID',"=",$search_modid)
@@ -36,7 +36,7 @@ class ModScoreSummaryController extends Controller
             } else {
                 $data = Masterfile::select("MOD_ID", "MODERATOR",
                 DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM OVERALLSCORE)),2) AS overall_score"),
-                DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"),)
+                DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"))
                     ->where('OVERALLSCORE','NOT LIKE',"'%A%'")
                     ->where('OVERALLSCORE','<>',"''")
                     ->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
@@ -46,7 +46,7 @@ class ModScoreSummaryController extends Controller
         } else {
             $data = Masterfile::select("MOD_ID", "MODERATOR",
                 DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM OVERALLSCORE)),2) AS overall_score"),
-                DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"),)
+                DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"))
                     ->where('OVERALLSCORE','NOT LIKE',"'%A%'")
                     ->where('OVERALLSCORE','<>',"''")
                     ->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))

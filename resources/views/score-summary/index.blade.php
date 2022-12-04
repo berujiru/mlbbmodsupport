@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title') @lang('Deputy Moderator Score')  @endsection
+@section('title') @lang('Moderator Score Summary')  @endsection
 @section('content')
 @component('components.breadcrumb')
-@slot('li_1') Deputy Moderator Score @endslot
+@slot('li_1') Moderator Score Summary @endslot
 @slot('title') Index  @endslot
 @endcomponent
 
@@ -20,7 +20,7 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
-  {!! Form::open(array('route' => 'mod-score-summary.index','method'=>'GET')) !!}
+  {!! Form::open(array('route' => 'score-summary.index','method'=>'GET')) !!}
   <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4">
       <div class="mb-3">
@@ -55,7 +55,6 @@
               <th scope="col">Moderator</th>
               <th scope="col">Score</th>
               <th scope="col">Month/Year</th>
-              <!-- <th scope="col">Action</th> -->
           </tr>
       </thead>
       <tbody>
@@ -66,9 +65,6 @@
               <td style="width:20%;">{{ !empty($score->MODERATOR) ? $score->MODERATOR : 'Name not found' }}</td>
               <td style="width:20%;">{{ !empty($score->overall_score) ? $score->overall_score : 'Score not found' }}</td>
               <td style="width:20%;">{{ !empty($score->month_yr) ? date("M-Y",strtotime($score->month_yr)) : '' }}</td>
-              <!-- <td style="width:5%;">
-                <a class="btn btn-sm btn-info" href="" title="View Details"><i class="bx bx-fw bx-show bx-xs"></i></a>
-              </td> -->
           </tr>
         @empty
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
