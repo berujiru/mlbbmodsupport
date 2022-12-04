@@ -32,7 +32,7 @@ class ModScoreSummaryController extends Controller
                     ->where('MOD_ID',"=",$search_modid)
                     ->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
                     ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
-                    ->paginate(50);
+                    ->paginate(30);
             } else {
                 $data = Masterfile::select("MOD_ID", "MODERATOR",
                 DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM OVERALLSCORE)),2) AS overall_score"),
@@ -41,7 +41,7 @@ class ModScoreSummaryController extends Controller
                     ->where('OVERALLSCORE','<>',"''")
                     ->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
                     ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
-                    ->paginate(50);
+                    ->paginate(30);
             }
         } else {
             $data = Masterfile::select("MOD_ID", "MODERATOR",
@@ -51,12 +51,12 @@ class ModScoreSummaryController extends Controller
                     ->where('OVERALLSCORE','<>',"''")
                     ->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
                     ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
-                    ->paginate(50);
+                    ->paginate(30);
         }
         
         $mods = Dbsc::select(['id','modid','firstname','lastname'])->get();
         return view('score-summary.index',compact('data','mods'))
-            ->with('i', ($request->input('page', 1) - 1) * 50);
+            ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
     /**
