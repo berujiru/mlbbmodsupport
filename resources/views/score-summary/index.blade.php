@@ -7,8 +7,13 @@
 @endcomponent
 
 <?php
+  $year_start  = 2019;
+  $year_now = date('Y'); // current year
+
   $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
-  //$filtered_score = isset($_GET['filter_score']) ? $_GET['filter_score'] : '';
+  $team_id_selected = isset($_GET['team_id']) ? $_GET['team_id'] : '';
+  $month_selected = isset($_GET['month']) ? $_GET['month'] : date('m');
+  $year_selected = isset($_GET['year']) ? $_GET['year'] : $year_now;
 ?>
 
 <div class="row">
@@ -22,7 +27,7 @@
   <div class="col-lg-12">
   {!! Form::open(array('route' => 'score-summary.index','method'=>'GET')) !!}
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Moderator</label>
           <select class="form-control" name="mod_id" data-choices
@@ -38,11 +43,54 @@
           @enderror
       </div>
     </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="team" class="form-label">Team</label>
+          <select class="form-control" name="team_id" data-choices
+                id="modInput">
+              <option value="" selected disabled hidden>Select team </option>
+              <option value=""> -none- </option>
+              @foreach($teams as $team)
+                  <option value="{{$team->team_id}}" <?= ($team_id_selected == $team->team_id ? "selected" : "") ?> >{{$team->team_name}}</option>
+              @endforeach
+          </select>
+          @error('team_id')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+      </div>
+    </div>
     <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:9px;">
         <div class="mb-3">
             <br>
             <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
         </div>
+    </div>
+    <br>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="month" class="form-label">Month</label>
+          <select class="form-control" name="month" data-choices
+                id="modInput">
+              <option value="" selected disabled hidden>Select month </option>
+              <option value=""> -none- </option>
+              @for ($j = 1; $j <= 12; $j++)
+                <option value="{{ $j }}" <?= ($month_selected == $j ? "selected" : "") ?>>{{ date('F', mktime(0, 0, 0, $j, 10)) }}</option>
+              @endfor
+          </select>
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="year" class="form-label">Year</label>
+          <select class="form-control" name="year" data-choices
+                id="modInput">
+              <option value="" selected disabled hidden>Select year </option>
+              <option value=""> -none- </option>
+              @for ($i = $year_now; $i >= $year_start; $i--)
+                <option value="{{ $i }}" <?= ($year_selected == $i ? "selected" : "") ?>>{{ $i }}</option>
+              @endfor
+          </select>
+      </div>
     </div>
   </div>
   {!! Form::close() !!}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dbsc;
 use App\Models\Markdowns;
 use App\Models\Masterfile;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,16 +21,57 @@ class ModScoreSummaryController extends Controller
         $user = (int) auth()->user()->id; //if deputy user
         //$user = 4; //if deputy user
 
-        if(isset($_GET['mod_id'])) {
-            $search_modid = $request->input('mod_id');
-            $filter_score = $request->input('filter_score');
-            if($search_modid > 0) {
+        if(isset($_GET['mod_id']) && isset($_GET['team_id'])) {
+            $search_modid = (int) $request->input('mod_id');
+            $filter_team = (int) $request->input('team_id');
+            $filter_month = (int) $request->input('month');
+            $filter_year = (int) $request->input('year');
+
+            if($filter_month > 0) {
+                $month = trim($filter_month);
+            } else {
+                $month = date('m');
+            }
+
+            if($filter_year > 0) {
+                $year = trim($filter_year);
+            } else {
+                $year = date('Y');
+            }
+
+            if($search_modid > 0 && $filter_team < 1) {
                 $data = Masterfile::select("MOD_ID", "MODERATOR",
                 DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM OVERALLSCORE)),2) AS overall_score"),
                 DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"))
                     ->where('OVERALLSCORE','NOT LIKE','%A%')
                     ->where('OVERALLSCORE','<>',"''")
                     ->where('MOD_ID',"=",$search_modid)
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') >= '".$year.'-'.$month."'")
+                    ->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
+                    ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
+                    ->paginate(30);
+            } elseif($search_modid < 1 && $filter_team > 0) {
+                $data = Masterfile::select("MOD_ID", "MODERATOR",
+                DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM OVERALLSCORE)),2) AS overall_score"),
+                DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"))
+                    ->join('dbsc', 'masterfile.MOD_ID', '=', 'dbsc.modid')
+                    ->where('OVERALLSCORE','NOT LIKE','%A%')
+                    ->where('OVERALLSCORE','<>',"''")
+                    ->where('dbsc.team_id',"=",$filter_team)
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') >= '".$year.'-'.$month."'")
+                    ->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
+                    ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
+                    ->paginate(30);
+            } elseif($search_modid > 0 && $filter_team > 0) {
+                $data = Masterfile::select("MOD_ID", "MODERATOR",
+                DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM OVERALLSCORE)),2) AS overall_score"),
+                DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"))
+                    ->join('dbsc', 'masterfile.MOD_ID', '=', 'dbsc.modid')
+                    ->where('OVERALLSCORE','NOT LIKE','%A%')
+                    ->where('OVERALLSCORE','<>',"''")
+                    ->where('MOD_ID',"=",$search_modid)
+                    ->where('dbsc.team_id',"=",$filter_team)
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') >= '".$year.'-'.$month."'")
                     ->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
                     ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
                     ->paginate(30);
@@ -39,6 +81,7 @@ class ModScoreSummaryController extends Controller
                 DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') AS 'month_yr'"))
                     ->where('OVERALLSCORE','NOT LIKE',"'%A%'")
                     ->where('OVERALLSCORE','<>',"''")
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') >= '".$year.'-'.$month."'")
                     ->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
                     ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
                     ->paginate(30);
@@ -55,7 +98,8 @@ class ModScoreSummaryController extends Controller
         }
         
         $mods = Dbsc::select(['id','modid','firstname','lastname'])->get();
-        return view('score-summary.index',compact('data','mods'))
+        $teams = Team::select(['team_id','team_code','team_name'])->get();
+        return view('score-summary.index',compact('data','mods','teams'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
