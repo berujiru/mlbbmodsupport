@@ -7,8 +7,16 @@
 <?php echo $__env->renderComponent(); ?>
 
 <?php
+  $year_start  = 2019;
+  $year_now = date('Y'); // current year
+
   $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
-  //$filtered_score = isset($_GET['filter_score']) ? $_GET['filter_score'] : '';
+  $team_id_selected = isset($_GET['team_id']) ? $_GET['team_id'] : '';
+  //$month_selected = isset($_GET['month']) ? $_GET['month'] : date('m');
+  //$year_selected = isset($_GET['year']) ? $_GET['year'] : $year_now;
+  $from = isset($_GET['date_range_f']) ? $_GET['date_range_f'] : '';
+  $to = isset($_GET['date_range_t']) ? $_GET['date_range_t'] : '';
+  $type_summary = isset($_GET['type_summary']) ? $_GET['type_summary'] : '';
 ?>
 
 <div class="row">
@@ -23,7 +31,7 @@
   <?php echo Form::open(array('route' => 'score-summary.index','method'=>'GET')); ?>
 
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
           <label for="moderator" class="form-label">Moderator</label>
           <select class="form-control" name="mod_id" data-choices
@@ -46,11 +54,61 @@ endif;
 unset($__errorArgs, $__bag); ?>
       </div>
     </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="team" class="form-label">Team</label>
+          <select class="form-control" name="team_id" data-choices
+                id="modInput">
+              <option value="" selected disabled hidden>Select team </option>
+              <option value=""> -none- </option>
+              <?php $__currentLoopData = $teams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $team): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <option value="<?php echo e($team->team_id); ?>" <?= ($team_id_selected == $team->team_id ? "selected" : "") ?> ><?php echo e($team->team_name); ?></option>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+          </select>
+          <?php $__errorArgs = ['team_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+              <div class="alert alert-danger"><?php echo e($message); ?></div>
+          <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+      </div>
+    </div>
     <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:9px;">
         <div class="mb-3">
             <br>
             <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
         </div>
+    </div>
+    <br>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">From</label>
+          <input type="text" placeholder="Set Date (From) ..." name="date_range_f"  value="<?= $from ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <label for="moderator" class="form-label">To</label>
+          <input type="text" placeholder="Set Date (To) ..." name="date_range_t" value="<?= $to ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <div class="mb-3">
+          <label for="moderator" class="form-label">Type of Summary</label>
+          <select class="form-control" name="type_summary" data-choices
+                id="modInput">
+              <option value="" selected disabled hidden>Select ... </option>
+              <option value=""> -none- </option>
+              <option value="1" <?= ($type_summary == 1 ? "selected" : "") ?>>Monthly</option>
+              <option value="2" <?= ($type_summary == 2 ? "selected" : "") ?>>All</option>
+          </select>
+      </div>
+      </div>
     </div>
   </div>
   <?php echo Form::close(); ?>
@@ -73,7 +131,7 @@ unset($__errorArgs, $__bag); ?>
               <td style="width:20%;"><?php echo e(!empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($score->MODERATOR) ? $score->MODERATOR : 'Name not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($score->overall_score) ? $score->overall_score : 'Score not found'); ?></td>
-              <td style="width:20%;"><?php echo e(!empty($score->month_yr) ? date("M-Y",strtotime($score->month_yr)) : ''); ?></td>
+              <td style="width:20%;<?= $type_summary == 2 ? 'color: #009900;font-weight:bold;' : '' ?>"><?php echo e(!empty($score->month_yr) && $type_summary == 1 ? date("M-Y",strtotime($score->month_yr)) : ($type_summary == 2 ? 'OVERALL SUMMARY' : '')); ?></td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>

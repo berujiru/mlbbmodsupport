@@ -90,7 +90,7 @@
               <option value="" selected disabled hidden>Select ... </option>
               <option value=""> -none- </option>
               <option value="1" <?= ($type_summary == 1 ? "selected" : "") ?>>Monthly</option>
-              <option value="2" <?= ($type_summary == 2 ? "selected" : "") ?>>All</option>
+              <option value="2" <?= ($type_summary == 2 ? "selected" : "") ?>>Overall</option>
           </select>
       </div>
       </div>
