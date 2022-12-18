@@ -12,8 +12,11 @@
 
   $mod_id_selected = isset($_GET['mod_id']) ? $_GET['mod_id'] : '';
   $team_id_selected = isset($_GET['team_id']) ? $_GET['team_id'] : '';
-  $month_selected = isset($_GET['month']) ? $_GET['month'] : date('m');
-  $year_selected = isset($_GET['year']) ? $_GET['year'] : $year_now;
+  //$month_selected = isset($_GET['month']) ? $_GET['month'] : date('m');
+  //$year_selected = isset($_GET['year']) ? $_GET['year'] : $year_now;
+  $from = isset($_GET['date_range_f']) ? $_GET['date_range_f'] : '';
+  $to = isset($_GET['date_range_t']) ? $_GET['date_range_t'] : '';
+  $type_summary = isset($_GET['type_summary']) ? $_GET['type_summary'] : '';
 ?>
 
 <div class="row">
@@ -68,28 +71,28 @@
     <br>
     <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
-          <label for="month" class="form-label">Month</label>
-          <select class="form-control" name="month" data-choices
-                id="modInput">
-              <option value="" selected disabled hidden>Select month </option>
-              <option value=""> -none- </option>
-              @for ($j = 1; $j <= 12; $j++)
-                <option value="{{ $j }}" <?= ($month_selected == $j ? "selected" : "") ?>>{{ date('F', mktime(0, 0, 0, $j, 10)) }}</option>
-              @endfor
-          </select>
+          <label for="moderator" class="form-label">From</label>
+          <input type="text" placeholder="Set Date (From) ..." name="date_range_f"  value="<?= $from ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
       </div>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
-          <label for="year" class="form-label">Year</label>
-          <select class="form-control" name="year" data-choices
+          <label for="moderator" class="form-label">To</label>
+          <input type="text" placeholder="Set Date (To) ..." name="date_range_t" value="<?= $to ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="mb-3">
+          <div class="mb-3">
+          <label for="moderator" class="form-label">Type of Summary</label>
+          <select class="form-control" name="type_summary" data-choices
                 id="modInput">
-              <option value="" selected disabled hidden>Select year </option>
+              <option value="" selected disabled hidden>Select ... </option>
               <option value=""> -none- </option>
-              @for ($i = $year_now; $i >= $year_start; $i--)
-                <option value="{{ $i }}" <?= ($year_selected == $i ? "selected" : "") ?>>{{ $i }}</option>
-              @endfor
+              <option value="1" <?= ($type_summary == 1 ? "selected" : "") ?>>Monthly</option>
+              <option value="2" <?= ($type_summary == 2 ? "selected" : "") ?>>All</option>
           </select>
+      </div>
       </div>
     </div>
   </div>
@@ -112,7 +115,7 @@
               <td style="width:20%;">{{ !empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found' }}</td>
               <td style="width:20%;">{{ !empty($score->MODERATOR) ? $score->MODERATOR : 'Name not found' }}</td>
               <td style="width:20%;">{{ !empty($score->overall_score) ? $score->overall_score : 'Score not found' }}</td>
-              <td style="width:20%;">{{ !empty($score->month_yr) ? date("M-Y",strtotime($score->month_yr)) : '' }}</td>
+              <td style="width:20%;<?= $type_summary == 2 ? 'color: #009900;font-weight:bold;' : '' ?>">{{ !empty($score->month_yr) && ($type_summary == 1 || $type_summary == '' ) ? date("M-Y",strtotime($score->month_yr)) : ($type_summary == 2 ? 'OVERALL SUMMARY' : '') }}</td>
           </tr>
         @empty
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
