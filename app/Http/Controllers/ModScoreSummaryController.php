@@ -8,6 +8,7 @@ use App\Models\Masterfile;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Print_;
 
 class ModScoreSummaryController extends Controller
 {
@@ -222,15 +223,51 @@ class ModScoreSummaryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        // $score = Masterfile::find($id);
-        // $markdown = Markdowns::select('markdowns.*')
-        //     ->where('markdowns.Merged',$id)
-        //     ->where('MOD_ID',$score->MOD_ID)
-        //     ->get();
+        //$date_range_from = trim($_GET['date_range_f']);
+        //$date_range_to = trim($_GET['date_range_t']);
+        $type_summary = trim($_GET['type_summary']);
 
-        // return view('deputy-mods.show',compact('score','markdown'));
+        if(isset($_GET['from'])) {
+            $date_from = !empty(trim($_GET['from'])) ? date("Y-m-d", strtotime(trim($_GET['from']))) : date("Y-01-01");
+        } else {
+            $date_from = date("Y-01-01");
+        }
+
+        if(isset($_GET['to'])) {
+            $date_to = !empty(trim($_GET['to'])) ? date("Y-m-d", strtotime(trim($_GET['to']))) : date("Y-m-t");
+        } else {
+            $date_to = date("Y-m-t");
+        }
+
+        if($type_summary == 2) {
+            $data = Masterfile::select("MOD_ID", "MODERATOR","OVERALLSCORE as overall_score",
+            //DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM OVERALLSCORE)),2) AS overall_score"),
+            DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m-%d') AS 'score_date'"))
+                ->where('OVERALLSCORE','NOT LIKE',"'%A%'")
+                ->where('OVERALLSCORE','<>',"''")
+                ->where('MOD_ID',"=",(int) $id)
+                ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                //->groupby('MOD_ID')
+                ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
+                ->paginate(30);
+
+        } else {
+            $data = Masterfile::select("MOD_ID", "MODERATOR","OVERALLSCORE as overall_score",
+            //DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM OVERALLSCORE)),2) AS overall_score"),
+            DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m-%d') AS 'score_date'"))
+                ->where('OVERALLSCORE','NOT LIKE',"'%A%'")
+                ->where('OVERALLSCORE','<>',"''")
+                ->where('MOD_ID',"=",(int) $id)
+                ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim($date_from)."'")
+                ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                //->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
+                ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
+                ->paginate(30);
+        }
+        return view('score-summary.show',compact('data'))->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
     /**

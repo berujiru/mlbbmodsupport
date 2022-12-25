@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     //mod score summary
     Route::resource('score-summary', ModScoreSummaryController::class);
+    Route::get('/score-summary/view/{id}',[ModScoreSummaryController::class,'show'])->name('score-summary.show');
 
     //deputy mods
     Route::resource('deputy-mods', DeputyModsController::class);

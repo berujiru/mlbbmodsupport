@@ -106,6 +106,7 @@
               <th scope="col">Moderator</th>
               <th scope="col">Score</th>
               <th scope="col">Month/Year</th>
+              <th scope="col">Action</th>
           </tr>
       </thead>
       <tbody>
@@ -116,6 +117,9 @@
               <td style="width:20%;">{{ !empty($score->MODERATOR) ? $score->MODERATOR : 'Name not found' }}</td>
               <td style="width:20%;">{{ !empty($score->overall_score) ? $score->overall_score : 'Score not found' }}</td>
               <td style="width:20%;<?= $type_summary == 2 ? 'color: #009900;font-weight:bold;' : '' ?>">{{ !empty($score->month_yr) && ($type_summary == 1 || $type_summary == '' ) ? date("M-Y",strtotime($score->month_yr)) : ($type_summary == 2 ? 'OVERALL SUMMARY' : '') }}</td>
+              <td style="width:10%;">
+                <a class="btn btn-sm btn-info" href="{{route('score-summary.show',['id'=>$score->MOD_ID,'type_summary'=>$type_summary,'from'=>$from,'to'=>$to])}}" title="View Scores"><i class="bx bx-fw bx-show bx-xs"></i></a>
+              </td>
           </tr>
         @empty
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
