@@ -1,14 +1,14 @@
-@extends('layouts.master')
-@section('title') @lang('Moderator Score Summary')  @endsection
-@section('content')
-@component('components.breadcrumb')
-@slot('li_1') Moderator Score Summary @endslot
-@slot('title') View  @endslot
-@endcomponent
+
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('Moderator Score Summary'); ?>  <?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> Moderator Score Summary <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> View  <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <a class="btn btn-sm btn-primary" href="{{ route('score-summary.index') }}"> <i class="bx bx-arrow-back"></i></a>
+            <a class="btn btn-sm btn-primary" href="<?php echo e(route('score-summary.index')); ?>"> <i class="bx bx-arrow-back"></i></a>
         </div>
     </div>
 </div>
@@ -33,22 +33,23 @@
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    @forelse($data as $key => $score)
+                    <?php $__empty_1 = true; $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $score): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <tr>
-                        <td style="width:5%;">{{$i++}}</td>
-                        <td style="width:20%;">{{ !empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found' }}</td>
-                        <td style="width:20%;">{{ !empty($score->MODERATOR) ? $score->MODERATOR : 'Name not found' }}</td>
-                        <td style="width:20%;">{{ !empty($score->overall_score) ? $score->overall_score : 'Score not found' }}</td>
-                        <td style="width:20%;">{{ date("m/d/Y",strtotime($score->score_date)) }}</td>
+                        <td style="width:5%;"><?php echo e($i++); ?></td>
+                        <td style="width:20%;"><?php echo e(!empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found'); ?></td>
+                        <td style="width:20%;"><?php echo e(!empty($score->MODERATOR) ? $score->MODERATOR : 'Name not found'); ?></td>
+                        <td style="width:20%;"><?php echo e(!empty($score->overall_score) ? $score->overall_score : 'Score not found'); ?></td>
+                        <td style="width:20%;"><?php echo e(date("m/d/Y",strtotime($score->score_date))); ?></td>
                     </tr>
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
-                    @endforelse
+                    <?php endif; ?>
                 </tbody>
                 </table>
             </div>
             <div class="d-flex justify-content-center">
-                {{ $data->links() }}
+                <?php echo e($data->links()); ?>
+
             </div>
             </div>
         </div>
@@ -80,7 +81,9 @@
     </div>
     <?php //endif; ?>
 </div>
-@endsection
-@section('script')
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp2\htdocs\mlbbmodsupport\resources\views/score-summary/show.blade.php ENDPATH**/ ?>

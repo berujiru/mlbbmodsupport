@@ -118,10 +118,10 @@
               <td style="width:20%;">{{ !empty($score->overall_score) ? $score->overall_score : 'Score not found' }}</td>
               <td style="width:20%;<?= $type_summary == 2 ? 'color: #009900;font-weight:bold;' : '' ?>">{{ !empty($score->month_yr) && ($type_summary == 1 || $type_summary == '' ) ? date("M-Y",strtotime($score->month_yr)) : ($type_summary == 2 ? 'OVERALL SUMMARY' : '') }}</td>
               <td style="width:10%;">
-                <?php if($type_summary != '' && $from != '' && $to != ''): ?>
+                <?php if($from != '' && $to != ''): ?>
                   <a class="btn btn-sm btn-info" href="{{route('score-summary.show',['id'=>$score->MOD_ID,'type_summary'=>$type_summary,'from'=>$from,'to'=>$to])}}" title="View Scores"><i class="bx bx-fw bx-show bx-xs"></i></a>
                 <?php else: ?>
-                  <label class="text-info">-Filter to view-</label>
+                  <label class="text-info">-Specify range to view-</label>
                 <?php endif; ?>
               </td>
           </tr>

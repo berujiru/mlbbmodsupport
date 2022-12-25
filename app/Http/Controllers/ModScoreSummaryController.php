@@ -225,6 +225,7 @@ class ModScoreSummaryController extends Controller
      */
     public function show(Request $request, $id)
     {
+        $user = (int) auth()->user()->id; //if deputy user
         //$date_range_from = trim($_GET['date_range_f']);
         //$date_range_to = trim($_GET['date_range_t']);
         $type_summary = trim($_GET['type_summary']);
@@ -267,7 +268,8 @@ class ModScoreSummaryController extends Controller
                 ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
                 ->paginate(30);
         }
-        return view('score-summary.show',compact('data'))->with('i', ($request->input('page', 1) - 1) * 30);
+        //return view('score-summary.show',compact('data'))->with('i', ($request->input('page', 1) - 1) * 30);
+        return view('score-summary.show',compact('data'));
     }
 
     /**

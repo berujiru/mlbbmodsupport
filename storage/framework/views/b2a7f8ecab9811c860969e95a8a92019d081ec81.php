@@ -105,7 +105,7 @@ unset($__errorArgs, $__bag); ?>
               <option value="" selected disabled hidden>Select ... </option>
               <option value=""> -none- </option>
               <option value="1" <?= ($type_summary == 1 ? "selected" : "") ?>>Monthly</option>
-              <option value="2" <?= ($type_summary == 2 ? "selected" : "") ?>>All</option>
+              <option value="2" <?= ($type_summary == 2 ? "selected" : "") ?>>Overall</option>
           </select>
       </div>
       </div>
@@ -122,6 +122,7 @@ unset($__errorArgs, $__bag); ?>
               <th scope="col">Moderator</th>
               <th scope="col">Score</th>
               <th scope="col">Month/Year</th>
+              <th scope="col">Action</th>
           </tr>
       </thead>
       <tbody>
@@ -131,7 +132,14 @@ unset($__errorArgs, $__bag); ?>
               <td style="width:20%;"><?php echo e(!empty($score->MOD_ID) ? $score->MOD_ID : 'Mod ID not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($score->MODERATOR) ? $score->MODERATOR : 'Name not found'); ?></td>
               <td style="width:20%;"><?php echo e(!empty($score->overall_score) ? $score->overall_score : 'Score not found'); ?></td>
-              <td style="width:20%;<?= $type_summary == 2 ? 'color: #009900;font-weight:bold;' : '' ?>"><?php echo e(!empty($score->month_yr) && $type_summary == 1 ? date("M-Y",strtotime($score->month_yr)) : ($type_summary == 2 ? 'OVERALL SUMMARY' : '')); ?></td>
+              <td style="width:20%;<?= $type_summary == 2 ? 'color: #009900;font-weight:bold;' : '' ?>"><?php echo e(!empty($score->month_yr) && ($type_summary == 1 || $type_summary == '' ) ? date("M-Y",strtotime($score->month_yr)) : ($type_summary == 2 ? 'OVERALL SUMMARY' : '')); ?></td>
+              <td style="width:10%;">
+                <?php if($from != '' && $to != ''): ?>
+                  <a class="btn btn-sm btn-info" href="<?php echo e(route('score-summary.show',['id'=>$score->MOD_ID,'type_summary'=>$type_summary,'from'=>$from,'to'=>$to])); ?>" title="View Scores"><i class="bx bx-fw bx-show bx-xs"></i></a>
+                <?php else: ?>
+                  <label class="text-info">-Specify range to view-</label>
+                <?php endif; ?>
+              </td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
