@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\DeputyModsController;
 use App\Http\Controllers\DeputyModsNteController;
 use App\Http\Controllers\InfractionController;
@@ -60,6 +61,10 @@ Route::group(['middleware' => ['auth']], function() {
     //infraction
     Route::resource('infraction', InfractionController::class);
     Route::get('/infraction/delete/{id}',[InfractionController::class,'destroy'])->name('infraction.delete');
+
+    //attribute
+    Route::resource('attribute', AttributeController::class);
+    Route::get('/attribute/delete/{id}',[AttributeController::class,'destroy'])->name('attribute.delete');
 
     //team management
     Route::resource('team-deputy', TeamDeputyController::class);

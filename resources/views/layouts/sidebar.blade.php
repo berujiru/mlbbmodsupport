@@ -55,11 +55,27 @@
                     </div>
                 </li> <!-- end Dashboard Menu -->
 
-                <li class="nav-item"> <!-- start Infractions -->
-                    <a class="nav-link" aria-expanded="false" href="{{ route('infraction.index') }}">
-                        <i class="bx bx-message-alt-error"></i> <span >Infraction</span>
+                <li class="nav-item"> <!-- start Config -->
+                    <a class="nav-link menu-link" href="#sidebarConfig" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarConfig">
+                        <i class="bx bx-cog"></i> <span >Configurations</span>
                     </a>
-                </li> <!-- end Infractions -->
+                    <div class="collapse menu-dropdown" id="sidebarConfig">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item"> <!-- start Attributes -->
+                                <a class="nav-link" aria-expanded="false" href="{{ route('attribute.index') }}">
+                                    <i class="bx bx-message-alt-detail"></i> <span >Attribute</span>
+                                </a>
+                            </li> <!-- end Attributes -->
+                            <li class="nav-item"> <!-- start Infractions -->
+                                <a class="nav-link" aria-expanded="false" href="{{ route('infraction.index') }}">
+                                    <i class="bx bx-message-alt-error"></i> <span >Infraction</span>
+                                </a>
+                            </li> <!-- end Infractions -->
+                        </ul>
+                    </div>
+                </li> <!-- end Config -->
+
                 <li class="nav-item"> <!-- start Team -->
                     <a class="nav-link menu-link" href="#sidebarTeam" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarTeam">
