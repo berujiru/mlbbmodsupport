@@ -65,57 +65,7 @@
             <div class="tab-content pt-4 text-muted">
                 <div class="tab-pane active" id="overview-tab" role="tabpanel">
                     <div class="row">
-                        <div class="col-xxl-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-5">Complete Your Profile</h5>
-                                    <div
-                                        class="progress animated-progress custom-progress progress-label">
-                                        <div class="progress-bar bg-danger" role="progressbar"
-                                            style="width: @if ($dbsc){{ 100 }}@else{{ 10 }}@endif%" aria-valuenow="@if ($dbsc){{ 100 }}@else{{ 10 }}@endif" aria-valuemin="0"
-                                            aria-valuemax="100">
-                                            <div class="label">@if ($dbsc){{ "100%" }}@else{{ "10%" }}@endif</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">Info</h5>
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless mb-0">
-                                            <tbody>
-                                                <tr>
-                                                    <th class="ps-0" scope="row">Full Name :</th>
-                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->firstname." ".$dbsc->middlename.". ".$dbsc->lastname }}@else{{ "None" }}@endif</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="ps-0" scope="row">Contact No. :</th>
-                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->contactno }}@else{{ "None" }}@endif</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="ps-0" scope="row">E-mail :</th>
-                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->email }}@else{{ "None" }}@endif</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="ps-0" scope="row">Location :</th>
-                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->location }}@else{{ "None" }}@endif
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="ps-0" scope="row">FB Link</th>
-                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->fblink }}@else{{ "None" }}@endif</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div><!-- end card body -->
-                            </div><!-- end card -->
-
-                        </div>
-                        <!--end col-->
-                        <div class="col-xxl-9">
+                        <div class="col-xxl-4">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title mb-3">About</h5>
@@ -217,9 +167,114 @@
                                 <!--end card-body-->
                             </div><!-- end card -->
 
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Info</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="ps-0" scope="row">Full Name :</th>
+                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->firstname." ".$dbsc->middlename.". ".$dbsc->lastname }}@else{{ "None" }}@endif</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="ps-0" scope="row">Contact No. :</th>
+                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->contactno }}@else{{ "None" }}@endif</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="ps-0" scope="row">E-mail :</th>
+                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->email }}@else{{ "None" }}@endif</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="ps-0" scope="row">Location :</th>
+                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->location }}@else{{ "None" }}@endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="ps-0" scope="row">FB Link</th>
+                                                    <td class="text-muted">@if ($dbsc){{ $dbsc->fblink }}@else{{ "None" }}@endif</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
 
+                        </div>                        
+                        <div class="col-xxl-8">
+                            @if (!$dbsc)
+                                <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-5">Complete Your Profile</h5>
+                                    <div
+                                        class="progress animated-progress custom-progress progress-label">
+                                        <div class="progress-bar bg-danger" role="progressbar"
+                                            style="width: @if ($dbsc){{ 100 }}@else{{ 10 }}@endif%" aria-valuenow="@if ($dbsc){{ 100 }}@else{{ 10 }}@endif" aria-valuemin="0"
+                                            aria-valuemax="100">
+                                            <div class="label">@if ($dbsc){{ "100%" }}@else{{ "10%" }}@endif</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            
+
+                            <div class="card">
+                                <div class="card-header align-items-center d-flex">
+                                    <h4 class="card-title mb-0 flex-grow-1">Infraction Stats</h4>
+                                    <div class="flex-shrink-0">
+                                        <div class="dropdown card-header-dropdown">
+                                            <a class="dropdown-btn text-muted" href="#" data-bs-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                All Time <i class="mdi mdi-chevron-down ms-1"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">All Time</a>
+                                                <!-- <a class="dropdown-item" href="#">Last 7 Days</a>
+                                                <a class="dropdown-item" href="#">Last 30 Days</a>
+                                                <a class="dropdown-item" href="#">Last 90 Days</a> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end card header -->
+
+                                <div class="card-body">
+                                    <div id="prjects-status"
+                                        data-colors='["--vz-success", "--vz-primary", "--vz-warning", "--vz-danger"]'
+                                        class="apex-charts" dir="ltr"></div>
+                                    <div class="mt-3">
+                                        <div class="d-flex justify-content-center align-items-center mb-4">
+                                            <h2 class="me-3 ff-secondary mb-0">{{array_sum($markdown_total)}}</h2>
+                                            <div>
+                                                <p class="text-muted mb-0">Total Infractions</p>
+                                                <!-- <p class="text-success fw-medium mb-0">
+                                                    <span class="badge badge-soft-success p-1 rounded-circle"><i
+                                                            class="ri-arrow-right-down-line"></i></span> +3 New
+                                                </p> -->
+                                            </div>
+                                        </div>
+                                        @foreach($markdowns as $markdown)
+                                            <div
+                                                class="d-flex justify-content-between border-bottom border-bottom-dashed py-2">
+                                                <p class="fw-medium mb-0"><i
+                                                        class="ri-checkbox-blank-circle-fill text-danger align-middle me-2"></i>
+                                                        {{$markdown->Form_Attribute}}</p>
+                                                <div>
+                                                    <span class="text-muted pe-5">{{$markdown->total}}</span>
+                                                    <span class="text-success fw-medium fs-12"> ~ (48 hrs) cooldowns to see next update</span>
+                                                </div>
+                                            </div><!-- end -->
+                                        
+                                        @endforeach
+                                    </div>
+                                </div><!-- end cardbody -->
+                            </div><!-- end card -->
+
+                            
 
                         </div>
+                        <!--end col-->
+
                         <!--end col-->
                     </div>
                     <!--end row-->
@@ -235,5 +290,119 @@
 @section('script')
     <script src="{{ URL::asset('/assets/libs/swiper/swiper.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/pages/profile.init.js') }}"></script>
+    <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <!-- <script src="{{ URL::asset('/assets/js/pages/dashboard-projects.init.js') }}"></script> -->
+
+
+    <script>
+
+function getChartColorsArray(chartId) {
+  if (document.getElementById(chartId) !== null) {
+    var colors = document.getElementById(chartId).getAttribute("data-colors");
+    colors = JSON.parse(colors);
+    return colors.map(function (value) {
+      var newValue = value.replace(" ", "");
+
+      if (newValue.indexOf(",") === -1) {
+        var color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
+        if (color) return color;else return newValue;
+        ;
+      } else {
+        var val = value.split(',');
+
+        if (val.length == 2) {
+          var rgbaColor = getComputedStyle(document.documentElement).getPropertyValue(val[0]);
+          rgbaColor = "rgba(" + rgbaColor + "," + val[1] + ")";
+          return rgbaColor;
+        } else {
+          return newValue;
+        }
+      }
+    });
+  }
+}
+
+    var isApexSeriesData = {};
+var isApexSeries = document.querySelectorAll("[data-chart-series]");
+isApexSeries.forEach(function (element) {
+  var isApexSeriesVal = element.attributes;
+
+  if (isApexSeriesVal["data-chart-series"]) {
+    isApexSeriesData.series = isApexSeriesVal["data-chart-series"].value.toString();
+    var radialbarhartoneColors = getChartColorsArray(isApexSeriesVal["id"].value.toString());
+    var options = {
+      series: [isApexSeriesData.series],
+      chart: {
+        type: 'radialBar',
+        width: 36,
+        height: 36,
+        sparkline: {
+          enabled: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      plotOptions: {
+        radialBar: {
+          hollow: {
+            margin: 0,
+            size: '50%'
+          },
+          track: {
+            margin: 1
+          },
+          dataLabels: {
+            show: false
+          }
+        }
+      },
+      colors: radialbarhartoneColors
+    };
+    var chart = new ApexCharts(document.querySelector("#" + isApexSeriesVal["id"].value.toString()), options);
+    chart.render();
+  }
+}); // Project Status charts
+
+var donutchartProjectsStatusColors = getChartColorsArray("prjects-status");
+var options = {
+  series: <?= "[".implode(",",$markdown_total)."]" ?>,
+  labels: <?= "[".implode(",",$markdown_title)."]" ?>,
+  chart: {
+    type: "donut",
+    height: 230
+  },
+  plotOptions: {
+    pie: {
+      size: 100,
+      offsetX: 0,
+      offsetY: 0,
+      donut: {
+        size: "90%",
+        labels: {
+          show: false
+        }
+      }
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  legend: {
+    show: false
+  },
+  stroke: {
+    lineCap: "round",
+    width: 0
+  },
+  colors: donutchartProjectsStatusColors
+};
+var chart = new ApexCharts(document.querySelector("#prjects-status"), options);
+chart.render();
+
+;
+</script>
+
+
     <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection

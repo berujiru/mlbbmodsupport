@@ -11,6 +11,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Masterfile;
+use App\Models\Markdowns;
 use App\Models\Nte;
 use App\Models\Ticket;
 
@@ -37,7 +38,21 @@ class ProfileController extends Controller
     public function index()
     {
         $dbsc = Dbsc::find(auth()->user()->id);
-        return view('pages-profile',compact('dbsc'));
+
+        //get all the infractions
+        $markdowns = Markdowns::select(DB::raw('SUM(Infractions) AS total'),'Form_Attribute')->where('MOD_ID', $dbsc->modid)->groupBy('Form_Attribute')->get();
+        // $markdowns = Markdowns::where('MOD_ID', $dbsc->modid)->groupBy('Form_Attribute')->sum('Infractions')->get();
+
+        $markdown_total = [];
+        $markdown_title = [];
+        foreach($markdowns as $markdown){
+            $markdown_title[] = '"'.$markdown->Form_Attribute.'"';
+            $markdown_total[] = $markdown->total;
+        }
+
+        // return var_dump(implode(",",$markdown_title));
+
+        return view('pages-profile',compact('dbsc','markdown_total','markdown_title','markdowns'));
     }
 
     /**
