@@ -40,7 +40,7 @@ class ProfileController extends Controller
         $dbsc = Dbsc::find(auth()->user()->id);
 
         //get all the infractions
-
+        $markdowns = [];
         if($dbsc){
             $markdowns = Markdowns::select(DB::raw('SUM(Infractions) AS total'),'Form_Attribute')->where('MOD_ID', $dbsc->modid)->groupBy('Form_Attribute')->get();
         }
