@@ -40,16 +40,19 @@ class ProfileController extends Controller
         $dbsc = Dbsc::find(auth()->user()->id);
 
         //get all the infractions
-        $markdowns = Markdowns::select(DB::raw('SUM(Infractions) AS total'),'Form_Attribute')->where('MOD_ID', $dbsc->modid)->groupBy('Form_Attribute')->get();
-        // $markdowns = Markdowns::where('MOD_ID', $dbsc->modid)->groupBy('Form_Attribute')->sum('Infractions')->get();
+
+        if($dbsc){
+            $markdowns = Markdowns::select(DB::raw('SUM(Infractions) AS total'),'Form_Attribute')->where('MOD_ID', $dbsc->modid)->groupBy('Form_Attribute')->get();
+        }
 
         $markdown_total = [];
         $markdown_title = [];
-        foreach($markdowns as $markdown){
-            $markdown_title[] = '"'.$markdown->Form_Attribute.'"';
-            $markdown_total[] = $markdown->total;
+        if($dbsc){
+            foreach($markdowns as $markdown){
+                $markdown_title[] = '"'.$markdown->Form_Attribute.'"';
+                $markdown_total[] = $markdown->total;
+            }
         }
-
         // return var_dump(implode(",",$markdown_title));
 
         return view('pages-profile',compact('dbsc','markdown_total','markdown_title','markdowns'));
