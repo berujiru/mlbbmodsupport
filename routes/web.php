@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\AttributeInfractionController;
 use App\Http\Controllers\DeputyModsController;
 use App\Http\Controllers\DeputyModsNteController;
 use App\Http\Controllers\InfractionController;
@@ -65,6 +66,10 @@ Route::group(['middleware' => ['auth']], function() {
     //attribute
     Route::resource('attribute', AttributeController::class);
     Route::get('/attribute/delete/{id}',[AttributeController::class,'destroy'])->name('attribute.delete');
+
+    //attribute infraction
+    Route::resource('attrib-infra', AttributeInfractionController::class);
+    Route::get('/attrib-infra/delete/{id}',[AttributeInfractionController::class,'destroy'])->name('attrib-infra.delete');
 
     //team management
     Route::resource('team-deputy', TeamDeputyController::class);

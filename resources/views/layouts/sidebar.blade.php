@@ -72,6 +72,11 @@
                                     <i class="bx bx-message-alt-error"></i> <span >Infraction</span>
                                 </a>
                             </li> <!-- end Infractions -->
+                            <li class="nav-item"> <!-- start Attribute Infractions -->
+                                <a class="nav-link" aria-expanded="false" href="{{ route('attrib-infra.index') }}">
+                                    <i class="bx bx-message-alt-error"></i> <span >Attribute - Infraction</span>
+                                </a>
+                            </li> <!-- end Attribute Infractions -->
                         </ul>
                     </div>
                 </li> <!-- end Config -->
