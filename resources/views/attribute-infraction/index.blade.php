@@ -7,6 +7,7 @@
 @endcomponent
 
 <?php
+  $search_opt = isset($_GET['search_opt']) ? $_GET['search_opt'] : '';
   $word_search = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 ?>
 
@@ -35,6 +36,32 @@
   </div>
 </div> -->
 <!-- {!! Form::close() !!} -->
+{!! Form::open(array('route' => 'attrib-infra.index','method'=>'GET')) !!}
+<div class="row">
+  <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top: 10px;">
+      <div class="mb-3">
+          <label for="search_opt" class="form-label">Search by : </label>
+          <select class="form-control" name="search_opt" data-choices id="search_opt">
+              <option value="" selected disabled hidden>Select to search option ... </option>
+              <option value="infra_code" <?= ($search_opt === 'infra_code' ? "selected" : "") ?>> Infraction Code </option>
+              <option value="infra_detail" <?= ($search_opt === 'infra_detail' ? "selected" : "") ?>> Infraction Detail </option>
+          </select>
+      </div>
+  </div>
+  <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top: 10px;">
+      <div class="mb-3">
+          <label for="keyword" class="form-label">Keyword</label>
+          <input type="text" name="keyword" value="{{$word_search}}" autocomplete="off" autocapitalize="true" class="form-control" placeholder="Search ... " />
+      </div>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:16px;">
+      <div class="mb-3">
+          <br>
+          <button type="submit" class="btn btn-info"><i class="bx bx-search-alt-2 bx-fw"></i> Search</button>
+      </div>
+  </div>
+</div>
+{!! Form::close() !!}
   <div class="card">
     <div class="card-header align-items-center d-flex">
       <h4 class="card-title mb-0 flex-grow-1">

@@ -229,6 +229,7 @@ class ModScoreSummaryController extends Controller
         //$date_range_from = trim($_GET['date_range_f']);
         //$date_range_to = trim($_GET['date_range_t']);
         $type_summary = trim($_GET['type_summary']);
+        $month_year = trim($_GET['mo_yr']);
 
         if(isset($_GET['from'])) {
             $date_from = !empty(trim($_GET['from'])) ? date("Y-m-d", strtotime(trim($_GET['from']))) : date("Y-01-01");
@@ -253,7 +254,7 @@ class ModScoreSummaryController extends Controller
                 ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
                 //->groupby('MOD_ID')
                 ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
-                ->paginate(30);
+                ->paginate(1000);
 
         } else {
             $data = Masterfile::select("MOD_ID", "MODERATOR","OVERALLSCORE as overall_score",
@@ -262,11 +263,10 @@ class ModScoreSummaryController extends Controller
                 ->where('OVERALLSCORE','NOT LIKE',"'%A%'")
                 ->where('OVERALLSCORE','<>',"''")
                 ->where('MOD_ID',"=",(int) $id)
-                ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') >= '".trim($date_from)."'")
-                ->whereRaw("STR_TO_DATE(`Date`, '%m/%d/%Y') <= '".trim($date_to)."'")
+                ->whereRaw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m') = '".$month_year."'")
                 //->groupby('MOD_ID',DB::raw("DATE_FORMAT(STR_TO_DATE(`Date`, '%m/%d/%Y'),'%Y-%m')"))
                 ->orderByRaw(DB::raw("STR_TO_DATE(`Date`, '%m/%d/%Y')")." DESC")
-                ->paginate(30);
+                ->paginate(1000);
         }
         //return view('score-summary.show',compact('data'))->with('i', ($request->input('page', 1) - 1) * 30);
         return view('score-summary.show',compact('data'));

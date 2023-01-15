@@ -54,7 +54,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->
-
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->hasRole('HR'))
                 <li class="nav-item"> <!-- start Config -->
                     <a class="nav-link menu-link" href="#sidebarConfig" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarConfig">
@@ -103,6 +103,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Team -->
+                @endif
                 @if(Auth::user()->hasRole('Deputy'))
                 <li class="nav-item"> <!-- start Deputy Mods -->
                     <a class="nav-link menu-link" href="#sidebarDeputyMods" data-bs-toggle="collapse" role="button"

@@ -17,23 +17,30 @@ class AttributeInfractionController extends Controller
      */
     public function index(Request $request)
     {
-        // if(isset($_GET['keyword'])) {
-        //     $word_search = $request->input('keyword');
-        //     if(!empty($word_search)) {
-        //         $data = Attribute::select('*')
-        //             ->where('attribute_name','LIKE',"%{$word_search}%")
-        //             ->orderBy('attribute_name','ASC')->paginate(30);
-        //     } else {
-        //         $data = Attribute::orderBy('attribute_name','ASC')->paginate(30);
-        //     }
-        // } else {
-            $data = AttributeInfraction::orderBy('attribute_id','ASC')->paginate(30);
-        //}
+        if(isset($_GET['search_opt']) && isset($_GET['keyword'])) {
+            $search_opt = $request->input('search_opt');
+            $word_search = $request->input('keyword');
+            if(!empty($search_opt) && $search_opt === 'infra_code') {
+                $data = AttributeInfraction::select('attribute_infraction.*',DB::raw('infractions.code AS infra_code'))
+                    ->join('infractions', 'attribute_infraction.infraction_id', '=', 'infractions.id')
+                    ->where('code','LIKE',"%{$word_search}%")
+                    ->orderBy('attribute_infraction.attribute_id')
+                    ->paginate(50);
+            } elseif (!empty($search_opt) && $search_opt === 'infra_detail') {
+                $data = AttributeInfraction::select('attribute_infraction.*',DB::raw('infractions.detail AS infra_detail'))
+                    ->join('infractions', 'attribute_infraction.infraction_id', '=', 'infractions.id')
+                    ->where('detail','LIKE',"%{$word_search}%")
+                    ->orderBy('attribute_infraction.attribute_id')
+                    ->paginate(50);
+            } else {
+                $data = AttributeInfraction::orderBy('attribute_id','ASC')->paginate(50);
+            }
+        } else {
+            $data = AttributeInfraction::orderBy('attribute_id','ASC')->paginate(50);
+        }
 
-
-        
         return view('attribute-infraction.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 30);
+            ->with('i', ($request->input('page', 1) - 1) * 50);
 
     }
 
