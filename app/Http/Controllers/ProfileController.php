@@ -14,6 +14,7 @@ use App\Models\Masterfile;
 use App\Models\Markdowns;
 use App\Models\Nte;
 use App\Models\Ticket;
+use DateTime;
 
 class ProfileController extends Controller
 {
@@ -47,15 +48,73 @@ class ProfileController extends Controller
 
         $markdown_total = [];
         $markdown_title = [];
+        $markdown_period = [];
         if($dbsc){
             foreach($markdowns as $markdown){
                 $markdown_title[] = '"'.$markdown->Form_Attribute.'"';
                 $markdown_total[] = $markdown->total;
+
+                //search for the severity
+                $nte = NTE::where('MODID', $dbsc->modid)->where('Attribute',$markdown->Form_Attribute)->orderBy('id','DESC')->first();
+                
+                if($nte){
+                    $datetime1 = new DateTime();
+                    $datetime2 = new DateTime($nte->InfractionDate);
+                    $interval = $datetime1->diff($datetime2);
+                    $elapsed = $interval->format('%y years %m months %a days %h hours %i minutes %s seconds');
+
+                    switch($nte->RecommendedAction){
+                        case "Verbal Warning":
+                            if($interval->format('%a')>14)
+                                $markdown_period[] = "Cleansed!";
+                            else
+                                $markdown_period[] = $elapsed;
+                            break;
+                        case "Written Warning":
+                            if($interval->format('%a')>28)
+                                $markdown_period[] = "Cleansed!";
+                            else
+                                $markdown_period[] = $elapsed;
+                            break;
+                        case "Final Written Warning":
+                        
+                            if($interval->format('%a')>35)
+                                $markdown_period[] = "Cleansed!";
+                            else
+                                $markdown_period[] = $elapsed;
+                            break;
+                        case "Lead Intervention":
+                            if($interval->format('%a')>49)
+                                $markdown_period[] = "Cleansed!";
+                            else
+                                $markdown_period[] = $elapsed;
+                            break;
+                        case "Suspension":
+                            if($interval->format('%a')>49)
+                                $markdown_period[] = "Cleansed!";
+                            else
+                                $markdown_period[] = $elapsed;
+                            break;
+                        case "Termination":
+                            if($interval->format('%a')>0)
+                                $markdown_period[] = "Terminated!";
+                            else
+                                $markdown_period[] = $elapsed;
+                            break;
+
+                        default:
+                            $markdown_period[] = $elapsed;
+                    }
+
+                    
+                }else{
+                    $markdown_period[] = "Safe!";
+                }
             }
         }
-        // return var_dump(implode(",",$markdown_title));
+        // return var_dump(implode(",",$markdown_period));
 
-        return view('pages-profile',compact('dbsc','markdown_total','markdown_title','markdowns'));
+        return view('pages-profile',compact('dbsc','markdown_total','markdown_title','markdowns','markdown_period'));
     }
 
     /**

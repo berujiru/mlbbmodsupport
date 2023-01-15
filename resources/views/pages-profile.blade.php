@@ -253,7 +253,9 @@
                                                 </p> -->
                                             </div>
                                         </div>
+                                        <?php $i =0;?>
                                         @foreach($markdowns as $markdown)
+                                        
                                             <div
                                                 class="d-flex justify-content-between border-bottom border-bottom-dashed py-2">
                                                 <p class="fw-medium mb-0"><i
@@ -261,10 +263,10 @@
                                                         {{$markdown->Form_Attribute}}</p>
                                                 <div>
                                                     <span class="text-muted pe-5">{{$markdown->total}}</span>
-                                                    <span class="text-success fw-medium fs-12"> ~ (48 hrs) cooldowns to see next update</span>
+                                                    <span class="text-success fw-medium fs-12">{{$markdown_period[$i]}}</span>
                                                 </div>
                                             </div><!-- end -->
-                                        
+                                            <?php $i++?>
                                         @endforeach
                                     </div>
                                 </div><!-- end cardbody -->
