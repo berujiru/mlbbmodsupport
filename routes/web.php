@@ -16,6 +16,7 @@ use App\Http\Controllers\NteController;
 use App\Http\Controllers\ModinfractionController;
 use App\Http\Controllers\ModScoreSummaryController;
 use App\Http\Controllers\NtereplyController;
+use App\Http\Controllers\QaDashboardController;
 use App\Http\Controllers\TeamAssignmentController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamDeputyController;
@@ -118,6 +119,9 @@ Route::group(['middleware' => ['auth']], function() {
     //birthday card
     Route::resource('birthday-card', ModBirthdayPictureController::class);
     Route::get('/birthday-card/delete/{id}',[ModBirthdayPictureController::class,'destroy'])->name('birthday-card.delete');
+
+    //QA dashboard
+    Route::resource('qa-dashboard', QaDashboardController::class);
 });
 
 //public reset pass

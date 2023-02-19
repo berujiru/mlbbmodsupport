@@ -37,6 +37,11 @@
                         <i class="ri-honour-line"></i> <span data-key="t-landing">Dashboard</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('qa-dashboard.index') }}">
+                        <i class="bx bx-bar-chart-alt-2"></i> <span data-key="t-landing">QA Dashboard</span>
+                    </a>
+                </li>
                 @if(Auth::user()->hasRole('Admin'))
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button"
@@ -142,6 +147,56 @@
                     <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
                 </li>
                 @endif
+                @if(Auth::user()->hasRole('HR') && !Auth::user()->hasRole('Admin'))
+                <li class="nav-item"> <!-- start Config -->
+                    <a class="nav-link menu-link" href="#sidebarConfig" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarConfig">
+                        <i class="bx bx-cog"></i> <span >Configurations</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarConfig">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item"> <!-- start Attributes -->
+                                <a class="nav-link" aria-expanded="false" href="{{ route('attribute.index') }}">
+                                    <i class="bx bx-message-alt-detail"></i> <span >Attribute</span>
+                                </a>
+                            </li> <!-- end Attributes -->
+                            <li class="nav-item"> <!-- start Infractions -->
+                                <a class="nav-link" aria-expanded="false" href="{{ route('infraction.index') }}">
+                                    <i class="bx bx-message-alt-error"></i> <span >Infraction</span>
+                                </a>
+                            </li> <!-- end Infractions -->
+							<li class="nav-item"> <!-- start Attribute Infractions -->
+                                <a class="nav-link" aria-expanded="false" href="{{ route('attrib-infra.index') }}">
+                                    <i class="bx bx-message-alt-error"></i> <span >Attribute - Infraction</span>
+                                </a>
+                            </li> <!-- end Attribute Infractions -->
+                        </ul>
+                    </div>
+                </li> <!-- end Config -->
+				
+                <li class="nav-item"> <!-- start Team -->
+                    <a class="nav-link menu-link" href="#sidebarTeam" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarTeam">
+                        <i class="bx bxs-user-account"></i> <span >Team Management</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarTeam">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('team.index') }}" class="nav-link" >Teams</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('team-deputy.index') }}" class="nav-link" >Deputy</a>
+                            </li>
+							<li class="nav-item">
+                                <a href="{{ route('team-assignment.index') }}" class="nav-link" >Mod Team Assignment</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('team-deputy-history.index') }}" class="nav-link" >Deputy Historical Changes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li> <!-- end Team -->
+				@endif
                 @if(Auth::user()->hasRole('NTE monitor'))
                 <li class="nav-item">
                     <a href="{{ route('ntereply.index') }}" class="nav-link" >

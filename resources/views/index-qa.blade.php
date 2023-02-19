@@ -1,14 +1,14 @@
-
-<?php $__env->startSection('title'); ?> QA Dashboard <?php $__env->stopSection(); ?>
-<?php $__env->startSection('css'); ?>
+@extends('layouts.master')
+@section('title') QA Dashboard @endsection
+@section('css')
 <link href="assets/libs/jsvectormap/jsvectormap.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/libs/swiper/swiper.min.css" rel="stylesheet" type="text/css" />
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('content'); ?>
-<?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Dashboard <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> QA Dashboard <?php $__env->endSlot(); ?>
-<?php echo $__env->renderComponent(); ?>
+@endsection
+@section('content')
+@component('components.breadcrumb')
+@slot('li_1') Dashboard @endslot
+@slot('title') QA Dashboard @endslot
+@endcomponent
 <?php
 $num_ind = 0;
 $num_img = 0;
@@ -32,14 +32,13 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
                 <div class="col-12">
                     <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                         <div class="flex-grow-1">
-                            <h4 class="fs-16 mb-1"><?php echo e($greeting); ?><?php echo e(!empty($dbsc) ? ", ".$dbsc->firstname : ""); ?>!</h4>
+                            <h4 class="fs-16 mb-1">{{$greeting}}{{!empty($dbsc) ? ", ".$dbsc->firstname : ""}}!</h4>
                         </div>
                         <div class="mt-3 mt-lg-0">
                             <form action="javascript:void(0);">
                                 <div class="row g-3 mb-0 align-items-center">
                                     <div class="col-sm-auto">
-                                        <?php echo e(date("F j, Y h:i:s A")); ?>
-
+                                        {{ date("F j, Y h:i:s A") }}
                                     </div>
                                     <!--end col-->
                                 </div>
@@ -160,21 +159,21 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $__empty_1 = true; $__currentLoopData = $overall_team_summary; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                        @forelse($overall_team_summary as $lts)
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="flex-grow-1"><?php echo e($lts->Team); ?></div>
+                                                    <div class="flex-grow-1">{{$lts->Team}}</div>
                                                 </div>
                                             </td>
-                                            <td><span class="text-default"><?php echo e($lts->overall_score); ?></span></td>
-                                            <td><span class="text-default"><?php echo e($lts->timeliness_score); ?></span></td>
-                                            <td><span class="text-default"><?php echo e($lts->communication_score); ?></span></td>
-                                            <td><span class="text-default"><?php echo e($lts->accuracy_score); ?></span></td>
+                                            <td><span class="text-default">{{$lts->overall_score}}</span></td>
+                                            <td><span class="text-default">{{$lts->timeliness_score}}</span></td>
+                                            <td><span class="text-default">{{$lts->communication_score}}</span></td>
+                                            <td><span class="text-default">{{$lts->accuracy_score}}</span></td>
                                         </tr><!-- end tr -->
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                        @empty
                                             <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
-                                        <?php endif; ?>
+                                        @endforelse
                                     </tbody><!-- end tbody -->
                                 </table><!-- end table -->
                             </div>
@@ -200,19 +199,19 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $__empty_1 = true; $__currentLoopData = $infra_teams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                        @forelse($infra_teams as $lt)
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="flex-grow-1"><?php echo e($lt->Team); ?></div>
+                                                    <div class="flex-grow-1">{{$lt->Team}}</div>
                                                 </div>
                                             </td>
-                                            <td><span class="text-danger" style="width:50%;word-wrap: break-all;"><?php echo e($lt->Form_Attribute); ?></span></td>
-                                            <td><span class="text-info" style="font-weight:bold;font-size:13px;text-align:right;"><?php echo e($lt->infractions); ?></span></td>
+                                            <td><span class="text-danger" style="width:50%;word-wrap: break-all;">{{$lt->Form_Attribute}}</span></td>
+                                            <td><span class="text-info" style="font-weight:bold;font-size:13px;text-align:right;">{{$lt->infractions}}</span></td>
                                         </tr><!-- end tr -->
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                        @empty
                                             <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
-                                        <?php endif; ?>
+                                        @endforelse
                                     </tbody><!-- end tbody -->
                                 </table><!-- end table -->
                             </div>
@@ -240,19 +239,19 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $__empty_1 = true; $__currentLoopData = $list_attributes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $la): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                        @forelse($list_attributes as $la)
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="flex-grow-1"><?php echo e($la->attribute_name); ?></div>
+                                                    <div class="flex-grow-1">{{$la->attribute_name}}</div>
                                                 </div>
                                             </td>
                                             <td><span class="text-danger">no data yet</span></td>
                                             <td><span class="text-danger">no data yet</span></td>
                                         </tr><!-- end tr -->
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                        @empty
                                             <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
-                                        <?php endif; ?>
+                                        @endforelse
                                     </tbody><!-- end tbody -->
                                 </table><!-- end table -->
                             </div>
@@ -296,18 +295,18 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
 
 </div>
 
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('script'); ?>
+@endsection
+@section('script')
 <!-- apexcharts -->
-<script src="<?php echo e(URL::asset('/assets/libs/apexcharts/apexcharts.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/js/pages/data/apexcharts-column.init.data.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/js/pages/data/apexcharts-pie.init.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.js')); ?>"></script>
+<script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/js/pages/data/apexcharts-column.init.data.js') }}"></script>
+<script src="{{ URL::asset('/assets/js/pages/data/apexcharts-pie.init.js') }}"></script>
+<script src="{{ URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/swiper/swiper.min.js')}}"></script>
 <!-- dashboard init -->
-<script src="<?php echo e(URL::asset('/assets/js/pages/dashboard-ecommerce.init.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<script src="{{ URL::asset('/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
+<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     $(document).on('click', '.pagination a', function(event){
@@ -327,6 +326,4 @@ $(document).ready(function(){
     }
 });
 </script>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp2\htdocs\mlbbmodsupport\resources\views/index-qa.blade.php ENDPATH**/ ?>
+@endsection
