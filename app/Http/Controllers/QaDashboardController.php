@@ -94,6 +94,62 @@ class QaDashboardController extends Controller
             ->orderByRaw(DB::raw("Team")." ASC")
             ->get();
 
+        $infra_form_attrib = Markdowns::select('Form_Attribute',
+            DB::raw('SUBSTRING(`Form_Attribute`, 1,1) AS attrib'),
+            DB::raw("(
+                CASE 
+                    WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'A' THEN 'Accuracy'
+                    WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'C' THEN 'Communication'
+                    WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'T' THEN 'Timeliness'
+                END) AS attrib_name"),
+            DB::raw('SUM(`Infractions`) AS infractions'))
+            ->where('Team','<>',"'Team'")
+            ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'F'")
+            ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'K'")
+            ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'Z'")
+            ->groupby('Form_Attribute')
+            //->orderByRaw(DB::raw("Team")." ASC")
+            ->get();
+        
+        $summary_infra_attrib = Markdowns::select('Form_Attribute',
+            DB::raw('SUBSTRING(`Form_Attribute`, 1,1) AS attrib'),
+            DB::raw('SUBSTRING(`Date`, 4,6) AS mo_yr'),
+            DB::raw("(
+                CASE 
+                    WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'A' THEN 'Accuracy'
+                    WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'C' THEN 'Communication'
+                    WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'T' THEN 'Timeliness'
+                END) AS attrib_name"),
+            DB::raw('SUM(`Infractions`) AS infractions'))
+            ->where('Team','<>',"'Team'")
+            ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'F'")
+            ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'K'")
+            ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'Z'")
+            ->groupby(DB::raw("SUBSTRING(`Form_Attribute`, 1,1)"))
+            //->orderByRaw(DB::raw("Team")." ASC")
+            ->get();
+        
+        $summary_infra_mo_yr = Markdowns::select('Form_Attribute',
+            DB::raw('SUBSTRING(`Form_Attribute`, 1,1) AS attrib'),
+            DB::raw('SUBSTRING(`Date`, 4,6) AS mo_yr'),
+            DB::raw("(
+                CASE 
+                    WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'A' THEN 'Accuracy'
+                    WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'C' THEN 'Communication'
+                    WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'T' THEN 'Timeliness'
+                END) AS attrib_name"),
+            DB::raw('SUM(`Infractions`) AS infractions'))
+            ->where('Team','<>',"'Team'")
+            ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'F'")
+            ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'K'")
+            ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'Z'")
+            //->whereRaw("SUBSTRING(`Date`, 8,2) = DATE_FORMAT(NOW(), '%y')") //offline
+            ->whereRaw("SUBSTRING(`Date`, 8,4) = DATE_FORMAT(NOW(), '%Y')") //online
+            //->groupby('Form_Attribute')
+            ->groupby(DB::raw("SUBSTRING(`Form_Attribute`, 1,1)"))
+            //->orderByRaw(DB::raw("Team")." ASC")
+            ->get();
+
         $overall_team_summary = Masterfile::select('Team',
             DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM `OVERALLSCORE`)),2) AS overall_score"),
             DB::raw("FORMAT(AVG(TRIM(TRAILING '%' FROM ScoreonAccuracy)),2) AS accuracy_score"),
@@ -116,53 +172,12 @@ class QaDashboardController extends Controller
                 ->orderby('attribute_name')
                 ->get();
 
-        //active mapped accounts
-        $active_accounts = DB::table('users')
-            ->join('dbsc', 'users.id', '=', 'dbsc.id')
-            ->where('users.status',1)
-            ->count();
-
-        $today_birthdays = Dbsc::select('modid','firstname','lastname','birthday','users.avatar as avatar')
-            ->leftJoin('users', 'users.id', '=', 'dbsc.id')
-            ->where(DB::raw("DATE_FORMAT(birthday,'%m-%d')"),date("m-d"))
-            ->orderByRaw('lastname, firstname')
-            ->get();
-        //only mapped active accounts
-        $total_male = DB::table('dbsc')
-            ->join('users', 'users.id', '=', 'dbsc.id')
-            ->where('users.status',1)
-            ->where('dbsc.sex','male')
-            ->count();
-        //only mapped active accounts
-        $total_female = DB::table('dbsc')
-            ->join('users', 'users.id', '=', 'dbsc.id')
-            ->where('users.status',1)
-            ->where('dbsc.sex','female')
-            ->count();
-        //newly registered active accounts
-        $total_newly_registered = DB::table('dbsc')
-            ->join('users', 'users.id', '=', 'dbsc.id')
-            ->where('users.status',1)
-            ->where(DB::raw("DATEDIFF(DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(dbsc.created_at,'%Y-%m-%d'))"),"<",31)
-            ->count();
-        $birthday_cards = ModBirthdayPicture::select('mod_id','pic_name','pic_filename','birthday')
-            ->join('dbsc', 'dbsc.modid', '=', 'mod_birthday_pic.mod_id')
-            ->where(DB::raw("DATE_FORMAT(birthday,'%m-%d')"),date("m-d"))
-            ->orderByRaw('firstname')
-            ->get();
-
-            // echo "<pre>";
-            // print_r($birthday_cards);
-            // exit;
-            // echo "</pre>";
-        //number of teams
-        $total_teams = DB::table('team')->where('status_id',1)->count();
         //echo auth()->user()->id;
         // echo "<pre>";
         // print_r($list_teams);
         // echo "</pre>";
         // exit;
-        return view('index-qa',compact('dbsc','overall_score','accuracy_score','timeliness_score','communication_score','infra_teams','overall_team_summary','greeting','active_accounts','today_birthdays','total_male','total_female','list_teams','list_attributes','total_newly_registered','total_teams','birthday_cards'));
+        return view('index-qa',compact('dbsc','overall_score','accuracy_score','timeliness_score','communication_score','infra_teams','overall_team_summary','greeting','list_attributes','infra_form_attrib','summary_infra_mo_yr','summary_infra_attrib'));
         //return view('index');
     }
 }

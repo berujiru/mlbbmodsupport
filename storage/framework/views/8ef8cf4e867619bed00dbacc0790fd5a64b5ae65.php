@@ -19,10 +19,12 @@ $accu_score = !empty($accuracy_score) ? number_format($accuracy_score[0]['accura
 $time_score = !empty($timeliness_score) ? number_format($timeliness_score[0]['timeliness_score'],2) : 0;
 $comm_score = !empty($communication_score) ? number_format($communication_score[0]['communication_score'],2) : 0;
 
-// echo "<pre>";
-// echo print_r($overall_team_summary);
-// echo "</pre>";
+//$col_accu_name = !empty($summary_infra_mo_yr[0]) ? $summary_infra_mo_yr[0]
 
+//echo "<pre>";
+//echo print_r($summary_infra_mo_yr);
+//echo "</pre>";
+$i = 1;
 ?>
 <div class="row">
     <div class="col">
@@ -191,7 +193,7 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
                             <div class="table-responsive table-card">
                                 <table
                                     class="table table-borderless table-centered align-middle table-wrap mb-0"
-                                    style="height: 300px;display: inline-block;width: 100%;overflow: auto;">
+                                    style="height: 300px;display: inline-block;width: 100%;overflow-y: scroll;">
                                     <thead class="text-muted table-light">
                                         <tr>
                                             <th scope="col" style="width:40%;">Team</th>
@@ -222,54 +224,14 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
             </div> <!-- end row-->
 
             <div class="row">
-                <div class="col-xl-12 col-md-12">
-                    <div class="card">
-                        <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Attribute Summary</h4>
-                        </div><!-- end card header -->
-
-                        <div class="card-body">
-                            <div class="table-responsive table-card">
-                                <table
-                                    class="table table-borderless table-centered align-middle table-nowrap mb-0">
-                                    <thead class="text-muted table-light">
-                                        <tr>
-                                            <th scope="col" style="width: 20%;">Main Attribute</th>
-                                            <th scope="col" style="width: 60%;">Key Attribute</th>
-                                            <th scope="col" style="width: 20%;">No. of Infractions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $__empty_1 = true; $__currentLoopData = $list_attributes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $la): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-grow-1"><?php echo e($la->attribute_name); ?></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="text-danger">no data yet</span></td>
-                                            <td><span class="text-danger">no data yet</span></td>
-                                        </tr><!-- end tr -->
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                                            <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
-                                        <?php endif; ?>
-                                    </tbody><!-- end tbody -->
-                                </table><!-- end table -->
-                            </div>
-                        </div>
-                    </div> <!-- .card-->
-                </div> <!-- .col-->
-            </div> <!-- end row-->
-
-            <div class="row">
                 <div class="col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Infractions Per Attribute (Monthly, Year <?= date("Y") ?>)</h4>
+                            <h4 class="card-title mb-0">Infractions Per Attribute (Year <?= date("Y") ?>)</h4>
                         </div><!-- end card header -->
 
                         <div class="card-body">
-                            <div id="column_chart" data-colors='["--vz-danger", "--vz-primary", "--vz-success"]'
+                            <div id="infra_column_chart" data-colors='["--vz-danger", "--vz-primary", "--vz-success"]'
                                 class="apex-charts" dir="ltr"></div>
                         </div><!-- end card-body -->
                     </div><!-- end card -->
@@ -290,6 +252,61 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
                 <!-- end col -->
             </div>
 
+            <div class="row">
+                <div class="col-xl-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header align-items-center d-flex">
+                            <h4 class="card-title mb-0 flex-grow-1">Attribute Summary</h4>
+                        </div><!-- end card header -->
+
+                        <div class="card-body">
+                            <div class="table-responsive table-card">
+                                <table
+                                    class="table table-borderless table-centered align-middle table-nowrap mb-0" 
+                                    style="height: 300px;display: inline-block;width: 100%;overflow-y: scroll;">
+                                    <thead class="text-muted table-light">
+                                        <tr>
+                                            <th scope="col" style="width: 20%;">Attribute</th>
+                                            <th scope="col" style="width: 60%;">No. of Infractions</th>
+                                            <th scope="col" style="width: 30%;">Key Attribute</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $__empty_1 = true; $__currentLoopData = $infra_form_attrib; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $la): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                    <?php
+                                                        // if($la->attrib == 'A') {
+                                                        //     echo 'Accuracy';
+                                                        // } elseif($la->attrib == 'T') {
+                                                        //     echo 'Timeliness';
+                                                        // } elseif($la->attrib == 'C') {
+                                                        //     echo 'Communication';
+                                                        // } else {
+                                                        //     echo $la->attrib;
+                                                        // }
+                                                    ?>
+                                                    <?php echo e($la->attrib_name); ?>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="text-info text-right" style="font-weight:bold;font-size:13px;text-align:right;"><?php echo e($la->infractions); ?></span></td>
+                                            <td><span class="text-danger" style="width:10%;word-wrap: break-all;"><?php echo e($la->Form_Attribute); ?></span></td>
+                                        </tr><!-- end tr -->
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                            <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
+                                        <?php endif; ?>
+                                    </tbody><!-- end tbody -->
+                                </table><!-- end table -->
+                            </div>
+                        </div>
+                    </div> <!-- .card-->
+                </div> <!-- .col-->
+            </div> <!-- end row-->
+
         </div> <!-- end .h-100-->
     </div> <!-- end col -->
 
@@ -300,8 +317,6 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
 <?php $__env->startSection('script'); ?>
 <!-- apexcharts -->
 <script src="<?php echo e(URL::asset('/assets/libs/apexcharts/apexcharts.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/js/pages/data/apexcharts-column.init.data.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/js/pages/data/apexcharts-pie.init.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.js')); ?>"></script>
 <!-- dashboard init -->
@@ -310,21 +325,137 @@ $comm_score = !empty($communication_score) ? number_format($communication_score[
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $(document).on('click', '.pagination a', function(event){
-        event.preventDefault(); 
-        var page = $(this).attr('href').split('page=')[1];
-        fetch_data(page);
-    });
+    // $(document).on('click', '.pagination a', function(event){
+    //     event.preventDefault(); 
+    //     var page = $(this).attr('href').split('page=')[1];
+    //     fetch_data(page);
+    // });
 
-    function fetch_data(page)
-    {
-        $.ajax({
-            url:"/pagination/fetch_data?page="+page,success:function(data)
-            {
-                $('#table_data').html(data);
-            }
-        });
+    // function fetch_data(page)
+    // {
+    //     $.ajax({
+    //         url:"/pagination/fetch_data?page="+page,success:function(data)
+    //         {
+    //             $('#table_data').html(data);
+    //         }
+    //     });
+    // }
+
+    // get colors array from the string
+    function getChartColorsArray(chartId) {
+        if (document.getElementById(chartId) !== null) {
+            var colors = document.getElementById(chartId).getAttribute("data-colors");
+            colors = JSON.parse(colors);
+            return colors.map(function (value) {
+                var newValue = value.replace(" ", "");
+                if (newValue.indexOf(",") === -1) {
+                    var color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
+                    if (color) return color;
+                    else return newValue;;
+                } else {
+                    var val = value.split(',');
+                    if (val.length == 2) {
+                        var rgbaColor = getComputedStyle(document.documentElement).getPropertyValue(val[0]);
+                        rgbaColor = "rgba(" + rgbaColor + "," + val[1] + ")";
+                        return rgbaColor;
+                    } else {
+                        return newValue;
+                    }
+                }
+            });
+        }
     }
+
+
+    // Basic Column Chart
+    var chartColumnColors = getChartColorsArray("infra_column_chart");
+    var options = {
+        chart: {
+            height: 350,
+            type: 'bar',
+            toolbar: {
+                show: false,
+            }
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '50%',
+                endingShape: 'rounded'
+            },
+        },
+        dataLabels: {
+            enabled: true
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        series: [{
+            name: '<?= $summary_infra_mo_yr[0]->attrib_name ?>',
+            data: [<?= $summary_infra_mo_yr[0]->infractions ?>],
+        }, {
+            name: '<?= $summary_infra_mo_yr[1]->attrib_name ?>',
+            data: [<?= $summary_infra_mo_yr[1]->infractions ?>],
+        }, {
+            name: '<?= $summary_infra_mo_yr[2]->attrib_name ?>',
+            data: [<?= $summary_infra_mo_yr[2]->infractions ?>],
+        }],
+        colors: chartColumnColors,
+        xaxis: {
+            categories: ['<?= date('Y') ?>'],
+        },
+        yaxis: {
+            title: {
+                text: 'No. of Infractions'
+            }
+        },
+        grid: {
+            borderColor: '#f1f1f1',
+        },
+        fill: {
+            opacity: 1
+
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val
+                }
+            }
+        }
+    }
+
+    var chart = new ApexCharts(
+        document.querySelector("#infra_column_chart"),
+        options
+    );
+    chart.render();
+
+
+    //  Simple Pie Charts
+    var chartPieBasicColors = getChartColorsArray("simple_pie_chart");
+    var options = {
+        series: [<?= $summary_infra_attrib[0]->infractions ?>,<?= $summary_infra_attrib[1]->infractions ?>,<?= $summary_infra_attrib[2]->infractions ?>],
+        chart: {
+            height: 382,
+            type: 'pie',
+        },
+        labels: ['<?= $summary_infra_attrib[0]->attrib_name ?>', '<?= $summary_infra_attrib[1]->attrib_name ?>', '<?= $summary_infra_attrib[2]->attrib_name ?>'],
+        legend: {
+            position: 'bottom'
+        },
+        dataLabels: {
+            dropShadow: {
+                enabled: false,
+            }
+        },
+        colors: chartPieBasicColors
+    };
+
+    var chart = new ApexCharts(document.querySelector("#simple_pie_chart"), options);
+    chart.render();
 });
 </script>
 <?php $__env->stopSection(); ?>
