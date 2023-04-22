@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportAttributeSummaryInfraction;
+use App\Exports\ExportInfractionAttributeSummary;
+use App\Exports\ExportSummaryCommittedInfraction;
+use App\Exports\ExportTeamSummary;
+use App\Exports\TeamCommittedInfraction;
 use App\Models\Attribute;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +20,7 @@ use App\Models\Markdowns;
 use App\Models\Masterfile;
 use App\Models\ModBirthdayPicture;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class QaDashboardController extends Controller
 {
@@ -23,12 +29,6 @@ class QaDashboardController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => [
-            'resetpassword','sendresetpassword'
-        ]]);
-    }
 
     /**
      * Show the application dashboard.
@@ -132,6 +132,7 @@ class QaDashboardController extends Controller
         $summary_infra_mo_yr = Markdowns::select('Form_Attribute',
             DB::raw('SUBSTRING(`Form_Attribute`, 1,1) AS attrib'),
             DB::raw('SUBSTRING(`Date`, 4,6) AS mo_yr'),
+            DB::raw("GROUP_CONCAT(DISTINCT SUBSTRING(`Date`, 4,3) SEPARATOR ',') mo_now"),
             DB::raw("(
                 CASE 
                     WHEN SUBSTRING(`Form_Attribute`, 1,1) = 'A' THEN 'Accuracy'
@@ -143,10 +144,10 @@ class QaDashboardController extends Controller
             ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'F'")
             ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'K'")
             ->whereRaw("SUBSTRING(`Form_Attribute`, 1,1) <> 'Z'")
-            //->whereRaw("SUBSTRING(`Date`, 8,2) = DATE_FORMAT(NOW(), '%y')") //offline
-            ->whereRaw("SUBSTRING(`Date`, 8,4) = DATE_FORMAT(NOW(), '%Y')") //online
+            ->whereRaw("SUBSTRING(`Date`, 8,2) = DATE_FORMAT(NOW(), '%y')") //offline
+            //->whereRaw("SUBSTRING(`Date`, 8,4) = DATE_FORMAT(NOW(), '%Y')") //online
             //->groupby('Form_Attribute')
-            ->groupby(DB::raw("SUBSTRING(`Form_Attribute`, 1,1)"))
+            ->groupbyRaw(DB::raw("SUBSTRING(`Form_Attribute`, 1,1),SUBSTRING(`Date`, 4,6)"))
             //->orderByRaw(DB::raw("Team")." ASC")
             ->get();
 
@@ -174,10 +175,35 @@ class QaDashboardController extends Controller
 
         //echo auth()->user()->id;
         // echo "<pre>";
-        // print_r($list_teams);
+        // print_r($summary_infra_mo_yr);
         // echo "</pre>";
         // exit;
         return view('index-qa',compact('dbsc','overall_score','accuracy_score','timeliness_score','communication_score','infra_teams','overall_team_summary','greeting','list_attributes','infra_form_attrib','summary_infra_mo_yr','summary_infra_attrib'));
         //return view('index');
+    }
+
+    public function exportTeamSummary()
+    {
+        return Excel::download(new ExportTeamSummary, 'Team_Summary'.date('YmdH:i:s').'.xlsx');
+    }
+
+    public function exportTeamInfraction()
+    {
+        return Excel::download(new TeamCommittedInfraction, 'Team_Commited_Infraction'.date('YmdH:i:s').'.xlsx');
+    }
+
+    public function exportInfractionAttribute()
+    {
+        return Excel::download(new ExportInfractionAttributeSummary, 'Infraction_Per_Attribute'.date('YmdH:i:s').'.xlsx');
+    }
+
+    public function exportSummaryCommittedInfraction()
+    {
+        return Excel::download(new ExportSummaryCommittedInfraction, 'Summary_Infraction'.date('YmdH:i:s').'.xlsx');
+    }
+
+    public function exportAttributeSummary()
+    {
+        return Excel::download(new ExportAttributeSummaryInfraction, 'Attribute_Summary_Infraction'.date('YmdH:i:s').'.xlsx');
     }
 }
