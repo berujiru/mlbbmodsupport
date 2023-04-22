@@ -105,6 +105,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('team-deputy-history.index') }}" class="nav-link" >Deputy Historical Changes</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('deactivate-user.index') }}" class="nav-link" >User Account</a>
+                            </li>
                         </ul>
                     </div>
                 </li> <!-- end Team -->

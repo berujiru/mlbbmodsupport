@@ -19,9 +19,99 @@ $accu_score = !empty($accuracy_score) ? number_format($accuracy_score[0]['accura
 $time_score = !empty($timeliness_score) ? number_format($timeliness_score[0]['timeliness_score'],2) : 0;
 $comm_score = !empty($communication_score) ? number_format($communication_score[0]['communication_score'],2) : 0;
 
-//echo "<pre>";
-//echo print_r($summary_infra_mo_yr);
-//echo "</pre>";
+// echo "<pre>";
+// print_r($summary_infra_mo_yr);
+// echo "</pre>";
+
+$result = [];
+$l_months = "";
+foreach ($summary_infra_mo_yr as $item) {
+    $group_id = $item['mo_now'];
+    //$group_id = $item['attrib_name'];
+    $value = $item['infractions'];
+    $g_attrib = $item['attrib_name'];
+
+    if (!isset($result[$group_id])) {
+        $result[$group_id] = [];
+    }
+    $result[$group_id][] = ["attrib"=>$g_attrib,"values"=>$value];
+    //$result[$group_id][] = $group_mo;
+}
+
+function sortMonths($a, $b) {
+    //$monthsString = "Jan, Feb, Mar, Apr, May, June, Jul, Aug, Sep, Oct, Nov, Dec";
+    //$monthsArray = explode(", ", $monthsString);
+    $months = array(
+        'Jan' => 1,
+        'Feb' => 2,
+        'Mar' => 3,
+        'Apr' => 4
+    );
+    // $monthNumbers = array();
+    // foreach ($monthsArray as $month) {
+    //     $monthNumbers[] = date('n', strtotime($month));
+    // }
+
+    return $months[$a] - $months[$b];
+    //return $monthNumbers;
+}
+uksort($result, 'sortMonths');
+$l_months = !empty($result) ? "'" .implode("', '",array_keys($result))."'" : null;
+
+// $result_mo = [];
+// foreach ($result as $month => $data) {
+//     $value = array();
+//     $attrib_m = array();
+//     foreach ($data as $attrib_data) {
+//         $value[] = $attrib_data['values'];
+//     }
+//     foreach ($data as $attrib_m) {
+//         $val[] = $attrib_m['attrib'];
+//     }
+//     $result_mo[$month][] = ['attrib'=>$val,'infra'=>implode(', ', $value)];
+// }
+// // Store the result in a variable
+// $concatenated_month_and_values = $result_mo;
+
+// foreach ($result as $group_id => $values) {
+//     echo "Group ID: $group_id, Unique Values: " . implode(', ', $values) . PHP_EOL;
+// }
+// echo "<pre>";
+// print_r($concatenated_month_and_values['Jan']);
+// echo "</pre>";
+
+// Combine month, attrib, and values into a single array
+// $res = array();
+// foreach ($result as $month => $data) {
+//     foreach ($data as $attrib_data) {
+//         $res[] = array(
+//             'month' => $month,
+//             'attrib' => $attrib_data['attrib'],
+//             'values' => $attrib_data['values']
+//         );
+//     }
+// }
+// Group the data by 'attrib'
+//$grouped_data = [];
+//foreach ($result as $data) {
+    //$attrib = $data['attrib'];
+    //$grouped_data[$attrib][] = $data;
+    //echo $data['attrib'];
+//}
+
+// // Implode the values for each 'attrib'
+// $imploded_data = [];
+// foreach ($grouped_data as $attrib => $data) {
+//     $values = array_column($data, 'values');
+//     $imploded_data[$attrib] = implode(', ', $values);
+// }
+$aa = $result['Jan'][0]['values'].",".$result['Feb'][0]['values'].",".$result['Mar'][0]['values'];
+$cc = $result['Jan'][1]['values'].",".$result['Feb'][1]['values'].",".$result['Mar'][1]['values'];
+$tt = $result['Jan'][2]['values'].",".$result['Feb'][2]['values'].",".$result['Mar'][2]['values'];
+echo "<pre>";
+print_r($aa);
+echo "</pre>";
+
 $i = 1;
 ?>
 <div class="row">
@@ -141,7 +231,10 @@ $i = 1;
                 <div class="col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Team Summary</h4>
+                            <h4 class="card-title mb-0 flex-grow-1">Team Summary </h4>
+                            <div style="text-align: right;">
+                                <a class="btn btn-success btn-sm" href="{{ route('export-team-summary') }}"><i class="bx bx-spreadsheet"></i> Export</a>
+                            </div>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -183,7 +276,10 @@ $i = 1;
                 <div class="col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Commited Infractions Per Team</h4>
+                            <h4 class="card-title mb-0 flex-grow-1">Committed Infractions Per Team</h4>
+                            <div style="text-align: right;">
+                                <a class="btn btn-success btn-sm" href="{{ route('export-team-infraction') }}"><i class="bx bx-spreadsheet"></i> Export</a>
+                            </div>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -224,7 +320,10 @@ $i = 1;
                 <div class="col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Infractions Per Attribute (Year <?= date("Y") ?>)</h4>
+                            <div style="float:left;"><h4 class="card-title mb-0">Infractions Per Attribute (Year <?= date("Y") ?>)</h4></div>
+                            <div style="text-align:right;">
+                                <a class="btn btn-success btn-sm" href="{{ route('export-infraction-attribute') }}"><i class="bx bx-spreadsheet"></i> Export</a>
+                            </div>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -236,7 +335,10 @@ $i = 1;
                 <div class="col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Summary Infractions Committed Per Attribute</h4>
+                            <div style="float:left;"><h4 class="card-title mb-0">Summary Infractions Committed Per Attribute</h4></div>
+                            <div style="text-align:right;">
+                                <a class="btn btn-success btn-sm" href="{{ route('export-summary-infraction') }}"><i class="bx bx-spreadsheet"></i> Export</a>
+                            </div>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -254,6 +356,9 @@ $i = 1;
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Attribute Summary</h4>
+                            <div style="text-align:right;">
+                                <a class="btn btn-success btn-sm" href="{{ route('export-attribute-summary') }}"><i class="bx bx-spreadsheet"></i> Export</a>
+                            </div>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -389,18 +494,20 @@ $(document).ready(function(){
             colors: ['transparent']
         },
         series: [{
-            name: '<?= !empty($summary_infra_mo_yr[0]->attrib_name) ? $summary_infra_mo_yr[0]->attrib_name : 'Accuracy' ?>',
-            data: [<?= !empty($summary_infra_mo_yr[0]->infractions) ? $summary_infra_mo_yr[0]->infractions : 0 ?>],
+            name: 'Accuracy',
+            data: [
+                <?= $aa ?>
+            ],
         }, {
-            name: '<?= !empty($summary_infra_mo_yr[1]->attrib_name) ? $summary_infra_mo_yr[1]->attrib_name : 'Communication' ?>',
-            data: [<?= !empty($summary_infra_mo_yr[1]->infractions) ? $summary_infra_mo_yr[1]->infractions : 0 ?>],
+            name: 'Communication',
+            data: [<?= $cc ?>],
         }, {
-            name: '<?= !empty($summary_infra_mo_yr[2]->attrib_name) ? $summary_infra_mo_yr[2]->attrib_name : 'Timeliness' ?>',
-            data: [<?= !empty($summary_infra_mo_yr[2]->infractions) ? $summary_infra_mo_yr[2]->infractions : 0 ?>],
+            name: 'Timeliness',
+            data: [<?= $tt ?>],
         }],
         colors: chartColumnColors,
         xaxis: {
-            categories: ['<?= date('Y') ?>'],
+            categories: [<?= $l_months ?>],
         },
         yaxis: {
             title: {
