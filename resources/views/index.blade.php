@@ -41,6 +41,30 @@ $num_img = 0;
             <!--end row-->
 
             <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title mb-0"> Birthday Celebrants</h4>
+                        </div><!-- end card header -->
+                        <div class="card-body">
+                            <!-- Swiper -->
+                            <div class="swiper effect-coverflow-swiper rounded pb-5">
+                                <div class="swiper-wrapper">
+                                    @if(count($today_birthdays) > 1)
+                                        @foreach($today_birthdays as $bpic)
+                                        <div class="swiper-slide">
+                                            <h1>{{$bpic->firstname." ".$bpic->lastname}}</h1>
+                                            <img src="{{ URL::asset('images/' . $bpic->avatar) }}" class="d-block w-100 img-fluid mx-auto" alt="{{$bpic->mod_id}}">
+                                        </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                                <div class="swiper-pagination swiper-pagination-dark"></div>
+                            </div>
+                        </div><!-- end card-body -->
+                    </div><!-- end card -->
+                </div>
+                <!--end col-->
                 <div class="col-xl-4 col-md-6">
                     <div class="card card-animate">
                         <div class="card-body">
@@ -297,12 +321,15 @@ $num_img = 0;
 
 @endsection
 @section('script')
+<script src="{{ URL::asset('/assets/libs/prismjs/prismjs.min.js') }}"></script>
 <!-- apexcharts -->
-<script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js') }}"></script>
+<!-- <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script> -->
+<!-- <script src="{{ URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js') }}"></script> -->
 <script src="{{ URL::asset('assets/libs/swiper/swiper.min.js')}}"></script>
+<script src="{{ URL::asset('/assets/js/pages/swiper.init.js') }}"></script>
 <!-- dashboard init -->
-<script src="{{ URL::asset('/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
+<!-- <script src="{{ URL::asset('/assets/js/pages/dashboard-ecommerce.init.js') }}"></script> -->
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+
 @endsection
