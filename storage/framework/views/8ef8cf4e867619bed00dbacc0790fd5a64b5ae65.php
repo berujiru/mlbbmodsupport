@@ -66,11 +66,6 @@ function sortMonths($a, $b) {
 uksort($result, 'sortMonths');
 $l_months = !empty($result) ? "'" .implode("', '",array_keys($result))."'" : null;
 
-// echo "<pre>";
-// print_r($result);
-// echo "<pre>";
-// exit;
-
 // $result_mo = [];
 // foreach ($result as $month => $data) {
 //     $value = array();
