@@ -45,7 +45,15 @@ function sortMonths($a, $b) {
         'Jan' => 1,
         'Feb' => 2,
         'Mar' => 3,
-        'Apr' => 4
+        'Apr' => 4,
+		'May' => 5,
+		'Jun' => 6,
+		'Jul' => 7,
+		'Aug' => 8,
+		'Sep' => 9,
+		'Oct' => 10,
+		'Nov' => 11,
+		'Dec' => 12
     );
     // $monthNumbers = array();
     // foreach ($monthsArray as $month) {
@@ -57,6 +65,11 @@ function sortMonths($a, $b) {
 }
 uksort($result, 'sortMonths');
 $l_months = !empty($result) ? "'" .implode("', '",array_keys($result))."'" : null;
+
+// echo "<pre>";
+// print_r($result);
+// echo "<pre>";
+// exit;
 
 // $result_mo = [];
 // foreach ($result as $month => $data) {
@@ -105,12 +118,13 @@ $l_months = !empty($result) ? "'" .implode("', '",array_keys($result))."'" : nul
 //     $values = array_column($data, 'values');
 //     $imploded_data[$attrib] = implode(', ', $values);
 // }
-$aa = $result['Jan'][0]['values'].",".$result['Feb'][0]['values'].",".$result['Mar'][0]['values'];
-$cc = $result['Jan'][1]['values'].",".$result['Feb'][1]['values'].",".$result['Mar'][1]['values'];
-$tt = $result['Jan'][2]['values'].",".$result['Feb'][2]['values'].",".$result['Mar'][2]['values'];
-echo "<pre>";
-print_r($aa);
-echo "</pre>";
+
+$aa = $result['Jan'][0]['values'].",".$result['Feb'][0]['values'].",".$result['Mar'][0]['values'].",".$result['Apr'][0]['values'];
+$cc = $result['Jan'][1]['values'].",".$result['Feb'][1]['values'].",".$result['Mar'][1]['values'].",".$result['Apr'][1]['values'];
+$tt = $result['Jan'][2]['values'].",".$result['Feb'][2]['values'].",".$result['Mar'][2]['values'].",".$result['Apr'][2]['values'];
+// echo "<pre>";
+// print_r($aa);
+// echo "</pre>";
 
 $i = 1;
 ?>

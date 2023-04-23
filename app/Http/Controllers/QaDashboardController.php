@@ -86,6 +86,10 @@ class QaDashboardController extends Controller
             ->where('ScoreonCommunication','NOT LIKE',"'%e%'")
             ->where('ScoreonCommunication','<>',"''")
             ->get();
+        
+        $date_update_format = DB::table('markdowns')
+            ->whereRaw("LENGTH(`Date`) < 9 AND `Date` NOT LIKE 'Date'")
+            ->update(['Date' => DB::raw("CONCAT('0', `Date`)")]);
 
         $infra_teams = Markdowns::select('Team','Form_Attribute',
             DB::raw('SUM(`Infractions`) AS infractions'))
