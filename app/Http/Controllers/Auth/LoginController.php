@@ -55,7 +55,7 @@ class LoginController extends Controller
             'failed' => 'These credentials do not match our records.',
         ]);
         
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1])) {
             // Success
             return redirect()->intended('/index');
         } else {

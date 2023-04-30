@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\AttributeInfractionController;
+use App\Http\Controllers\DeactivateUserController;
 use App\Http\Controllers\DeputyModsController;
 use App\Http\Controllers\DeputyModsNteController;
 use App\Http\Controllers\InfractionController;
@@ -59,6 +60,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('changeprofile', ['as' => 'profileedit', 'uses' => 'App\Http\Controllers\ProfileController@loginedit']);
     Route::put('settingprofile', ['as' => 'profileupdate', 'uses' => 'App\Http\Controllers\ProfileController@loginupdate']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+
+    //deactivate user
+    Route::resource('deactivate-user', DeactivateUserController::class);
+    Route::get('/deactivate-user/remove/{id}',[DeactivateUserController::class,'remove'])->name('deactivate-user.remove');
+    Route::get('/deactivate-user/restore/{id}',[DeactivateUserController::class,'restore'])->name('deactivate-user.restore');
+    Route::post('/deactivate-user/remove-multiple',[DeactivateUserController::class,'removemultiple'])->name('deactivate-user.remove-multiple');
 
     //infraction
     Route::resource('infraction', InfractionController::class);
@@ -122,6 +129,13 @@ Route::group(['middleware' => ['auth']], function() {
 
     //QA dashboard
     Route::resource('qa-dashboard', QaDashboardController::class);
+
+    //exports
+    Route::get('export-team-summary',[QaDashboardController::class,'exportTeamSummary'])->name('export-team-summary');
+    Route::get('export-team-infraction',[QaDashboardController::class,'exportTeamInfraction'])->name('export-team-infraction');
+    Route::get('export-infraction-attribute',[QaDashboardController::class,'exportInfractionAttribute'])->name('export-infraction-attribute');
+    Route::get('export-summary-infraction',[QaDashboardController::class,'exportSummaryCommittedInfraction'])->name('export-summary-infraction');
+    Route::get('export-attribute-summary',[QaDashboardController::class,'exportAttributeSummary'])->name('export-attribute-summary');
 });
 
 //public reset pass
