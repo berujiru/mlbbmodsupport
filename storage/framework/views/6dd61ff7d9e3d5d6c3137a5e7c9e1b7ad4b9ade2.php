@@ -39,12 +39,15 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3">
                                         <label for="email_add" class="form-label">Select Email Address : </label>
-                                        <select class="form-control" name="email_add" data-choices id="email_add" multiple>
+                                        <br>
+                                        <span class="badge bg-info">Note : Ø means MOD ID not found.</span>
+                                        <select class="form-control" name="email_add" data-choices data-choices-removeItem multiple id="email_add" multiple>
                                             <!-- <option value="" selected disabled hidden>Select email ... </option> -->
-                                            <option value="uname" <?= ($search_opt === 'uname' ? "selected" : "") ?>> Username </option>
+                                            <!-- <option value="uname" <?= ($search_opt === 'uname' ? "selected" : "") ?>> Username </option>
                                             <option value="email" <?= ($search_opt === 'email' ? "selected" : "") ?>> Email </option>
+                                            <option value="mod_id" <?= ($search_opt === 'mod_id' ? "selected" : "") ?>> MOD ID </option> -->
                                             <?php $__currentLoopData = $list_active_user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $au): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option value="<?php echo e($au->id); ?>"><?php echo e($au->email." (".$au->name.")"); ?></option>
+                                                <option value="<?php echo e($au->id); ?>"><?php echo e($au->name." (".($au->fullname->modid ?? 'Ø')." - ".$au->email.")"); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
@@ -75,6 +78,7 @@
               <option value="" selected disabled hidden>What to search ... </option>
               <option value="uname" <?= ($search_opt === 'uname' ? "selected" : "") ?>> Username </option>
               <option value="email" <?= ($search_opt === 'email' ? "selected" : "") ?>> Email </option>
+              <option value="mod_id" <?= ($search_opt === 'mod_id' ? "selected" : "") ?>> MOD ID </option>
           </select>
       </div>
   </div>
