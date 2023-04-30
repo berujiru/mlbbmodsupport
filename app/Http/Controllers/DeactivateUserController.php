@@ -48,6 +48,12 @@ class DeactivateUserController extends Controller
                         ->where('email','LIKE',"%{$word_search}%")
                         ->where('status','=',$status)
                         ->orderBy('id','DESC')->paginate(20);
+                } elseif (!empty($search_opt) && $search_opt === 'mod_id') {
+                    $data = User::select('*')
+                        ->join('dbsc', 'dbsc.id', '=', 'users.id')
+                        ->where('modid','LIKE',"%{$word_search}%")
+                        ->where('users.status','=',$status)
+                        ->orderBy('users.id','DESC')->paginate(20);
                 } else {
                     $data = User::select('*')
                         ->where('status','=',$status)
@@ -61,6 +67,11 @@ class DeactivateUserController extends Controller
                 } elseif (!empty($search_opt) && $search_opt === 'email') {
                     $data = User::select('*')
                         ->where('email','LIKE',"%{$word_search}%")
+                        ->orderBy('id','DESC')->paginate(20);
+                } elseif (!empty($search_opt) && $search_opt === 'mod_id') {
+                    $data = User::select('*')
+                        ->join('dbsc', 'dbsc.id', '=', 'users.id')
+                        ->where('modid','LIKE',"%{$word_search}%")
                         ->orderBy('id','DESC')->paginate(20);
                 } else {
                     $data = User::orderBy('id','DESC')->paginate(20);
