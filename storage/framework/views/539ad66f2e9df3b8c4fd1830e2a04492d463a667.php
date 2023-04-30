@@ -1,14 +1,14 @@
-@extends('layouts.master')
-@section('title') @lang('translation.dashboards') @endsection
-@section('css')
+
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.dashboards'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
 <link href="assets/libs/jsvectormap/jsvectormap.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/libs/swiper/swiper.min.css" rel="stylesheet" type="text/css" />
-@endsection
-@section('content')
-@component('components.breadcrumb')
-@slot('li_1') Dashboards @endslot
-@slot('title') Dashboard @endslot
-@endcomponent
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> Dashboards <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Dashboard <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 <?php
 $num_ind = 0;
 $num_img = 0;
@@ -21,13 +21,14 @@ $num_img = 0;
                 <div class="col-12">
                     <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                         <div class="flex-grow-1">
-                            <h4 class="fs-16 mb-1">{{$greeting}}{{!empty($dbsc) ? ", ".$dbsc->firstname : ""}}!</h4>
+                            <h4 class="fs-16 mb-1"><?php echo e($greeting); ?><?php echo e(!empty($dbsc) ? ", ".$dbsc->firstname : ""); ?>!</h4>
                         </div>
                         <div class="mt-3 mt-lg-0">
                             <form action="javascript:void(0);">
                                 <div class="row g-3 mb-0 align-items-center">
                                     <div class="col-sm-auto">
-                                        {{ date("F j, Y h:i:s A") }}
+                                        <?php echo e(date("F j, Y h:i:s A")); ?>
+
                                     </div>
                                     <!--end col-->
                                 </div>
@@ -50,12 +51,18 @@ $num_img = 0;
                             <!-- Swiper -->
                             <div class="swiper effect-coverflow-swiper rounded pb-5">
                                 <div class="swiper-wrapper">
-                                        @foreach($today_birthdays as $bpic)
+                                        <?php $__currentLoopData = $today_birthdays; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bpic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div class="swiper-slide">
-                                            <h1>{{$bpic->firstname." ".$bpic->lastname}}</h1>
-                                            <img src="{{ URL::asset('images/' . $bpic->avatar) }}" class="d-block w-100 img-fluid mx-auto" alt="{{$bpic->mod_id}}">
+                                            <h1><?php echo e($bpic->firstname." ".$bpic->lastname); ?></h1>
+                                            <img src="<?php echo e(URL::asset('images/' . $bpic->avatar)); ?>" class="d-block w-100 img-fluid mx-auto" alt="<?php echo e($bpic->mod_id); ?>">
                                         </div>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <!-- <?php if(count($today_birthdays) < 3): ?>
+                                        <div class="swiper-slide">
+                                            <h1>Place Holder</h1>
+                                            <img src="<?php echo e(URL::asset('assets/images/small/img-4.jpg')); ?>" alt="" class="img-fluid" />
+                                        </div>
+                                    <?php endif; ?> -->
                                 </div>
                                 <div class="swiper-pagination swiper-pagination-dark"></div>
                             </div>
@@ -70,7 +77,7 @@ $num_img = 0;
                                 <div>
                                     <p class="text-uppercase fw-medium text-muted mb-0">Registered Accounts</p>
                                     <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
-                                            data-target="{{number_format($active_accounts,2)}}">0</span></h2>
+                                            data-target="<?php echo e(number_format($active_accounts,2)); ?>">0</span></h2>
                                     <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
                                             Total Active</p>
                                 </div>
@@ -93,7 +100,7 @@ $num_img = 0;
                                 <div>
                                     <p class="text-uppercase fw-medium text-muted mb-0">Newly Registered</p>
                                     <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
-                                            data-target="{{number_format($total_newly_registered,2)}}">0</span></h2>
+                                            data-target="<?php echo e(number_format($total_newly_registered,2)); ?>">0</span></h2>
                                     <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
                                             Total New Active</p>
                                 </div>
@@ -116,7 +123,7 @@ $num_img = 0;
                                 <div>
                                     <p class="text-uppercase fw-medium text-muted mb-0">Number of Teams</p>
                                     <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
-                                            data-target="{{number_format($total_teams,2)}}">0</span></h2>
+                                            data-target="<?php echo e(number_format($total_teams,2)); ?>">0</span></h2>
                                     <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
                                             Total Active Teams</p>
                                 </div>
@@ -139,7 +146,7 @@ $num_img = 0;
                                 <div>
                                     <p class="text-uppercase fw-medium text-muted mb-0">Male Employees</p>
                                     <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
-                                            data-target="{{number_format($total_male,2)}}">0</span></h2>
+                                            data-target="<?php echo e(number_format($total_male,2)); ?>">0</span></h2>
                                     <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
                                             Total Active</p>
                                 </div>
@@ -162,7 +169,7 @@ $num_img = 0;
                                 <div>
                                     <p class="text-uppercase fw-medium text-muted mb-0">Female Employees</p>
                                     <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
-                                            data-target="{{number_format($total_female,2)}}">0</span></h2>
+                                            data-target="<?php echo e(number_format($total_female,2)); ?>">0</span></h2>
                                     <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
                                             Total Active</p>
                                 </div>
@@ -199,25 +206,25 @@ $num_img = 0;
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($list_teams as $lt)
+                                        <?php $__empty_1 = true; $__currentLoopData = $list_teams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div
                                                         class="avatar-sm bg-light rounded p-1 me-2">
-                                                        <img src="{{ URL::asset('assets/images/companies/img-1.png') }}"
+                                                        <img src="<?php echo e(URL::asset('assets/images/companies/img-1.png')); ?>"
                                                             alt="" class="img-fluid d-block" />
                                                     </div>
-                                                    <div class="flex-grow-1">{{$lt->team_name}}</div>
+                                                    <div class="flex-grow-1"><?php echo e($lt->team_name); ?></div>
                                                 </div>
                                             </td>
-                                            <td><span class="text-success">{{$lt->number_people}}</span></td>
+                                            <td><span class="text-success"><?php echo e($lt->number_people); ?></span></td>
                                             <td><span class="text-danger">no data yet</span></td>
                                             <td><?= empty($lt->headed_by) ? "<span class='text-danger'>no data yet</span>" : "<span class='text-primary'>$lt->headed_by</span>" ?></td>
                                         </tr><!-- end tr -->
-                                        @empty
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                             <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
-                                        @endforelse
+                                        <?php endif; ?>
                                     </tbody><!-- end tbody -->
                                 </table><!-- end table -->
                             </div>
@@ -233,31 +240,31 @@ $num_img = 0;
                         <div class="card-body">
                             <div class="table-responsive table-card">
                                 <div id="carouselExampleIndicators" class="carousel slide carousel-dark" data-bs-ride="carousel">
-                                    @if(count($today_birthdays) > 0 && count($birthday_cards) > 0)
+                                    <?php if(count($today_birthdays) > 0 && count($birthday_cards) > 0): ?>
                                     <div class="carousel-indicators">
-                                        @if(count($birthday_cards) > 1)
-                                            @foreach($birthday_cards as $tb)
+                                        <?php if(count($birthday_cards) > 1): ?>
+                                            <?php $__currentLoopData = $birthday_cards; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tb): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <?php if($num_ind == 0): ?>
-                                            <button type="button" class="active" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$num_ind}}" aria-current="true" aria-label="{{$tb->mod_id}}"></button>
+                                            <button type="button" class="active" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo e($num_ind); ?>" aria-current="true" aria-label="<?php echo e($tb->mod_id); ?>"></button>
                                             <?php else: ?>
-                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$num_ind}}" aria-current="true" aria-label="{{$tb->mod_id}}"></button>
+                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo e($num_ind); ?>" aria-current="true" aria-label="<?php echo e($tb->mod_id); ?>"></button>
                                             <?php 
                                                 endif;
                                                 $num_ind++;
                                             ?>
-                                            @endforeach
-                                        @endif
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
                                     </div>
                                     <div class="carousel-inner" role="listbox" style="width:100%;max-height: 400px !important;">
                                     <?php
                                         foreach($birthday_cards as $bpic):    
                                             if($num_img == 0): ?>
                                             <div class="carousel-item active" data-interval="2000">
-                                                <img src="{{URL::asset('img_birthday/'.$bpic->pic_filename)}}" class="d-block w-100 img-fluid mx-auto" alt="{{$bpic->mod_id}}">
+                                                <img src="<?php echo e(URL::asset('img_birthday/'.$bpic->pic_filename)); ?>" class="d-block w-100 img-fluid mx-auto" alt="<?php echo e($bpic->mod_id); ?>">
                                             </div>
                                             <?php else: ?>
                                             <div class="carousel-item" data-interval="2000">
-                                                <img src="{{URL::asset('img_birthday/'.$bpic->pic_filename)}}" class="d-block w-100 img-fluid mx-auto" alt="{{$bpic->mod_id}}">
+                                                <img src="<?php echo e(URL::asset('img_birthday/'.$bpic->pic_filename)); ?>" class="d-block w-100 img-fluid mx-auto" alt="<?php echo e($bpic->mod_id); ?>">
                                             </div>
                                             <?php
                                             endif;
@@ -265,7 +272,7 @@ $num_img = 0;
                                             ?>
                                     <?php endforeach; ?>
                                     </div>
-                                    @if(count($birthday_cards) > 1)
+                                    <?php if(count($birthday_cards) > 1): ?>
                                         <button class="carousel-control-prev" type="button" role="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Previous</span>
@@ -274,36 +281,36 @@ $num_img = 0;
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>
-                                    @endif
-                                    @else
+                                    <?php endif; ?>
+                                    <?php else: ?>
                                     <!--  no display -->
                                     <table class="table table-hover table-centered align-middle table-nowrap mb-0">
                                         <tbody>
-                                            @forelse($today_birthdays as $tb)
+                                            <?php $__empty_1 = true; $__currentLoopData = $today_birthdays; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tb): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
                                                             <div
                                                                 class="avatar-sm bg-light rounded p-1 me-2">
-                                                                <img src="{{ URL::asset('images/' . $tb->avatar) }}"
+                                                                <img src="<?php echo e(URL::asset('images/' . $tb->avatar)); ?>"
                                                                     alt="" class="rounded-circle img-thumbnail avatax-xs" />
                                                             </div>
                                                             <div>
-                                                                <h5 class="fs-14 my-1">{{$tb->firstname." ".$tb->lastname}}</h5>
+                                                                <h5 class="fs-14 my-1"><?php echo e($tb->firstname." ".$tb->lastname); ?></h5>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <h5 class="fs-14 my-1 fw-normal">{{date("F j",strtotime($tb->birthday))}}</h5>
+                                                        <h5 class="fs-14 my-1 fw-normal"><?php echo e(date("F j",strtotime($tb->birthday))); ?></h5>
                                                     </td>
                                                     <td></td>
                                                 </tr>
-                                            @empty
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                                 <tr><td colspan="3" class="text-muted">No birthday celebrant today</td></tr>
-                                            @endforelse
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -317,17 +324,19 @@ $num_img = 0;
 
 </div>
 
-@endsection
-@section('script')
-<script src="{{ URL::asset('/assets/libs/prismjs/prismjs.min.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(URL::asset('/assets/libs/prismjs/prismjs.min.js')); ?>"></script>
 <!-- apexcharts -->
-<!-- <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script> -->
-<!-- <script src="{{ URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js') }}"></script> -->
-<script src="{{ URL::asset('assets/libs/swiper/swiper.min.js')}}"></script>
-<script src="{{ URL::asset('/assets/js/pages/swiper.init.js') }}"></script>
+<!-- <script src="<?php echo e(URL::asset('/assets/libs/apexcharts/apexcharts.min.js')); ?>"></script> -->
+<!-- <script src="<?php echo e(URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js')); ?>"></script> -->
+<script src="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/js/pages/swiper.init.js')); ?>"></script>
 <!-- dashboard init -->
-<!-- <script src="{{ URL::asset('/assets/js/pages/dashboard-ecommerce.init.js') }}"></script> -->
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+<!-- <script src="<?php echo e(URL::asset('/assets/js/pages/dashboard-ecommerce.init.js')); ?>"></script> -->
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\site\mlbbmodsupport\resources\views/index.blade.php ENDPATH**/ ?>

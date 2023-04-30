@@ -1,14 +1,14 @@
-@extends('layouts.master')
-@section('title') @lang('translation.swiper-slider') @endsection
-@section('css')
+
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.swiper-slider'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
     <link href="assets/libs/swiper/swiper.min.css" rel="stylesheet" type="text/css" />
 
-@endsection
-@section('content')
-    @component('components.breadcrumb')
-        @slot('li_1') Advance UI @endslot
-        @slot('title') Swiper Slider @endslot
-    @endcomponent
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('li_1'); ?> Advance UI <?php $__env->endSlot(); ?>
+        <?php $__env->slot('title'); ?> Swiper Slider <?php $__env->endSlot(); ?>
+    <?php echo $__env->renderComponent(); ?>
     <div class="row">
         <div class="col-xl-4 col-lg-6">
             <div class="card">
@@ -22,13 +22,13 @@
                     <div class="swiper default-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-1.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-1.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-2.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-2.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-3.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-3.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                     </div>
@@ -50,13 +50,13 @@
                     <div class="swiper navigation-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-4.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-4.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-5.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-5.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-6.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-6.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-button-next"></div>
@@ -81,13 +81,13 @@
                     <div class="swiper pagination-dynamic-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-7.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-7.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-8.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-8.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-9.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-9.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-pagination dynamic-pagination"></div>
@@ -109,13 +109,13 @@
                     <div class="swiper pagination-fraction-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-10.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-10.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-11.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-11.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-12.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-12.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-button-next"></div>
@@ -139,13 +139,13 @@
                     <div class="swiper pagination-custom-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-2.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-2.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-3.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-3.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-4.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-4.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-pagination pagination-custom"></div>
@@ -167,13 +167,13 @@
                     <div class="swiper pagination-progress-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-5.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-5.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-6.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-6.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-7.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-7.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-button-next"></div>
@@ -197,13 +197,13 @@
                     <div class="swiper pagination-scrollbar-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-8.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-8.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-9.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-9.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-10.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-10.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-button-next"></div>
@@ -227,13 +227,13 @@
                     <div class="swiper vertical-swiper rounded" style="height: 324px;">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-11.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-11.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-12.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-12.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-1.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-1.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
@@ -256,13 +256,13 @@
                     <div class="swiper mousewheel-control-swiper rounded" style="height: 324px;">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-3.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-3.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-4.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-4.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-5.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-5.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
@@ -285,13 +285,13 @@
                     <div class="swiper effect-fade-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-6.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-6.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-7.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-7.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-8.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-8.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
@@ -313,13 +313,13 @@
                     <div class="swiper effect-creative-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-9.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-9.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-10.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-10.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-11.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-11.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
@@ -341,13 +341,13 @@
                     <div class="swiper effect-flip-swiper rounded">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-12.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-12.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-1.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-1.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ URL::asset('assets/images/small/img-2.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-2.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
@@ -370,7 +370,7 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <h1>asfsdfgsd</h1>
-                                <img src="{{ URL::asset('assets/images/small/img-4.jpg') }}" alt="" class="img-fluid" />
+                                <img src="<?php echo e(URL::asset('assets/images/small/img-4.jpg')); ?>" alt="" class="img-fluid" />
                             </div>
                             
                         </div>
@@ -395,8 +395,8 @@
                             <div class="swiper-slide">
                                 <div class="gallery-box card">
                                     <div class="gallery-container">
-                                        <a class="image-popup" href="{{ URL::asset('assets/images/small/img-1.jpg') }}" title="">
-                                            <img class="gallery-img img-fluid mx-auto" src="{{ URL::asset('assets/images/small/img-1.jpg') }}"
+                                        <a class="image-popup" href="<?php echo e(URL::asset('assets/images/small/img-1.jpg')); ?>" title="">
+                                            <img class="gallery-img img-fluid mx-auto" src="<?php echo e(URL::asset('assets/images/small/img-1.jpg')); ?>"
                                                 alt="" />
                                             <div class="gallery-overlay">
                                                 <h5 class="overlay-caption">Glasses and laptop from above</h5>
@@ -428,8 +428,8 @@
                             <div class="swiper-slide">
                                 <div class="gallery-box card">
                                     <div class="gallery-container">
-                                        <a class="image-popup" href="{{ URL::asset('assets/images/small/img-2.jpg') }}" title="">
-                                            <img class="gallery-img img-fluid mx-auto" src="{{ URL::asset('assets/images/small/img-2.jpg') }}"
+                                        <a class="image-popup" href="<?php echo e(URL::asset('assets/images/small/img-2.jpg')); ?>" title="">
+                                            <img class="gallery-img img-fluid mx-auto" src="<?php echo e(URL::asset('assets/images/small/img-2.jpg')); ?>"
                                                 alt="" />
                                             <div class="gallery-overlay">
                                                 <h5 class="overlay-caption">Working at a coffee shop</h5>
@@ -461,8 +461,8 @@
                             <div class="swiper-slide">
                                 <div class="gallery-box card mb-0">
                                     <div class="gallery-container">
-                                        <a class="image-popup" href="{{ URL::asset('assets/images/small/img-10.jpg') }}" title="">
-                                            <img class="gallery-img img-fluid mx-auto" src="{{ URL::asset('assets/images/small/img-10.jpg') }}"
+                                        <a class="image-popup" href="<?php echo e(URL::asset('assets/images/small/img-10.jpg')); ?>" title="">
+                                            <img class="gallery-img img-fluid mx-auto" src="<?php echo e(URL::asset('assets/images/small/img-10.jpg')); ?>"
                                                 alt="">
                                             <div class="gallery-overlay">
                                                 <h5 class="overlay-caption">Fun day at the Hill Station</h5>
@@ -494,8 +494,8 @@
                             <div class="swiper-slide">
                                 <div class="gallery-box card">
                                     <div class="gallery-container">
-                                        <a class="image-popup" href="{{ URL::asset('assets/images/small/img-4.jpg') }}" title="">
-                                            <img class="gallery-img img-fluid mx-auto" src="{{ URL::asset('assets/images/small/img-4.jpg') }}"
+                                        <a class="image-popup" href="<?php echo e(URL::asset('assets/images/small/img-4.jpg')); ?>" title="">
+                                            <img class="gallery-img img-fluid mx-auto" src="<?php echo e(URL::asset('assets/images/small/img-4.jpg')); ?>"
                                                 alt="" />
                                             <div class="gallery-overlay">
                                                 <h5 class="overlay-caption">Drawing a sketch</h5>
@@ -527,8 +527,8 @@
                             <div class="swiper-slide">
                                 <div class="gallery-box card">
                                     <div class="gallery-container">
-                                        <a class="image-popup" href="{{ URL::asset('assets/images/small/img-6.jpg') }}" title="">
-                                            <img class="gallery-img img-fluid mx-auto" src="{{ URL::asset('assets/images/small/img-6.jpg') }}"
+                                        <a class="image-popup" href="<?php echo e(URL::asset('assets/images/small/img-6.jpg')); ?>" title="">
+                                            <img class="gallery-img img-fluid mx-auto" src="<?php echo e(URL::asset('assets/images/small/img-6.jpg')); ?>"
                                                 alt="" />
                                             <div class="gallery-overlay">
                                                 <h5 class="overlay-caption">Project discussion with team</h5>
@@ -566,12 +566,14 @@
         <!--end col-->
     </div>
     <!--end row-->
-@endsection
-@section('script')
-    <script src="{{ URL::asset('/assets/libs/prismjs/prismjs.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/libs/swiper/swiper.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/pages/swiper.init.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(URL::asset('/assets/libs/prismjs/prismjs.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('/assets/libs/swiper/swiper.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('/assets/js/pages/swiper.init.js')); ?>"></script>
 
     <script src="assets/js/app.min.js"></script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\site\mlbbmodsupport\resources\views/advance-ui-swiper.blade.php ENDPATH**/ ?>
