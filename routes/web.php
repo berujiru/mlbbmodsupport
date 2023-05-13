@@ -4,6 +4,7 @@ use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\AttributeInfractionController;
 use App\Http\Controllers\DeactivateUserController;
 use App\Http\Controllers\DeputyModsController;
+use App\Http\Controllers\DeputyModsInfractionController;
 use App\Http\Controllers\DeputyModsNteController;
 use App\Http\Controllers\InfractionController;
 use Illuminate\Support\Facades\Route;
@@ -102,6 +103,7 @@ Route::group(['middleware' => ['auth']], function() {
     //deputy mods
     Route::resource('deputy-mods', DeputyModsController::class);
     Route::resource('deputy-mods-nte', DeputyModsNteController::class);
+    Route::resource('deputy-mods-infra', DeputyModsInfractionController::class);
     
     //mailbox
     Route::get('/mailbox',[MailboxController::class,'index'])->name('mailbox');
