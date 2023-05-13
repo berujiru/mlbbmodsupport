@@ -125,6 +125,11 @@
                                     <!-- <i class="bx bxs-user-account"></i> --> <span>Moderator's Score</span>
                                 </a>
                             </li> <!-- end Deputy Mods Score -->
+                            <li class="nav-item"> <!-- start Deputy Mods Infra -->
+                                <a class="nav-link" aria-expanded="false" href="{{ route('deputy-mods-infra.index') }}">
+                                    <!-- <i class="bx bxs-user-account"></i> --> <span >Moderator's Infraction</span>
+                                </a>
+                            </li> <!-- end Deputy Mods Infra -->
                             <li class="nav-item"> <!-- start Deputy Mods NTE -->
                                 <a class="nav-link" aria-expanded="false" href="{{ route('deputy-mods-nte.index') }}">
                                     <!-- <i class="bx bxs-user-account"></i> --> <span >Moderator's NTE</span>
