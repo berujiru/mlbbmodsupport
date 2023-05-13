@@ -41,7 +41,7 @@ $num_img = 0;
             <!--end row-->
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title mb-0"> Birthday Celebrants</h4>
@@ -62,75 +62,109 @@ $num_img = 0;
                         </div><!-- end card-body -->
                     </div><!-- end card -->
                 </div>
-                <!--end col-->
-                <div class="col-xl-4 col-md-6">
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p class="text-uppercase fw-medium text-muted mb-0">Registered Accounts</p>
-                                    <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
-                                            data-target="{{number_format($active_accounts,2)}}">0</span></h2>
-                                    <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
-                                            Total Active</p>
-                                </div>
-                                <div>
-                                    <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-soft-info rounded-circle fs-2">
-                                            <i data-feather="users" class="text-primary"></i>
-                                        </span>
+                <div class="col-md-6">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p class="text-uppercase fw-medium text-muted mb-0">Registered Accounts</p>
+                                        <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
+                                                data-target="{{number_format($active_accounts,2)}}">0</span></h2>
+                                        <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
+                                                Total Active</p>
+                                    </div>
+                                    <div>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-soft-info rounded-circle fs-2">
+                                                <i data-feather="users" class="text-primary"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-                <!--newly registered -->
-                <div class="col-xl-4 col-md-6">
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p class="text-uppercase fw-medium text-muted mb-0">Newly Registered</p>
-                                    <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
-                                            data-target="{{number_format($total_newly_registered,2)}}">0</span></h2>
-                                    <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
-                                            Total New Active</p>
-                                </div>
-                                <div>
-                                    <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-soft-info rounded-circle fs-2">
-                                            <i data-feather="users" class="text-primary"></i>
-                                        </span>
+                            </div><!-- end card body -->
+                        </div> <!-- end card-->
+                    <!--newly registered -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p class="text-uppercase fw-medium text-muted mb-0">Newly Registered</p>
+                                        <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
+                                                data-target="{{number_format($total_newly_registered,2)}}">0</span></h2>
+                                        <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
+                                                Total New Active</p>
+                                    </div>
+                                    <div>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-soft-info rounded-circle fs-2">
+                                                <i data-feather="users" class="text-primary"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-                <!-- number of teams -->
-                <div class="col-xl-4 col-md-6">
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p class="text-uppercase fw-medium text-muted mb-0">Number of Teams</p>
-                                    <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
-                                            data-target="{{number_format($total_teams,2)}}">0</span></h2>
-                                    <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
-                                            Total Active Teams</p>
-                                </div>
-                                <div>
-                                    <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-soft-info rounded-circle fs-2">
-                                            <i data-feather="users" class="text-primary"></i>
-                                        </span>
+                            </div><!-- end card body -->
+                        </div> <!-- end card-->
+                    <!-- number of teams -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p class="text-uppercase fw-medium text-muted mb-0">Number of Teams</p>
+                                        <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value"
+                                                data-target="{{number_format($total_teams,2)}}">0</span></h2>
+                                        <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0">
+                                                Total Active Teams</p>
+                                    </div>
+                                    <div>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-soft-info rounded-circle fs-2">
+                                                <i data-feather="users" class="text-primary"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
+                            </div><!-- end card body -->
+                        </div> <!-- end card-->
+                </div>
+              
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <h4 class="card-title mb-0">Upcoming Schedules</h4>
+                        </div><!-- end cardheader -->
+                        <div class="card-body pt-0">
+                            <div class="upcoming-scheduled">
+                                <input type="text" class="form-control" data-provider="flatpickr"
+                                    data-date-format="d M, Y" data-deafult-date="today" data-inline-date="true">
                             </div>
-                        </div><!-- end card body -->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
+
+                            <h6 class="text-uppercase fw-semibold mt-4 mb-3 text-muted">Events:</h6>
+
+                            <div class="mini-stats-wid d-flex align-items-center mt-3">
+                                <div class="flex-shrink-0 avatar-sm">
+                                    <span
+                                        class="mini-stat-icon avatar-title rounded-circle text-success bg-soft-success fs-4">
+                                        12
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="mb-1">Design new UI and allow schedules inpout</h6>
+                                    <p class="text-muted mb-0">Meta4Systems</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <p class="text-muted mb-0">11:30 <span class="text-uppercase">am</span></p>
+                                </div>
+                            </div><!-- end -->
+
+                            <div class="mt-3 text-center">
+                                <a href="javascript:void(0);" class="text-muted text-decoration-underline">View
+                                    all Events</a>
+                            </div>
+
+                        </div><!-- end cardbody -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
                 <!--
                 <div class="col-xl-4 col-md-6">
                     <div class="card card-animate">
