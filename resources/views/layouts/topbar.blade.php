@@ -369,6 +369,10 @@
                         <a class="dropdown-item" href="{{ route('profile') }}"><i
                                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Profile</span></a>
+                        <a class="dropdown-item" target="_blank" href="https://docs.google.com/document/d/12WX0eolJI_tVocZJZ8AMcFNhl1pvO_gNHwbg9nMED18/edit?usp=sharing">
+                            <i class="mdi mdi-help text-muted fs-16 align-middle me-1"></i>
+                            User Manual
+                        </a>
                         <!-- <a class="dropdown-item" href="apps-chat"><i
                                 class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Messages</span></a>
