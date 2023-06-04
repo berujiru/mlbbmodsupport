@@ -47,10 +47,6 @@
                 </tbody>
                 </table>
             </div>
-            <div class="d-flex justify-content-center">
-                <?php echo e($data->links()); ?>
-
-            </div>
             </div>
         </div>
         <!-- end stickey -->

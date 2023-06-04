@@ -22,29 +22,34 @@ class DeputyModsInfractionController extends Controller
         //$user = 4; //if deputy user
 
         if(isset($_GET['mod_id']) && isset($_GET['q_infra'])) {
+
             $search_modid = $request->input('mod_id');
             $q_infraction = $request->input('q_infra');
-            //$date_range_from = $request->input('date_range_f');
-            //$date_range_to = $request->input('date_range_t');
+            $date_range_from = $request->input('date_range_f');
+            $date_range_to = $request->input('date_range_t');
 
-            // if(isset($_GET['date_range_f'])) {
-            //     $date_from = !empty($date_range_from) ? date("Y-m-d", strtotime($date_range_from)) : date("Y-01-01");
-            // } else {
-            //     $date_from = date("Y-01-01");
-            // }
+            if(isset($_GET['date_range_f'])) {
+                $date_from = !empty($date_range_from) ? date("Y-m-d", strtotime($date_range_from)) : date("Y-01-01");
+            } else {
+                $date_from = date("Y-01-01");
+            }
 
-            // if(isset($_GET['date_range_t'])) {
-            //     $date_to = !empty($date_range_to) ? date("Y-m-d", strtotime($date_range_to)) : date("Y-m-t");
-            // } else {
-            //     $date_to = date("Y-m-t");
-            // }
+            if(isset($_GET['date_range_t'])) {
+                $date_to = !empty($date_range_to) ? date("Y-m-d", strtotime($date_range_to)) : date("Y-m-t");
+            } else {
+                $date_to = date("Y-m-t");
+            }
+
+            // echo $date_from.' '.$date_to;
+            // exit;
 
             if($search_modid > 0 && !empty($q_infraction)) {
                 $data = Markdowns::select('markdowns.*')
-                    ->where('Moderator','<>',"Moderator")
                     ->where('markdowns.MOD_ID','=',$search_modid)
                     ->where('markdowns.Form_Attribute','LIKE',"%{$q_infraction}%")
-                    ->orderByRaw('STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
+                    ->whereRaw("STR_TO_DATE(`Date`, '%d-%b-%y') >= '".trim($date_from)."'")
+                    ->whereRaw("STR_TO_DATE(`Date`, '%d-%b-%y') <= '".trim($date_to)."'")
+                    ->orderByRaw("STR_TO_DATE(`Date`, '%d-%b-%y') DESC")
                     ->paginate(50);
                 
                 
@@ -60,20 +65,30 @@ class DeputyModsInfractionController extends Controller
                 //     ->paginate(50);
             } elseif ($search_modid > 0 && empty($q_infraction)) {
                 $data = Markdowns::select('markdowns.*')
-                    ->where('Moderator','<>',"Moderator")
                     ->where('markdowns.MOD_ID','=',$search_modid)
-                    ->orderByRaw('STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
+                    ->whereRaw("STR_TO_DATE(`Date`, '%d-%b-%y') >= '".trim($date_from)."'")
+                    ->whereRaw("STR_TO_DATE(`Date`, '%d-%b-%y') <= '".trim($date_to)."'")
+                    ->orderByRaw("STR_TO_DATE(`Date`, '%d-%b-%y') DESC")
+                    ->paginate(50);
+            } elseif (empty($search_modid) && !empty($q_infraction)) {
+                $data = Markdowns::select('markdowns.*')
+                    ->where('markdowns.Form_Attribute','LIKE',"%{$q_infraction}%")
+                    ->whereRaw("STR_TO_DATE(`Date`, '%d-%b-%y') >= '".trim($date_from)."'")
+                    ->whereRaw("STR_TO_DATE(`Date`, '%d-%b-%y') <= '".trim($date_to)."'")
+                    ->orderByRaw("STR_TO_DATE(`Date`, '%d-%b-%y') DESC")
                     ->paginate(50);
             } else {
                 $data = Markdowns::select('*')
                     ->where('Moderator','<>',"Moderator")
-                    ->orderByRaw('STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
+                    ->whereRaw("STR_TO_DATE(`Date`, '%d-%b-%y') >= '".trim($date_from)."'")
+                    ->whereRaw("STR_TO_DATE(`Date`, '%d-%b-%y') <= '".trim($date_to)."'")
+                    ->orderByRaw("STR_TO_DATE(`Date`, '%d-%b-%y') DESC")
                     ->paginate(50);
-                    }
+            }
         } else {
             $data = Markdowns::select('*')
                 ->where('Moderator','<>',"Moderator")
-                ->orderByRaw('STR_TO_DATE(`Date`, "%m/%d/%Y") DESC')
+                ->orderByRaw("STR_TO_DATE(`Date`, '%d-%b-%y') DESC")
                 ->paginate(50);
             // $data = Masterfile::select('masterfile.*')
             //     ->join('dbsc', 'dbsc.modid', '=', 'masterfile.MOD_ID')

@@ -61,18 +61,18 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
     <br>
-    <!-- <div class="col-xs-3 col-sm-3 col-md-3">
+    <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
-          <label for="moderator" class="form-label">From</label>
+          <label for="from-date" class="form-label">From</label>
           <input type="text" placeholder="Set Date (From) ..." name="date_range_f"  value="<?= $from ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
       </div>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3">
       <div class="mb-3">
-          <label for="moderator" class="form-label">To</label>
+          <label for="to-date" class="to-label">To</label>
           <input type="text" placeholder="Set Date (To) ..." name="date_range_t" value="<?= $to ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
       </div>
-    </div> -->
+    </div>
   </div>
   <?php echo Form::close(); ?>
 
