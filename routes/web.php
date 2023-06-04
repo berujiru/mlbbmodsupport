@@ -24,6 +24,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamDeputyController;
 use App\Http\Controllers\TeamDeputyHistoryController;
 use App\Http\Controllers\TicketsupportController;
+use App\Http\Controllers\UserManualController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,7 +105,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('deputy-mods', DeputyModsController::class);
     Route::resource('deputy-mods-nte', DeputyModsNteController::class);
     Route::resource('deputy-mods-infra', DeputyModsInfractionController::class);
-    
+
     //mailbox
     Route::get('/mailbox',[MailboxController::class,'index'])->name('mailbox');
     Route::get('/mailbox/{id}',[MailboxController::class,'show'])->name('mailboxview');
@@ -138,6 +139,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('export-infraction-attribute',[QaDashboardController::class,'exportInfractionAttribute'])->name('export-infraction-attribute');
     Route::get('export-summary-infraction',[QaDashboardController::class,'exportSummaryCommittedInfraction'])->name('export-summary-infraction');
     Route::get('export-attribute-summary',[QaDashboardController::class,'exportAttributeSummary'])->name('export-attribute-summary');
+
+    //Users Manual
+    Route::resource('user-manual', UserManualController::class);
+    Route::get('/user-manual/view',[UserManualController::class,'show'])->name('user-manual.show');
 });
 
 //public reset pass

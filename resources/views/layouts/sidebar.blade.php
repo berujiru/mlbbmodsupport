@@ -219,6 +219,10 @@
                     <a href="{{ route('mytickets') }}" class="nav-link" >
                     <i class="ri-ticket-line"></i> <span data-key="t-landing">My Tickets</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('user-manual.index') }}" class="nav-link" >
+                    <i class="bx bx-help-circle"></i> <span data-key="t-landing">Users Manual</a>
+                </li>
 
             </ul>
         </div>
