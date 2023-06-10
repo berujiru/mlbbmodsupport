@@ -143,10 +143,14 @@ Route::group(['middleware' => ['auth']], function() {
     //Users Manual
     Route::resource('user-manual', UserManualController::class);
     Route::get('/user-manual/view',[UserManualController::class,'show'])->name('user-manual.show');
+    
+    //calendar
+    Route::get('/schedules',  [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 });
 
 //public reset pass
 Route::get('/reset', [App\Http\Controllers\HomeController::class, 'resetpassword'])->name('resetpass');
+
 
 Route::post('/forgot-password', [App\Http\Controllers\HomeController::class, 'sendresetpassword'])->name('password.email');
 
