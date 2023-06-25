@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Response;
 
 class UserManualController extends Controller
 {
@@ -32,7 +34,17 @@ class UserManualController extends Controller
      */
     public function show()
     {
-        return view('user-manual.show');
+        //return view('user-manual.show');
+
+        return Response::make(file_get_contents('manual/DEPUTY_MANAGEMENT_USERS_MANUAL.pdf'), 200, [
+            'content-type'=>'application/pdf',
+        ]);
+    }
+
+    public function pdf() {
+        // return Response::make(file_get_contents('manual/DEPUTY_MANAGEMENT_USERS_MANUAL.pdf'), 200, [
+        //                'content-type'=>'application/pdf',
+        //            ]);
     }
 
     /**

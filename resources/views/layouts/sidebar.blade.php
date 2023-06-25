@@ -219,11 +219,12 @@
                     <a href="{{ route('mytickets') }}" class="nav-link" >
                     <i class="ri-ticket-line"></i> <span data-key="t-landing">My Tickets</a>
                 </li>
+                @if(Auth::user()->hasRole('HR') && Auth::user()->hasRole('Admin'))
                 <li class="nav-item">
                     <a href="{{ route('user-manual.index') }}" class="nav-link" >
                     <i class="bx bx-help-circle"></i> <span data-key="t-landing">Users Manual</a>
                 </li>
-
+                @endif
             </ul>
         </div>
         <!-- Sidebar -->

@@ -34,7 +34,7 @@
               <td style="width:10%;">{{++$i}}</td>
               <td style="width:20%;">{{ $manual->manual_name }}</td>
               <td style="width:30%;">{{ $manual->manual_description ?? '-' }}</td>
-              <td style="width:30%;"><a style="font-size:30px;" title="Click to View" href="{{ route('user-manual.show') }}"><i class="bx bxs-file-pdf"></i></a></td>
+              <td style="width:30%;"><a target="_blank" style="font-size:30px;" title="Click to View" href="{{ route('user-manual.show') }}"><i class="bx bxs-file-pdf"></i></a></td>
           </tr>
         @empty
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
