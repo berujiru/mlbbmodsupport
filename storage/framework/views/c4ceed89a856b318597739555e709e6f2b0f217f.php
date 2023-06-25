@@ -34,7 +34,7 @@
               <td style="width:10%;"><?php echo e(++$i); ?></td>
               <td style="width:20%;"><?php echo e($manual->manual_name); ?></td>
               <td style="width:30%;"><?php echo e($manual->manual_description ?? '-'); ?></td>
-              <td style="width:30%;"><a style="font-size:30px;" title="Click to View" href="<?php echo e(route('user-manual.show')); ?>"><i class="bx bxs-file-pdf"></i></a></td>
+              <td style="width:30%;"><a target="_blank" style="font-size:30px;" title="Click to View" href="<?php echo e(route('user-manual.show')); ?>"><i class="bx bxs-file-pdf"></i></a></td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
