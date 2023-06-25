@@ -158,8 +158,7 @@ $num_img = 0;
                             </div><!-- end -->
 
                             <div class="mt-3 text-center">
-                                <a href="javascript:void(0);" class="text-muted text-decoration-underline">View
-                                    all Events</a>
+                                <a href="apps-calendar" class="text-success text-decoration-underline ">Manage Events (BETA)</a>
                             </div>
 
                         </div><!-- end cardbody -->

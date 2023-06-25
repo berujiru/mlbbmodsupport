@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="external-event fc-event bg-soft-danger text-danger" data-class="bg-soft-danger">
                                     <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Create
-                                    New theme
+                                    New Team
                                 </div>
                             </div>
 
