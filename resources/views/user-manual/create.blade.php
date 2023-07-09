@@ -75,7 +75,7 @@
             <input type="file" class="form-control @error('file_name') is-invalid @enderror" name="file_name" id="input-filename" required>
             @error('file_name')
                 <span class="invalid-feedback" role="alert">
-                    <strong>{{ 'Only PDF file is allowed!' }}</strong>
+                    <strong>{{ 'Only PDF files are allowed!' }}</strong>
                 </span>
             @enderror
             </div>
