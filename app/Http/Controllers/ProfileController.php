@@ -14,6 +14,7 @@ use App\Models\Masterfile;
 use App\Models\Markdowns;
 use App\Models\Nte;
 use App\Models\Ticket;
+use App\Models\Event;
 use DateTime;
 
 class ProfileController extends Controller
@@ -175,6 +176,22 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function event(Request $request)
+    {
+
+        $event = new Event();
+        $event->type = $request->info['className'];
+        $event->name =$request->info['title'];
+        $event->date =$request->info['start']." ".$request->info['end'];;
+        $event->description=$request->info['description'];
+        
+        if($event->save()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function ticket(Request $request)
     {
 
