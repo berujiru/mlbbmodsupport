@@ -17,6 +17,11 @@
   <div class="card">
     <div class="card-header align-items-center d-flex">
       <h4 class="card-title mb-0 flex-grow-1">
+      <?php if(Auth::user()->hasRole('HR') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('QA Mods')): ?>
+        <div class="pull-right">
+            <a class="btn btn-success" href="<?php echo e(route('user-manual.create')); ?>"> <i class="bx bx-fw bx-upload"></i> Upload Users Manual</a>
+        </div>
+      <?php endif; ?>
       </h4>
     </div><!-- end card header -->
     <table class="table table-hover table-nowrap mb-0 align-middle">
@@ -34,7 +39,7 @@
               <td style="width:10%;"><?php echo e(++$i); ?></td>
               <td style="width:20%;"><?php echo e($manual->manual_name); ?></td>
               <td style="width:30%;"><?php echo e($manual->manual_description ?? '-'); ?></td>
-              <td style="width:30%;"><a style="font-size:30px;" title="Click to View" href="<?php echo e(route('user-manual.show')); ?>"><i class="bx bxs-file-pdf"></i></a></td>
+              <td style="width:30%;"><a target="_blank" style="font-size:25px;" title="Click to View" href="<?php echo e(route('user-manual.show',[$manual->user_manual_id,$manual->manual_name])); ?>"><i class="bx bxs-file-pdf"></i></a></td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
