@@ -143,7 +143,7 @@ Route::group(['middleware' => ['auth']], function() {
     //Users Manual
     Route::resource('user-manual', UserManualController::class);
     Route::get('/user-manual/view/{id}/{filename}',[UserManualController::class,'show'])->name('user-manual.show');
-    //Route::get('/user-manual/pdf',[UserManualController::class,'show'])->name('user-manual.show');
+    Route::get('/user-manual/delete/{id}',[UserManualController::class,'destroy'])->name('user-manual.delete');
     
     //calendar
     Route::get('/schedules',  [App\Http\Controllers\HomeController::class, 'index'])->name('index');
