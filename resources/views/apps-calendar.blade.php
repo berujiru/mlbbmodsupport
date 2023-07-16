@@ -83,7 +83,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                         </div>
                         <div class="modal-body p-4">
-                            <form class="needs-validation" name="event-form" id="form-event" novalidate>
+                            <form class="needs-validation" name="custom_event-form" id="form-event" novalidate >
                                 <div class="text-end">
                                     <a href="#" class="btn btn-sm btn-soft-primary" id="edit-event-btn" data-id="edit-event" onclick="editEvent(this)" role="button">Edit</a>
                                 </div>
@@ -210,4 +210,30 @@
     <script src="{{ URL::asset('assets/libs/fullcalendar/fullcalendar.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/pages/calendar.init.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+
+    <script>
+        function sendevent(newEvent){
+
+        setTimeout(function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type:'POST',
+                    url:"/event",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        info: newEvent,
+                        user: "{{  auth()->user()->id }}"
+                    },
+                    success:function(data){
+                        console.log(data);
+                    }
+                });
+            }, 2000)
+        }
+    </script>
 @endsection
