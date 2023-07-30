@@ -18,7 +18,13 @@ class UserManualController extends Controller
      */
     public function index(Request $request)
     {
-        $data = DB::table('user_manual')->paginate(50);
+        // $data = DB::table('user_manual')->paginate(50);
+        // if($data){
+        //     return view('user-manual.index',compact('data'))
+        //         ->with('i', ($request->input('page', 1) - 1) * 50);
+        // }
+        
+        $data = UserManual::orderBy('manual_name','ASC')->paginate(50);
         if($data){
             return view('user-manual.index',compact('data'))
                 ->with('i', ($request->input('page', 1) - 1) * 50);

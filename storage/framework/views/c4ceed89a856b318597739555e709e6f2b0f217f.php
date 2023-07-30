@@ -30,19 +30,27 @@
               <th scope="col">#</th>
               <th scope="col">Manual</th>
               <th scope="col">Description</th>
+              <th scope="col">File Size</th>
+              <th scope="col">Uploader</th>
+              <th scope="col">Date Attached/Reattached</th>
               <th scope="col">Link</th>
           </tr>
       </thead>
       <tbody>
         <?php $__empty_1 = true; $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $manual): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
           <tr>
-              <td style="width:10%;"><?php echo e(++$i); ?></td>
+              <td style="width:5%;"><?php echo e(++$i); ?></td>
               <td style="width:20%;"><?php echo e($manual->manual_name); ?></td>
               <td style="width:30%;"><?php echo e($manual->manual_description ?? '-'); ?></td>
+              <td style="width:5%;"><?php echo e($manual->file_size ?? '-'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($manual->reattached_by) ? $manual->reattachedby->firstname." ".$manual->reattachedby->lastname : $manual->uploadedby->firstname." ".$manual->uploadedby->lastname); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($manual->date_reattached) ? date('d M Y h:i A',strtotime($manual->date_reattached)) : date('d M Y h:i A',strtotime($manual->date_attached))); ?></td>
               <td style="width:30%;">
                 <a target="_blank" class="btn btn-sm btn-info" title="Click to View" href="<?php echo e(route('user-manual.show',[$manual->user_manual_id,$manual->manual_name])); ?>"><i class="bx bx-fw bxs-file-pdf"></i></a>
+                <?php if(Auth::user()->hasRole('HR') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('QA Mods')): ?>
                 <a class="btn btn-sm btn-primary" href="<?php echo e(route('user-manual.edit',$manual->user_manual_id)); ?>" title="Update User Manual"><i class="bx bx-fw bx-upload"></i></a>
                 <a class="btn btn-sm btn-danger" href="<?php echo e(route('user-manual.delete',$manual->user_manual_id)); ?>" title="Delete User Manual"><i class="bx bx-fw bx-trash"></i></a>
+                <?php endif; ?>
               </td>
           </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
