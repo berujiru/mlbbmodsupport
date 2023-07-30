@@ -114,10 +114,15 @@ class UserManualController extends Controller
         ]);
 
         $input = $request->all();
-
-        $file_path = 'manual/';
+        
+        $doc_root = public_path();
+        $file_path = $doc_root.'/manual/';
         if (request()->has('file_name')) {
             $d_file = request()->file('file_name');
+
+            print_r($d_file);
+            exit;
+
             $filename = strtoupper(str_replace(" ","_",$input['manual_name'])).'_'.time().'.'.$d_file->getClientOriginalExtension();
             $file_ext = $d_file->getClientMimeType();
 
@@ -128,6 +133,7 @@ class UserManualController extends Controller
                 $unit = " MB";
             }
             $d_file->move($file_path, $filename);
+            //move_uploaded_file($file->tempName,$path.$model->document_filename)
         } else {
             $filename = "";
             $file_size = "";
@@ -189,7 +195,8 @@ class UserManualController extends Controller
         ]);
 
         $input = $request->all();
-        $file_path = 'manual/';
+        $doc_root = public_path();
+        $file_path = $doc_root.'/manual/';
         $old_file_name = $manual->file_name;
         $cur_file_ext = $manual->file_type;
         $cur_file_size = $manual->file_size;
@@ -259,7 +266,8 @@ class UserManualController extends Controller
     public function destroy($id)
     {
         $manual = UserManual::find($id);
-        $file_path = 'manual/';
+        $doc_root = public_path();
+        $file_path = $doc_root.'/manual/';
         $old_file_name = $manual->file_name;
 
         $delete = UserManual::find($id)->delete();
