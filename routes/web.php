@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MailboxController;
 use App\Http\Controllers\ModBirthdayPictureController;
+use App\Http\Controllers\ModDashboardController;
 use App\Http\Controllers\NteController;
 use App\Http\Controllers\ModinfractionController;
 use App\Http\Controllers\ModScoreSummaryController;
@@ -134,6 +135,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     //QA dashboard
     Route::resource('qa-dashboard', QaDashboardController::class);
+
+    //Mod dashboard
+    Route::resource('mod-dashboard', ModDashboardController::class);
 
     //exports
     Route::get('export-team-summary',[QaDashboardController::class,'exportTeamSummary'])->name('export-team-summary');

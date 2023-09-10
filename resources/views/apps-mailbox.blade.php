@@ -1,6 +1,13 @@
 @extends('layouts.master')
 @section('title') @lang('translation.mailbox') @endsection
 @section('content')
+
+<?php
+  $from = isset($_GET['from_date']) ? $_GET['from_date'] : '';
+  $to = isset($_GET['to_date']) ? $_GET['to_date'] : '';
+  $infra = isset($_GET['filter_infra']) ? $_GET['filter_infra'] : '';
+?>
+
 <div class="email-wrapper d-lg-flex gap-1 mx-n4 mt-n4 p-1">
     <div class="email-content">
         <div class="p-4 pb-0">
@@ -12,7 +19,42 @@
                         </button>
                     </div>
                 </div>
-
+                <!-- start mail filter -->
+                {!! Form::open(array('route' => 'mailbox','method'=>'GET')) !!}
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="mb-3">
+                            <label for="from-date" class="form-label">From</label>
+                            <input type="text" placeholder="Set Date (From) ..." name="from_date"  value="<?= $from ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="mb-3">
+                            <label for="to-date" class="to-label">To</label>
+                            <input type="text" placeholder="Set Date (To) ..." name="to_date" value="<?= $to ?>" class="form-control" data-provider="flatpickr" data-date-format="M d, Y">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2">
+                        <div class="mb-2">
+                            <label for="moderator" class="form-label">With Infraction</label>
+                            <select class="form-control" name="filter_infra" data-choices
+                                    id="modInput">
+                                <option value="" selected disabled hidden>Filter ... </option>
+                                <option value=""> -clear- </option>
+                                <option value="1" <?= ($infra == 1 ? "selected" : "") ?> >Yes</option>
+                                <option value="0" <?= ($infra == 0 ? "selected" : "") ?> >None</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:9px;">
+                        <div class="mb-3">
+                            <br>
+                            <button type="submit" class="btn btn-info"><i class="bx bx-filter-alt bx-fw"></i> Filter</button>
+                        </div>
+                    </div>
+                </div>
+                {!! Form::close() !!}
+                <!-- end mail filter -->
                 <div class="row align-items-center mt-3">
                     <div class="col">
                         <ul class="nav nav-tabs nav-tabs-custom nav-success gap-1 text-center border-bottom-0" role="tablist">

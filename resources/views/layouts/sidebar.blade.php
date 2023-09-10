@@ -38,10 +38,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('mod-dashboard.index') }}">
+                        <i class="bx bx-bar-chart-alt-2"></i> <span data-key="t-landing">Moderator Dashboard</span>
+                    </a>
+                </li>
+                @if(Auth::user()->hasRole('HR') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('QA Mods'))
+                <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('qa-dashboard.index') }}">
                         <i class="bx bx-bar-chart-alt-2"></i> <span data-key="t-landing">QA Dashboard</span>
                     </a>
                 </li>
+                @endif
                 @if(Auth::user()->hasRole('Admin'))
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button"
@@ -59,6 +66,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->
+                @endif
                 @if(Auth::user()->hasRole('Admin') || Auth::user()->hasRole('HR'))
                 <li class="nav-item"> <!-- start Config -->
                     <a class="nav-link menu-link" href="#sidebarConfig" data-bs-toggle="collapse" role="button"
@@ -85,7 +93,6 @@
                         </ul>
                     </div>
                 </li> <!-- end Config -->
-
                 <li class="nav-item"> <!-- start Team -->
                     <a class="nav-link menu-link" href="#sidebarTeam" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarTeam">
@@ -111,6 +118,14 @@
                         </ul>
                     </div>
                 </li> <!-- end Team -->
+                <li class="nav-item">
+                    <a href="{{ route('birthday-card.index') }}" class="nav-link" >
+                    <i class="bx bx-images"></i> <span data-key="t-eval">Birthday Card</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('modeval') }}" class="nav-link" >
+                    <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
+                </li>
                 @endif
                 @if(Auth::user()->hasRole('Deputy'))
                 <li class="nav-item"> <!-- start Deputy Mods -->
@@ -145,15 +160,6 @@
                         </ul>
                     </div>
                 </li> <!-- end Deputy Mods -->
-                @endif
-                <li class="nav-item">
-                    <a href="{{ route('birthday-card.index') }}" class="nav-link" >
-                    <i class="bx bx-images"></i> <span data-key="t-eval">Birthday Card</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('modeval') }}" class="nav-link" >
-                    <i class="ri-file-user-line"></i> <span data-key="t-eval">Evaluation form</a>
-                </li>
                 @endif
                 @if(Auth::user()->hasRole('HR') && !Auth::user()->hasRole('Admin'))
                 <li class="nav-item"> <!-- start Config -->
@@ -219,7 +225,7 @@
                     <a href="{{ route('mytickets') }}" class="nav-link" >
                     <i class="ri-ticket-line"></i> <span data-key="t-landing">My Tickets</a>
                 </li>
-                @if(Auth::user()->hasRole('HR') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('QA Mods'))
+                @if(Auth::user()->hasRole('HR') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('QA Mods') || Auth::user()->hasRole('Deputy'))
                 <li class="nav-item">
                     <a href="{{ route('user-manual.index') }}" class="nav-link" >
                     <i class="bx bx-help-circle"></i> <span data-key="t-landing">Users Manual</a>
