@@ -120,9 +120,6 @@ class UserManualController extends Controller
         if (request()->has('file_name')) {
             $d_file = request()->file('file_name');
 
-            print_r($d_file);
-            exit;
-
             $filename = strtoupper(str_replace(" ","_",$input['manual_name'])).'_'.time().'.'.$d_file->getClientOriginalExtension();
             $file_ext = $d_file->getClientMimeType();
 

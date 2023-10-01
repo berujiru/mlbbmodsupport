@@ -78,6 +78,20 @@
                 <?php endif; ?>
               </td>
           </tr>
+          <?php else: ?>
+            <?php if($manual->user_manual_id == 5): ?>
+            <tr>
+              <td style="width:5%;"><?php echo e(++$i); ?></td>
+              <td style="width:20%;"><?php echo e($manual->manual_name); ?></td>
+              <td style="width:30%;"><?php echo e($manual->manual_description ?? '-'); ?></td>
+              <td style="width:5%;"><?php echo e($manual->file_size ?? '-'); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($manual->reattached_by) ? $manual->reattachedby->firstname." ".$manual->reattachedby->lastname : $manual->uploadedby->firstname." ".$manual->uploadedby->lastname); ?></td>
+              <td style="width:20%;"><?php echo e(!empty($manual->date_reattached) ? date('d M Y h:i A',strtotime($manual->date_reattached)) : date('d M Y h:i A',strtotime($manual->date_attached))); ?></td>
+              <td style="width:30%;">
+                <a target="_blank" class="btn btn-sm btn-info" title="Click to View" href="<?php echo e(route('user-manual.show',[$manual->user_manual_id,$manual->manual_name])); ?>"><i class="bx bx-fw bxs-file-pdf"></i></a>
+              </td>
+            </tr>
+            <?php endif; ?>
           <?php endif; ?>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
