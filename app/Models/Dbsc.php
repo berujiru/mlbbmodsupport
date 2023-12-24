@@ -38,6 +38,7 @@ class Dbsc extends Model
         'description',
         'assigned_team_by',
         'date_team_assigned',
+        'user_type_id',
     ];
 
     public function team()
@@ -48,5 +49,18 @@ class Dbsc extends Model
     public function deputyteam()
     {
         return $this->hasOne(DeputyTeam::class, 'team_id', 'team_id');
+    }
+
+    public function usertype()
+    {
+        return $this->hasOne(UserType::class, 'user_type_id', 'user_type_id');
+    }
+
+    public function getFullname()
+    {
+        $mi = !empty($this->middlename) ? " ".substr($this->middlename,0,1).". " : " ";
+        $fullname = $this->firstname.$mi.$this->lastname;
+
+        return $fullname;
     }
 }

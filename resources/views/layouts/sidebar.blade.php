@@ -63,6 +63,12 @@
                             <li class="nav-item">
                                 <a href="{{ route('roles.index') }}" class="nav-link" >Roles</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('assign-user-type.index') }}" class="nav-link" >Assign User Type</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('user-manual-access.index') }}" class="nav-link" >User Manual Access</a>
+                            </li>
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->

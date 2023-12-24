@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserManual;
+use App\Models\UserManualAccess;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\File;
@@ -262,6 +263,14 @@ class UserManualController extends Controller
      */
     public function destroy($id)
     {
+
+        // $check = DB::table('mod_infraction')->join('infractions', 'infractions.id', '=', 'mod_infraction.infraction_id')->where('infractions.id',$id)->count();
+
+        // if($check_infra > 0) {
+        //     $show = 'error';
+        //     $message = "Can't delete infraction due to existing related records.";
+        // } else {
+
         $manual = UserManual::find($id);
         $doc_root = public_path();
         $file_path = $doc_root.'/manual/';
@@ -272,6 +281,7 @@ class UserManualController extends Controller
             if(file_exists($file_path.$old_file_name)){
                 unlink($file_path.$old_file_name);
             }
+            //$remove = UserManualAccess::where('user_manual_id',$id)->delete();
             $show = 'success';
             $message = 'User manual was successfully removed.';
         } else {

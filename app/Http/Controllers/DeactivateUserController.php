@@ -188,7 +188,7 @@ class DeactivateUserController extends Controller
 
             if($pass == 1) {
                 $response = true;
-                $show = 'error';
+                $show = 'success';
                 $message = 'Accounts deleted and successfully removed access.';
             } else {
                 $show = 'error';

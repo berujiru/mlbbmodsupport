@@ -25,7 +25,10 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamDeputyController;
 use App\Http\Controllers\TeamDeputyHistoryController;
 use App\Http\Controllers\TicketsupportController;
+use App\Http\Controllers\UserManualAccessController;
 use App\Http\Controllers\UserManualController;
+use App\Http\Controllers\UserTypeAssignController;
+use App\Http\Controllers\UserTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,6 +153,23 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('user-manual', UserManualController::class);
     Route::get('/user-manual/view/{id}/{filename}',[UserManualController::class,'show'])->name('user-manual.show');
     Route::get('/user-manual/delete/{id}',[UserManualController::class,'destroy'])->name('user-manual.delete');
+
+    //Users Manual Access
+    Route::resource('user-manual-access', UserManualAccessController::class);
+    //Route::get('/user-manual-access/view/{id}/{filename}',[UserManualController::class,'show'])->name('user-manual.show');
+    //Route::get('/user-manual-access/update/{id}', [UserManualAccessController::class, 'update'])->name('user-manual-access.update');
+    Route::get('/user-manual-access/delete/{id}',[UserManualAccessController::class,'destroy'])->name('user-manual-access.delete');
+    Route::post('/user-manual-access/assign-access',[UserManualAccessController::class,'assign_access'])->name('user-manual.assign-access');
+
+    //User Type
+    Route::resource('user-type', UserTypeController::class);
+    Route::get('/user-type/delete/{id}',[UserTypeController::class,'destroy'])->name('user-type.delete');
+    //Route::get('/user-type/mods',[UserTypeController::class,'mods']);
+    
+    //Assign User Type
+    Route::resource('assign-user-type', UserTypeAssignController::class);
+    //Route::get('/assign-user-type/assign/{id}',[UserTypeAssignController::class,'assign'])->name('user-type.assign');
+    Route::post('/assign-user-type/assign-multiple',[UserTypeAssignController::class,'assign_usertype'])->name('user-type.assign-multiple');
     
     //calendar
     Route::get('/schedules',  [App\Http\Controllers\HomeController::class, 'index'])->name('index');
