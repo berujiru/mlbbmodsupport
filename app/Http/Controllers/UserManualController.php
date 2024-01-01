@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dbsc;
 use App\Models\UserManual;
 use App\Models\UserManualAccess;
 use Illuminate\Http\Request;
@@ -24,10 +25,12 @@ class UserManualController extends Controller
         //     return view('user-manual.index',compact('data'))
         //         ->with('i', ($request->input('page', 1) - 1) * 50);
         // }
-        
+        $user = (int) auth()->user()->id;
         $data = UserManual::orderBy('manual_name','ASC')->paginate(50);
+        $profile = Dbsc::where('id',$user)->get();
+        $useraccess = UserManualAccess::where('user_type_id',$profile[0]['user_type_id'])->get();
         if($data){
-            return view('user-manual.index',compact('data'))
+            return view('user-manual.index',compact('data','profile','useraccess'))
                 ->with('i', ($request->input('page', 1) - 1) * 50);
         }
 

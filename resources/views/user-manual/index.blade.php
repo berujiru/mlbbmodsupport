@@ -79,7 +79,11 @@
               </td>
           </tr>
           @else
-            @if($manual->user_manual_id == 5)
+            <?php if(!empty($useraccess)): ?>
+            <?php
+              foreach ($useraccess as $ua) {
+                if($ua['user_manual_id'] == $manual->user_manual_id):
+            ?>
             <tr>
               <td style="width:5%;">{{++$i}}</td>
               <td style="width:20%;">{{ $manual->manual_name }}</td>
@@ -90,12 +94,19 @@
               <td style="width:30%;">
                 <a target="_blank" class="btn btn-sm btn-info" title="Click to View" href="{{ route('user-manual.show',[$manual->user_manual_id,$manual->manual_name]) }}"><i class="bx bx-fw bxs-file-pdf"></i></a>
               </td>
-            </tr>
-            @endif
+            </tr>          
+            <?php
+                endif;
+              }
+            ?>
+            <?php endif; ?>
           @endif
         @empty
           <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
         @endforelse
+        <?php if(count($useraccess) < 1): ?>
+          <tr><td colspan="3" class="text-muted">No data to be displayed</td></tr>
+        <?php endif; ?>
       </tbody>
     </table>
   </div>

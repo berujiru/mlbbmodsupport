@@ -62,3 +62,4 @@ public/manual/QA_DASHBOARD_USERS_MANUAL.pdf
 public/manual/TEAM_MANAGEMENT_USERS_MANUAL.pdf
 public/manual/TEAM_MANAGEMENT_USERS_MANUAL_1689494699.pdf
 app/Http/Controllers/ModScoreSummaryController2.php
+resources/views/user-manual/index_bk.blade.php
